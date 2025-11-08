@@ -1,4 +1,4 @@
-import { CameraConfig, FrigateConfig } from "@/types/frigateConfig";
+import { CameraConfig, SecurityConfig } from "@/types/securityConfig";
 import { useCallback, useEffect, useState, useMemo } from "react";
 import useSWR from "swr";
 import { LivePlayerMode, LiveStreamMetadata } from "@/types/live";
@@ -7,7 +7,7 @@ export default function useCameraLiveMode(
   cameras: CameraConfig[],
   windowVisible: boolean,
 ) {
-  const { data: config } = useSWR<FrigateConfig>("config");
+  const { data: config } = useSWR<SecurityConfig>("config");
 
   // Get comma-separated list of restreamed stream names for SWR key
   const restreamedStreamsKey = useMemo(() => {

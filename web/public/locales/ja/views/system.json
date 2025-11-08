@@ -1,13 +1,13 @@
 {
   "documentTitle": {
-    "cameras": "カメラ統計 - Frigate",
-    "general": "一般統計 - Frigate",
-    "storage": "ストレージ統計 - Frigate",
-    "enrichments": "高度解析統計 - Frigate",
+    "cameras": "カメラ統計 - Security",
+    "general": "一般統計 - Security",
+    "storage": "ストレージ統計 - Security",
+    "enrichments": "高度解析統計 - Security",
     "logs": {
-      "frigate": "Frigate ログ - Frigate",
-      "go2rtc": "Go2RTC ログ - Frigate",
-      "nginx": "Nginx ログ - Frigate"
+      "security": "Security ログ - Security",
+      "go2rtc": "Go2RTC ログ - Security",
+      "nginx": "Nginx ログ - Security"
     }
   },
   "title": "システム",
@@ -89,7 +89,7 @@
     "overview": "概要",
     "recordings": {
       "title": "録画",
-      "tips": "この値は Frigate のデータベースで録画が使用している総ストレージ量を表します。Frigate はディスク上のすべてのファイルの使用量を追跡しているわけではありません。",
+      "tips": "この値は Security のデータベースで録画が使用している総ストレージ量を表します。Security はディスク上のすべてのファイルの使用量を追跡しているわけではありません。",
       "earliestRecording": "利用可能な最古の録画:"
     },
     "shm": {
@@ -105,7 +105,7 @@
       "bandwidth": "帯域幅",
       "unused": {
         "title": "未使用",
-        "tips": "Frigate の録画以外にドライブへ保存しているファイルがある場合、この値は Frigate が利用できる空き容量を正確に表さないことがあります。Frigate は録画以外のストレージ使用量を追跡しません。"
+        "tips": "Security の録画以外にドライブへ保存しているファイルがある場合、この値は Security が利用できる空き容量を正確に表さないことがあります。Security は録画以外のストレージ使用量を追跡しません。"
       }
     }
   },

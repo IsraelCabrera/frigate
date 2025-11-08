@@ -99,7 +99,7 @@ if [[ ! -f "/dev/shm/go2rtc.yaml" ]]; then
 
     python3 /usr/local/go2rtc/create_config.py
 else
-    echo "[WARNING] Unable to remove existing go2rtc config. Changes made to your frigate config file may not be recognized. Please remove the /dev/shm/go2rtc.yaml from your docker host manually."
+    echo "[WARNING] Unable to remove existing go2rtc config. Changes made to your security config file may not be recognized. Please remove the /dev/shm/go2rtc.yaml from your docker host manually."
 fi
 
 # HomeKit configuration persistence setup
@@ -119,6 +119,6 @@ echo "[INFO] Starting go2rtc..."
 
 # Replace the bash process with the go2rtc process, redirecting stderr to stdout
 # Use HomeKit config as the primary config so writebacks go there
-# The main config from Frigate will be loaded as a secondary config
+# The main config from Security will be loaded as a secondary config
 exec 2>&1
 exec "${binary_path}" -config="${homekit_config_path}" -config=/dev/shm/go2rtc.yaml

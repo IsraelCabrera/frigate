@@ -23,9 +23,9 @@
   },
   "allCameras": "Alle kameraer",
   "timeline.aria": "Velg tidslinje",
-  "documentTitle": "Inspiser - Frigate",
+  "documentTitle": "Inspiser - Security",
   "recordings": {
-    "documentTitle": "Opptak - Frigate"
+    "documentTitle": "Opptak - Security"
   },
   "calendarFilter": {
     "last24Hours": "Siste 24 timer"

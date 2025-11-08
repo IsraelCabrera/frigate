@@ -193,6 +193,7 @@ RUN pip3 wheel --wheel-dir=/wheels -r /requirements-wheels.txt && \
     fi
 
 # Install HailoRT & Wheels
+#TODO: copy the hailort files
 RUN --mount=type=bind,source=docker/main/install_hailort.sh,target=/deps/install_hailort.sh \
     /deps/install_hailort.sh
 
@@ -209,7 +210,7 @@ COPY --from=wheels /rootfs/ /
 COPY docker/main/rootfs/ /
 
 
-# Frigate deps (ffmpeg, python, nginx, go2rtc, s6-overlay, etc)
+# Security deps (ffmpeg, python, nginx, go2rtc, s6-overlay, etc)
 FROM slim-base AS deps
 ARG TARGETARCH
 ARG BASE_IMAGE
@@ -257,6 +258,7 @@ RUN --mount=type=bind,from=wheels,source=/wheels,target=/deps/wheels \
     pip3 install -U /deps/wheels/*.whl
 
 # Install MemryX runtime (requires libgomp (OpenMP) in the final docker image)
+COPY ./resources/mxaccl.zip /tmp/mxaccl.zip
 RUN --mount=type=bind,source=docker/main/install_memryx.sh,target=/deps/install_memryx.sh \
     bash -c "bash /deps/install_memryx.sh"
 
@@ -277,18 +279,18 @@ ENTRYPOINT ["/init"]
 CMD []
 
 HEALTHCHECK --start-period=300s --start-interval=5s --interval=15s --timeout=5s --retries=3 \
-    CMD test -f /dev/shm/.frigate-is-stopping && exit 0; curl --fail --silent --show-error http://127.0.0.1:5000/api/version || exit 1
+    CMD test -f /dev/shm/.security-is-stopping && exit 0; curl --fail --silent --show-error http://127.0.0.1:5000/api/version || exit 1
 
-# Frigate deps with Node.js and NPM for devcontainer
+# Security deps with Node.js and NPM for devcontainer
 FROM deps AS devcontainer
 
-# Do not start the actual Frigate service on devcontainer as it will be started by VS Code
+# Do not start the actual Security service on devcontainer as it will be started by VS Code
 # But start a fake service for simulating the logs
-COPY docker/main/fake_frigate_run /etc/s6-overlay/s6-rc.d/frigate/run
+COPY docker/main/fake_security_run /etc/s6-overlay/s6-rc.d/security/run
 
-# Create symbolic link to the frigate source code, as go2rtc's create_config.sh uses it
-RUN mkdir -p /opt/frigate \
-    && ln -svf /workspace/frigate/frigate /opt/frigate/frigate
+# Create symbolic link to the security source code, as go2rtc's create_config.sh uses it
+RUN mkdir -p /opt/security \
+    && ln -svf /workspace/security/security /opt/security/security
 
 # Install Node 20
 RUN curl -SLO https://deb.nodesource.com/nsolid_setup_deb.sh && \
@@ -298,13 +300,13 @@ RUN curl -SLO https://deb.nodesource.com/nsolid_setup_deb.sh && \
     && rm -rf /var/lib/apt/lists/* \
     && npm install -g npm@10
 
-WORKDIR /workspace/frigate
+WORKDIR /workspace/security
 
 RUN apt-get update \
     && apt-get install make -y \
     && rm -rf /var/lib/apt/lists/*
 
-RUN --mount=type=bind,source=./docker/main/requirements-dev.txt,target=/workspace/frigate/requirements-dev.txt \
+RUN --mount=type=bind,source=./docker/main/requirements-dev.txt,target=/workspace/security/requirements-dev.txt \
     pip3 install -r requirements-dev.txt
 
 HEALTHCHECK NONE
@@ -312,7 +314,7 @@ HEALTHCHECK NONE
 CMD ["sleep", "infinity"]
 
 
-# Frigate web build
+# Security web build
 # This should be architecture agnostic, so speed up the build on multiarch by not using QEMU.
 FROM --platform=$BUILDPLATFORM node:20 AS web-build
 
@@ -328,13 +330,13 @@ RUN npm run build \
 # Collect final files in a single layer
 FROM scratch AS rootfs
 
-WORKDIR /opt/frigate/
-COPY frigate frigate/
+WORKDIR /opt/security/
+COPY security security/
 COPY migrations migrations/
 COPY --from=web-build /work/dist/ web/
 
-# Frigate final container
-FROM deps AS frigate
+# Security final container
+FROM deps AS security
 
-WORKDIR /opt/frigate/
+WORKDIR /opt/security/
 COPY --from=rootfs / /

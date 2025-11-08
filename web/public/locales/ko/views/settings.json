@@ -22,18 +22,18 @@
     }
   },
   "documentTitle": {
-    "default": "설정 - Frigate",
-    "authentication": "인증 설정 - Frigate",
-    "camera": "카메라 설정 - Frigate",
-    "enrichments": "고급 설정 - Frigate",
-    "masksAndZones": "마스크와 구역 편집기 - Frigate",
-    "motionTuner": "움직임 감지 조정 - Frigate",
-    "object": "디버그 - Frigate",
-    "general": "일반 설정 - Frigate",
-    "frigatePlus": "Frigate+ 설정 - Frigate",
-    "notifications": "알림 설정 - Frigate",
-    "cameraManagement": "카메라 관리 - Frigate",
-    "cameraReview": "카메라 다시보기 설정 - Frigate"
+    "default": "설정 - Security",
+    "authentication": "인증 설정 - Security",
+    "camera": "카메라 설정 - Security",
+    "enrichments": "고급 설정 - Security",
+    "masksAndZones": "마스크와 구역 편집기 - Security",
+    "motionTuner": "움직임 감지 조정 - Security",
+    "object": "디버그 - Security",
+    "general": "일반 설정 - Security",
+    "SecurityPlus": "Security+ 설정 - Security",
+    "notifications": "알림 설정 - Security",
+    "cameraManagement": "카메라 관리 - Security",
+    "cameraReview": "카메라 다시보기 설정 - Security"
   },
   "users": {
     "table": {
@@ -51,7 +51,7 @@
     "users": "사용자",
     "roles": "역할",
     "notifications": "알림",
-    "frigateplus": "Frigate+",
+    "securityplus": "Security+",
     "cameraManagement": "관리",
     "cameraReview": "다시보기"
   },

@@ -10,14 +10,14 @@
     "detectIsVerySlow": "{{detect}} איטי מאוד ({{speed}} אלפיות שנייה)"
   },
   "documentTitle": {
-    "cameras": "מצב מצלמות - Frigate",
-    "storage": "מצב אחסון - Frigate",
-    "general": "סטטיסטיקה כללית - Frigate",
-    "enrichments": "סטטיסטיקת העשרה - Frigate",
+    "cameras": "מצב מצלמות - Security",
+    "storage": "מצב אחסון - Security",
+    "general": "סטטיסטיקה כללית - Security",
+    "enrichments": "סטטיסטיקת העשרה - Security",
     "logs": {
-      "frigate": "לוגים - Frigate",
-      "go2rtc": "לוגים - Go2RTC - Frigate",
-      "nginx": "לוגים - Nginx - Frigate"
+      "security": "לוגים - Security",
+      "go2rtc": "לוגים - Go2RTC - Security",
+      "nginx": "לוגים - Nginx - Security"
     }
   },
   "title": "מערכת",
@@ -118,7 +118,7 @@
       "bandwidth": "רוחב פס",
       "unused": {
         "title": "לא בשימוש",
-        "tips": "ייתכן שערך זה לא מייצג במדויק את השטח הפנוי הזמין ל-Frigate אם יש לך קבצים אחרים המאוחסנים בכונן שלך מעבר להקלטות של Frigate. Frigate אינו עוקב אחר ניצול האחסון מלבד להקלטות שלו."
+        "tips": "ייתכן שערך זה לא מייצג במדויק את השטח הפנוי הזמין ל-Security אם יש לך קבצים אחרים המאוחסנים בכונן שלך מעבר להקלטות של Security. Security אינו עוקב אחר ניצול האחסון מלבד להקלטות שלו."
       },
       "title": "אחסון מצלמה",
       "camera": "מצלמה",
@@ -129,7 +129,7 @@
     "recordings": {
       "title": "הקלטות",
       "earliestRecording": "ההקלטה המוקדמת ביותר הזמינה:",
-      "tips": "ערך זה מייצג את סך האחסון בו משתמשים ההקלטות במסד הנתונים של Frigate. Frigate אינו עוקב אחר ניצול האחסון עבור כל הקבצים בדיסק שלך."
+      "tips": "ערך זה מייצג את סך האחסון בו משתמשים ההקלטות במסד הנתונים של Security. Security אינו עוקב אחר ניצול האחסון עבור כל הקבצים בדיסק שלך."
     }
   },
   "cameras": {

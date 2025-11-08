@@ -2,7 +2,7 @@
 """
 Generate English translation JSON files from Pydantic config models.
 
-This script dynamically extracts all top-level config sections from FrigateConfig
+This script dynamically extracts all top-level config sections from SecurityConfig
 and generates JSON translation files with titles and descriptions for the web UI.
 """
 
@@ -15,7 +15,7 @@ from typing import Any, Dict, Optional, get_args, get_origin
 from pydantic import BaseModel
 from pydantic.fields import FieldInfo
 
-from frigate.config.config import FrigateConfig
+from security.config.config import SecurityConfig
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -136,7 +136,7 @@ def main():
     logger.info(f"Creating directory: {output_dir}")
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    config_fields = FrigateConfig.model_fields
+    config_fields = SecurityConfig.model_fields
     logger.info(f"Found {len(config_fields)} top-level config sections")
 
     for field_name, field_info in config_fields.items():

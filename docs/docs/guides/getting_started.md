@@ -7,9 +7,9 @@ title: Getting started
 
 :::tip
 
-If you already have an environment with Linux and Docker installed, you can continue to [Installing Frigate](#installing-frigate) below.
+If you already have an environment with Linux and Docker installed, you can continue to [Installing Security](#installing-security) below.
 
-If you already have Frigate installed through Docker or through a Home Assistant Add-on, you can continue to [Configuring Frigate](#configuring-frigate) below.
+If you already have Security installed through Docker or through a Home Assistant Add-on, you can continue to [Configuring Security](#configuring-security) below.
 
 :::
 
@@ -79,13 +79,13 @@ Now you have a minimal Debian server that requires very little maintenance.
    1. Specifically, follow the steps in the [Install using the apt repository](https://docs.docker.com/engine/install/debian/#install-using-the-repository) section
 2. Add your user to the docker group as described in the [Linux postinstall steps](https://docs.docker.com/engine/install/linux-postinstall/)
 
-## Installing Frigate
+## Installing Security
 
-This section shows how to create a minimal directory structure for a Docker installation on Debian. If you have installed Frigate as a Home Assistant Add-on or another way, you can continue to [Configuring Frigate](#configuring-frigate).
+This section shows how to create a minimal directory structure for a Docker installation on Debian. If you have installed Security as a Home Assistant Add-on or another way, you can continue to [Configuring Security](#configuring-security).
 
 ### Setup directories
 
-Frigate will create a config file if one does not exist on the initial startup. The following directory structure is the bare minimum to get started. Once Frigate is running, you can use the built-in config editor which supports config validation.
+Security will create a config file if one does not exist on the initial startup. The following directory structure is the bare minimum to get started. Once Security is running, you can use the built-in config editor which supports config validation.
 
 ```
 .
@@ -100,25 +100,25 @@ This will create the above structure:
 mkdir storage config && touch docker-compose.yml
 ```
 
-If you are setting up Frigate on a Linux device via SSH, you can use [nano](https://itsfoss.com/nano-editor-guide/) to edit the following files. If you prefer to edit remote files with a full editor instead of a terminal, I recommend using [Visual Studio Code](https://code.visualstudio.com/) with the [Remote SSH extension](https://code.visualstudio.com/docs/remote/ssh-tutorial).
+If you are setting up Security on a Linux device via SSH, you can use [nano](https://itsfoss.com/nano-editor-guide/) to edit the following files. If you prefer to edit remote files with a full editor instead of a terminal, I recommend using [Visual Studio Code](https://code.visualstudio.com/) with the [Remote SSH extension](https://code.visualstudio.com/docs/remote/ssh-tutorial).
 
 :::note
 
-This `docker-compose.yml` file is just a starter for amd64 devices. You will need to customize it for your setup as detailed in the [Installation docs](/frigate/installation#docker).
+This `docker-compose.yml` file is just a starter for amd64 devices. You will need to customize it for your setup as detailed in the [Installation docs](/security/installation#docker).
 
 :::
 `docker-compose.yml`
 
 ```yaml
 services:
-  frigate:
-    container_name: frigate
+  security:
+    container_name: security
     restart: unless-stopped
     stop_grace_period: 30s
-    image: ghcr.io/blakeblackshear/frigate:stable
+    image: ghcr.io/blakeblackshear/security:stable
     volumes:
       - ./config:/config
-      - ./storage:/media/frigate
+      - ./storage:/media/security
       - type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
         target: /tmp/cache
         tmpfs:
@@ -128,11 +128,11 @@ services:
       - "8554:8554" # RTSP feeds
 ```
 
-Now you should be able to start Frigate by running `docker compose up -d` from within the folder containing `docker-compose.yml`. On startup, an admin user and password will be created and outputted in the logs. You can see this by running `docker logs frigate`. Frigate should now be accessible at `https://server_ip:8971` where you can login with the `admin` user and finish the configuration using the built-in configuration editor.
+Now you should be able to start Security by running `docker compose up -d` from within the folder containing `docker-compose.yml`. On startup, an admin user and password will be created and outputted in the logs. You can see this by running `docker logs security`. Security should now be accessible at `https://server_ip:8971` where you can login with the `admin` user and finish the configuration using the built-in configuration editor.
 
-## Configuring Frigate
+## Configuring Security
 
-This section assumes that you already have an environment setup as described in [Installation](../frigate/installation.md). You should also configure your cameras according to the [camera setup guide](/frigate/camera_setup). Pay particular attention to the section on choosing a detect resolution.
+This section assumes that you already have an environment setup as described in [Installation](../security/installation.md). You should also configure your cameras according to the [camera setup guide](/security/camera_setup). Pay particular attention to the section on choosing a detect resolution.
 
 ### Step 1: Add a detect stream
 
@@ -152,9 +152,9 @@ cameras:
             - detect
 ```
 
-### Step 2: Start Frigate
+### Step 2: Start Security
 
-At this point you should be able to start Frigate and see the video feed in the UI.
+At this point you should be able to start Security and see the video feed in the UI.
 
 If you get an error image from the camera, this means ffmpeg was not able to get the video feed from your camera. Check the logs for error messages from ffmpeg. The default ffmpeg arguments are designed to work with H264 RTSP cameras that support TCP connections.
 
@@ -170,7 +170,7 @@ Here is an example configuration with hardware acceleration configured to work w
 
 ```yaml
 services:
-  frigate:
+  security:
     ...
     devices:
       - /dev/dri/renderD128:/dev/dri/renderD128 # for intel hwaccel, needs to be updated for your hardware
@@ -192,13 +192,13 @@ cameras:
 
 ### Step 4: Configure detectors
 
-By default, Frigate will use a single CPU detector. If you have a USB Coral, you will need to add a detectors section to your config.
+By default, Security will use a single CPU detector. If you have a USB Coral, you will need to add a detectors section to your config.
 
 `docker-compose.yml` (after modifying, you will need to run `docker compose up -d` to apply changes)
 
 ```yaml
 services:
-  frigate:
+  security:
     ...
     devices:
       - /dev/bus/usb:/dev/bus/usb # passes the USB Coral, needs to be modified for other versions
@@ -224,7 +224,7 @@ cameras:
 
 More details on available detectors can be found [here](../configuration/object_detectors.md).
 
-Restart Frigate and you should start seeing detections for `person`. If you want to track other objects, they will need to be added according to the [configuration file reference](../configuration/reference.md).
+Restart Security and you should start seeing detections for `person`. If you want to track other objects, they will need to be added according to the [configuration file reference](../configuration/reference.md).
 
 ### Step 5: Setup motion masks
 
@@ -263,7 +263,7 @@ cameras:
 
 ### Step 6: Enable recordings
 
-In order to review activity in the Frigate UI, recordings need to be enabled.
+In order to review activity in the Security UI, recordings need to be enabled.
 
 To enable recording video, add the `record` role to a stream and enable it in the config. If record is disabled in the config, it won't be possible to enable it in the UI.
 
@@ -292,13 +292,13 @@ If you don't have separate streams for detect and record, you would just add the
 
 :::note
 
-If you only define one stream in your `inputs` and do not assign a `detect` role to it, Frigate will automatically assign it the `detect` role. Frigate will always decode a stream to support motion detection, Birdseye, the API image endpoints, and other features, even if you have disabled object detection with `enabled: False` in your config's `detect` section.
+If you only define one stream in your `inputs` and do not assign a `detect` role to it, Security will automatically assign it the `detect` role. Security will always decode a stream to support motion detection, Birdseye, the API image endpoints, and other features, even if you have disabled object detection with `enabled: False` in your config's `detect` section.
 
-If you only plan to use Frigate for recording, it is still recommended to define a `detect` role for a low resolution stream to minimize resource usage from the required stream decoding.
+If you only plan to use Security for recording, it is still recommended to define a `detect` role for a low resolution stream to minimize resource usage from the required stream decoding.
 
 :::
 
-By default, Frigate will retain video of all tracked objects for 10 days. The full set of options for recording can be found [here](../configuration/reference.md).
+By default, Security will retain video of all tracked objects for 10 days. The full set of options for recording can be found [here](../configuration/reference.md).
 
 ### Step 7: Complete config
 

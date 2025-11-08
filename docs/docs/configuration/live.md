@@ -3,19 +3,19 @@ id: live
 title: Live View
 ---
 
-Frigate intelligently displays your camera streams on the Live view dashboard. By default, Frigate employs "smart streaming" where camera images update once per minute when no detectable activity is occurring to conserve bandwidth and resources. As soon as any motion or active objects are detected, cameras seamlessly switch to a live stream.
+Security intelligently displays your camera streams on the Live view dashboard. By default, Security employs "smart streaming" where camera images update once per minute when no detectable activity is occurring to conserve bandwidth and resources. As soon as any motion or active objects are detected, cameras seamlessly switch to a live stream.
 
 ### Live View technologies
 
-Frigate intelligently uses three different streaming technologies to display your camera streams on the dashboard and the single camera view, switching between available modes based on network bandwidth, player errors, or required features like two-way talk. The highest quality and fluency of the Live view requires the bundled `go2rtc` to be configured as shown in the [step by step guide](/guides/configuring_go2rtc).
+Security intelligently uses three different streaming technologies to display your camera streams on the dashboard and the single camera view, switching between available modes based on network bandwidth, player errors, or required features like two-way talk. The highest quality and fluency of the Live view requires the bundled `go2rtc` to be configured as shown in the [step by step guide](/guides/configuring_go2rtc).
 
 The jsmpeg live view will use more browser and client GPU resources. Using go2rtc is highly recommended and will provide a superior experience.
 
 | Source | Frame Rate                            | Resolution | Audio                        | Requires go2rtc | Notes                                                                                                                                                               |
 | ------ | ------------------------------------- | ---------- | ---------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| jsmpeg | same as `detect -> fps`, capped at 10 | 720p       | no                           | no              | Resolution is configurable, but go2rtc is recommended if you want higher resolutions and better frame rates. jsmpeg is Frigate's default without go2rtc configured. |
-| mse    | native                                | native     | yes (depends on audio codec) | yes             | iPhone requires iOS 17.1+, Firefox is h.264 only. This is Frigate's default when go2rtc is configured.                                                              |
-| webrtc | native                                | native     | yes (depends on audio codec) | yes             | Requires extra configuration, doesn't support h.265. Frigate attempts to use WebRTC when MSE fails or when using a camera's two-way talk feature.                   |
+| jsmpeg | same as `detect -> fps`, capped at 10 | 720p       | no                           | no              | Resolution is configurable, but go2rtc is recommended if you want higher resolutions and better frame rates. jsmpeg is Security's default without go2rtc configured. |
+| mse    | native                                | native     | yes (depends on audio codec) | yes             | iPhone requires iOS 17.1+, Firefox is h.264 only. This is Security's default when go2rtc is configured.                                                              |
+| webrtc | native                                | native     | yes (depends on audio codec) | yes             | Requires extra configuration, doesn't support h.265. Security attempts to use WebRTC when MSE fails or when using a camera's two-way talk feature.                   |
 
 ### Camera Settings Recommendations
 
@@ -63,19 +63,19 @@ go2rtc:
 
 ### Setting Streams For Live UI
 
-You can configure Frigate to allow manual selection of the stream you want to view in the Live UI. For example, you may want to view your camera's substream on mobile devices, but the full resolution stream on desktop devices. Setting the `live -> streams` list will populate a dropdown in the UI's Live view that allows you to choose between the streams. This stream setting is _per device_ and is saved in your browser's local storage.
+You can configure Security to allow manual selection of the stream you want to view in the Live UI. For example, you may want to view your camera's substream on mobile devices, but the full resolution stream on desktop devices. Setting the `live -> streams` list will populate a dropdown in the UI's Live view that allows you to choose between the streams. This stream setting is _per device_ and is saved in your browser's local storage.
 
 Additionally, when creating and editing camera groups in the UI, you can choose the stream you want to use for your camera group's Live dashboard.
 
 :::note
 
-Frigate's default dashboard ("All Cameras") will always use the first entry you've defined in `streams:` when playing live streams from your cameras.
+Security's default dashboard ("All Cameras") will always use the first entry you've defined in `streams:` when playing live streams from your cameras.
 
 :::
 
 Configure the `streams` option with a "friendly name" for your stream followed by the go2rtc stream name.
 
-Using Frigate's internal version of go2rtc is required to use this feature. You cannot specify paths in the `streams` configuration, only go2rtc stream names.
+Using Security's internal version of go2rtc is required to use this feature. You cannot specify paths in the `streams` configuration, only go2rtc stream names.
 
 ```yaml
 go2rtc:
@@ -103,7 +103,7 @@ cameras:
           roles:
             - detect
     live:
-      streams: # <--- Multiple streams for Frigate 0.16 and later
+      streams: # <--- Multiple streams for Security 0.16 and later
         Main Stream: test_cam # <--- Specify a "friendly name" followed by the go2rtc stream name
         Sub Stream: test_cam_sub
         Special Stream: test_cam_another_sub
@@ -113,8 +113,8 @@ cameras:
 
 WebRTC works by creating a TCP or UDP connection on port `8555`. However, it requires additional configuration:
 
-- For external access, over the internet, setup your router to forward port `8555` to port `8555` on the Frigate device, for both TCP and UDP.
-- For internal/local access, unless you are running through the HA Add-on, you will also need to set the WebRTC candidates list in the go2rtc config. For example, if `192.168.1.10` is the local IP of the device running Frigate:
+- For external access, over the internet, setup your router to forward port `8555` to port `8555` on the Security device, for both TCP and UDP.
+- For internal/local access, unless you are running through the HA Add-on, you will also need to set the WebRTC candidates list in the go2rtc config. For example, if `192.168.1.10` is the local IP of the device running Security:
 
   ```yaml title="config.yml"
   go2rtc:
@@ -126,14 +126,14 @@ WebRTC works by creating a TCP or UDP connection on port `8555`. However, it req
         - stun:8555
   ```
 
-- For access through Tailscale, the Frigate system's Tailscale IP must be added as a WebRTC candidate. Tailscale IPs all start with `100.`, and are reserved within the `100.64.0.0/10` CIDR block.
+- For access through Tailscale, the Security system's Tailscale IP must be added as a WebRTC candidate. Tailscale IPs all start with `100.`, and are reserved within the `100.64.0.0/10` CIDR block.
 - Note that WebRTC does not support H.265.
 
 :::tip
 
-This extra configuration may not be required if Frigate has been installed as a Home Assistant Add-on, as Frigate uses the Supervisor's API to generate a WebRTC candidate.
+This extra configuration may not be required if Security has been installed as a Home Assistant Add-on, as Security uses the Supervisor's API to generate a WebRTC candidate.
 
-However, it is recommended if issues occur to define the candidates manually. You should do this if the Frigate Add-on fails to generate a valid candidate. If an error occurs you will see some warnings like the below in the Add-on logs page during the initialization:
+However, it is recommended if issues occur to define the candidates manually. You should do this if the Security Add-on fails to generate a valid candidate. If an error occurs you will see some warnings like the below in the Add-on logs page during the initialization:
 
 ```log
 [WARN] Failed to get IP address from supervisor
@@ -144,9 +144,9 @@ However, it is recommended if issues occur to define the candidates manually. Yo
 
 :::note
 
-If you are having difficulties getting WebRTC to work and you are running Frigate with docker, you may want to try changing the container network mode:
+If you are having difficulties getting WebRTC to work and you are running Security with docker, you may want to try changing the container network mode:
 
-- `network: host`, in this mode you don't need to forward any ports. The services inside of the Frigate container will have full access to the network interfaces of your host machine as if they were running natively and not in a container. Any port conflicts will need to be resolved. This network mode is recommended by go2rtc, but we recommend you only use it if necessary.
+- `network: host`, in this mode you don't need to forward any ports. The services inside of the Security container will have full access to the network interfaces of your host machine as if they were running natively and not in a container. Any port conflicts will need to be resolved. This network mode is recommended by go2rtc, but we recommend you only use it if necessary.
 - `network: bridge` is the default network driver, a bridge network is a Link Layer device which forwards traffic between network segments. You need to forward any ports that you want to be accessible from the host IP.
 
 If not running in host mode, port 8555 will need to be mapped for the container:
@@ -155,7 +155,7 @@ docker-compose.yml
 
 ```yaml
 services:
-  frigate:
+  security:
     ...
     ports:
       - "8555:8555/tcp" # WebRTC over tcp
@@ -168,11 +168,11 @@ See [go2rtc WebRTC docs](https://github.com/AlexxIT/go2rtc/tree/v1.8.3#module-we
 
 ### Two way talk
 
-For devices that support two way talk, Frigate can be configured to use the feature from the camera's Live view in the Web UI. You should:
+For devices that support two way talk, Security can be configured to use the feature from the camera's Live view in the Web UI. You should:
 
 - Set up go2rtc with [WebRTC](#webrtc-extra-configuration).
-- Ensure you access Frigate via https (may require [opening port 8971](/frigate/installation/#ports)).
-- For the Home Assistant Frigate card, [follow the docs](http://card.camera/#/usage/2-way-audio) for the correct source.
+- Ensure you access Security via https (may require [opening port 8971](/security/installation/#ports)).
+- For the Home Assistant Security card, [follow the docs](http://card.camera/#/usage/2-way-audio) for the correct source.
 
 To use the Reolink Doorbell with two way talk, you should use the [recommended Reolink configuration](/configuration/camera_specific#reolink-cameras)
 
@@ -180,7 +180,7 @@ As a starting point to check compatibility for your camera, view the list of cam
 
 ### Streaming options on camera group dashboards
 
-Frigate provides a dialog in the Camera Group Edit pane with several options for streaming on a camera group's dashboard. These settings are _per device_ and are saved in your device's local storage.
+Security provides a dialog in the Camera Group Edit pane with several options for streaming on a camera group's dashboard. These settings are _per device_ and are saved in your device's local storage.
 
 - Stream selection using the `live -> streams` configuration option (see _Setting Streams For Live UI_ above)
 - Streaming type:
@@ -202,11 +202,11 @@ Use a camera group if you want to change any of these settings from the defaults
 
 ### Disabling cameras
 
-Cameras can be temporarily disabled through the Frigate UI and through [MQTT](/integrations/mqtt#frigatecamera_nameenabledset) to conserve system resources. When disabled, Frigate's ffmpeg processes are terminated — recording stops, object detection is paused, and the Live dashboard displays a blank image with a disabled message. Review items, tracked objects, and historical footage for disabled cameras can still be accessed via the UI.
+Cameras can be temporarily disabled through the Security UI and through [MQTT](/integrations/mqtt#securitycamera_nameenabledset) to conserve system resources. When disabled, Security's ffmpeg processes are terminated — recording stops, object detection is paused, and the Live dashboard displays a blank image with a disabled message. Review items, tracked objects, and historical footage for disabled cameras can still be accessed via the UI.
 
 :::note
 
-Disabling a camera via the Frigate UI or MQTT is temporary and does not persist through restarts of Frigate.
+Disabling a camera via the Security UI or MQTT is temporary and does not persist through restarts of Security.
 
 :::
 
@@ -222,13 +222,13 @@ Note that disabling a camera through the config file (`enabled: False`) removes 
 
    Note that the low bandwidth mode player is a video-only stream. You should not expect to hear audio when in low bandwidth mode, even if you've set up go2rtc.
 
-2. **Frigate shows that my live stream is in "low bandwidth mode". What does this mean?**
+2. **Security shows that my live stream is in "low bandwidth mode". What does this mean?**
 
-   Frigate intelligently selects the live streaming technology based on a number of factors (user-selected modes like two-way talk, camera settings, browser capabilities, available bandwidth) and prioritizes showing an actual up-to-date live view of your camera's stream as quickly as possible.
+   Security intelligently selects the live streaming technology based on a number of factors (user-selected modes like two-way talk, camera settings, browser capabilities, available bandwidth) and prioritizes showing an actual up-to-date live view of your camera's stream as quickly as possible.
 
-   When you have go2rtc configured, Live view initially attempts to load and play back your stream with a clearer, fluent stream technology (MSE). An initial timeout, a low bandwidth condition that would cause buffering of the stream, or decoding errors in the stream will cause Frigate to switch to the stream defined by the `detect` role, using the jsmpeg format. This is what the UI labels as "low bandwidth mode". On Live dashboards, the mode will automatically reset when smart streaming is configured and activity stops. Continuous streaming mode does not have an automatic reset mechanism, but you can use the _Reset_ option to force a reload of your stream.
+   When you have go2rtc configured, Live view initially attempts to load and play back your stream with a clearer, fluent stream technology (MSE). An initial timeout, a low bandwidth condition that would cause buffering of the stream, or decoding errors in the stream will cause Security to switch to the stream defined by the `detect` role, using the jsmpeg format. This is what the UI labels as "low bandwidth mode". On Live dashboards, the mode will automatically reset when smart streaming is configured and activity stops. Continuous streaming mode does not have an automatic reset mechanism, but you can use the _Reset_ option to force a reload of your stream.
 
-   If you are using continuous streaming or you are loading more than a few high resolution streams at once on the dashboard, your browser may struggle to begin playback of your streams before the timeout. Frigate always prioritizes showing a live stream as quickly as possible, even if it is a lower quality jsmpeg stream. You can use the "Reset" link/button to try loading your high resolution stream again.
+   If you are using continuous streaming or you are loading more than a few high resolution streams at once on the dashboard, your browser may struggle to begin playback of your streams before the timeout. Security always prioritizes showing a live stream as quickly as possible, even if it is a lower quality jsmpeg stream. You can use the "Reset" link/button to try loading your high resolution stream again.
 
    Errors in stream playback (e.g., connection failures, codec issues, or buffering timeouts) that cause the fallback to low bandwidth mode (jsmpeg) are logged to the browser console for easier debugging. These errors may include:
 
@@ -239,18 +239,18 @@ Note that disabling a camera through the config file (`enabled: False`) removes 
 
    To view browser console logs:
 
-   1. Open the Frigate Live View in your browser.
+   1. Open the Security Live View in your browser.
    2. Open the browser's Developer Tools (F12 or right-click > Inspect > Console tab).
    3. Reproduce the error (e.g., load a problematic stream or simulate network issues).
    4. Look for messages prefixed with the camera name.
 
    These logs help identify if the issue is player-specific (MSE vs. WebRTC) or related to camera configuration (e.g., go2rtc streams, codecs). If you see frequent errors:
 
-   - Verify your camera's H.264/AAC settings (see [Frigate's camera settings recommendations](#camera_settings_recommendations)).
+   - Verify your camera's H.264/AAC settings (see [Security's camera settings recommendations](#camera_settings_recommendations)).
    - Check go2rtc configuration for transcoding (e.g., audio to AAC/OPUS).
    - Test with a different stream via the UI dropdown (if `live -> streams` is configured).
    - For WebRTC-specific issues, ensure port 8555 is forwarded and candidates are set (see (WebRTC Extra Configuration)(#webrtc-extra-configuration)).
-   - If your cameras are streaming at a high resolution, your browser may be struggling to load all of the streams before the buffering timeout occurs. Frigate prioritizes showing a true live view as quickly as possible. If the fallback occurs often, change your live view settings to use a lower bandwidth substream.
+   - If your cameras are streaming at a high resolution, your browser may be struggling to load all of the streams before the buffering timeout occurs. Security prioritizes showing a true live view as quickly as possible. If the fallback occurs often, change your live view settings to use a lower bandwidth substream.
 
 3. **It doesn't seem like my cameras are streaming on the Live dashboard. Why?**
 
@@ -268,7 +268,7 @@ Note that disabling a camera through the config file (`enabled: False`) removes 
 
    Smart streaming depends on having your camera's motion `threshold` and `contour_area` config values dialed in. Use the Motion Tuner in Settings in the UI to tune these values in real-time.
 
-   This is Frigate's default and recommended setting because it results in a significant bandwidth savings, especially for high resolution cameras.
+   This is Security's default and recommended setting because it results in a significant bandwidth savings, especially for high resolution cameras.
 
 6. **I have unmuted some cameras on my dashboard, but I do not hear sound. Why?**
 

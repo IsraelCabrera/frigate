@@ -1,14 +1,14 @@
 {
   "documentTitle": {
-    "cameras": "Kamerastatistikk - Frigate",
-    "storage": "Lagringsstatistikk - Frigate",
+    "cameras": "Kamerastatistikk - Security",
+    "storage": "Lagringsstatistikk - Security",
     "logs": {
-      "frigate": "Frigate-logger - Frigate",
-      "go2rtc": "Go2RTC-logger - Frigate",
-      "nginx": "Nginx-logger - Frigate"
+      "security": "Security-logger - Security",
+      "go2rtc": "Go2RTC-logger - Security",
+      "nginx": "Nginx-logger - Security"
     },
-    "general": "Generell statistikk - Frigate",
-    "enrichments": "Statistikk for utvidelser - Frigate"
+    "general": "Generell statistikk - Security",
+    "enrichments": "Statistikk for utvidelser - Security"
   },
   "logs": {
     "copy": {
@@ -87,7 +87,7 @@
     "recordings": {
       "earliestRecording": "Tidligste opptak tilgjengelig:",
       "title": "Opptak",
-      "tips": "Denne verdien representerer total lagringsplass brukt av opptakene i Frigates database. Frigate sporer ikke lagringsbruk for alle filer på disken din."
+      "tips": "Denne verdien representerer total lagringsplass brukt av opptakene i Securitys database. Security sporer ikke lagringsbruk for alle filer på disken din."
     },
     "cameraStorage": {
       "storageUsed": "Lagringsbruk",
@@ -98,7 +98,7 @@
       "percentageOfTotalUsed": "Prosentandel av tilgjengelig",
       "unused": {
         "title": "Ubrukt",
-        "tips": "Denne verdien representerer kanskje ikke nøyaktig den ledige plassen Frigate har tilgang til, dersom det finnes andre filer lagret på disken. Frigate sporer kun lagring brukt av egne opptak."
+        "tips": "Denne verdien representerer kanskje ikke nøyaktig den ledige plassen Security har tilgang til, dersom det finnes andre filer lagret på disken. Security sporer kun lagring brukt av egne opptak."
       }
     },
     "title": "Lagring",

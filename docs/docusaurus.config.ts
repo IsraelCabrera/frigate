@@ -4,15 +4,15 @@ import type { Config, PluginConfig } from "@docusaurus/types";
 import type * as OpenApiPlugin from "docusaurus-plugin-openapi-docs";
 
 const config: Config = {
-  title: "Frigate",
+  title: "Security",
   tagline: "NVR With Realtime Object Detection for IP Cameras",
-  url: "https://docs.frigate.video",
+  url: "https://docs.security.video",
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
   organizationName: "blakeblackshear",
-  projectName: "frigate",
+  projectName: "security",
   themes: [
     "@docusaurus/theme-mermaid",
     "docusaurus-theme-openapi-docs",
@@ -33,11 +33,11 @@ const config: Config = {
   },
   themeConfig: {
     announcementBar: {
-      id: 'frigate_plus',
+      id: 'security_plus',
       content: `
         <span style="margin-right: 8px; display: inline-block; animation: pulse 2s infinite;">🚀</span>
-        Get more relevant and accurate detections with Frigate+ models.
-        <a style="margin-left: 12px; padding: 3px 10px; background: #94d2bd; color: #001219; text-decoration: none; border-radius: 4px; font-weight: 500; " target="_blank" rel="noopener noreferrer" href="https://frigate.video/plus/">Learn more</a>
+        Get more relevant and accurate detections with Security+ models.
+        <a style="margin-left: 12px; padding: 3px 10px; background: #94d2bd; color: #001219; text-decoration: none; border-radius: 4px; font-weight: 500; " target="_blank" rel="noopener noreferrer" href="https://security.video/plus/">Learn more</a>
         <span style="margin-left: 8px; display: inline-block; animation: pulse 2s infinite;">✨</span>
         <style>
           @keyframes pulse {
@@ -62,12 +62,12 @@ const config: Config = {
         primaryBrandColor: "#010101",
       },
       aiChatSettings: {
-        chatSubjectName: "Frigate",
-        botAvatarSrcUrl: "https://frigate.video/images/favicon.png",
+        chatSubjectName: "Security",
+        botAvatarSrcUrl: "https://security.video/images/favicon.png",
         getHelpCallToActions: [
           {
             name: "GitHub",
-            url: "https://github.com/blakeblackshear/frigate",
+            url: "https://github.com/blakeblackshear/security",
             icon: {
               builtIn: "FaGithub",
             },
@@ -113,9 +113,9 @@ const config: Config = {
       },
     ],
     navbar: {
-      title: "Frigate",
+      title: "Security",
       logo: {
-        alt: "Frigate",
+        alt: "Security",
         src: "img/logo.svg",
         srcDark: "img/logo-dark.svg",
       },
@@ -127,12 +127,12 @@ const config: Config = {
           position: "left",
         },
         {
-          href: "https://frigate.video",
+          href: "https://security.video",
           label: "Website",
           position: "right",
         },
         {
-          href: "http://demo.frigate.video",
+          href: "http://demo.security.video",
           label: "Demo",
           position: "right",
         },
@@ -142,12 +142,12 @@ const config: Config = {
           dropdownItemsAfter: [
             {
               label: '简体中文（社区翻译）',
-              href: 'https://docs.frigate-cn.video',
+              href: 'https://docs.security-cn.video',
             }
           ]
         },
         {
-          href: 'https://github.com/blakeblackshear/frigate',
+          href: 'https://github.com/blakeblackshear/security',
           label: 'GitHub',
           position: 'right',
         },
@@ -161,11 +161,11 @@ const config: Config = {
           items: [
             {
               label: "GitHub",
-              href: "https://github.com/blakeblackshear/frigate",
+              href: "https://github.com/blakeblackshear/security",
             },
             {
               label: "Discussions",
-              href: "https://github.com/blakeblackshear/frigate/discussions",
+              href: "https://github.com/blakeblackshear/security/discussions",
             },
           ],
         },
@@ -181,8 +181,8 @@ const config: Config = {
         id: "openapi",
         docsPluginId: "classic", // configured for preset-classic
         config: {
-          frigateApi: {
-            specPath: "static/frigate-api.yaml",
+          SecurityApi: {
+            specPath: "static/security-api.yaml",
             outputDir: "docs/integrations/api",
             sidebarOptions: {
               groupPathsBy: "tag",
@@ -205,7 +205,7 @@ const config: Config = {
           sidebarPath: "./sidebars.ts",
           // Please change this to your repo.
           editUrl:
-            "https://github.com/blakeblackshear/frigate/edit/master/docs/",
+            "https://github.com/blakeblackshear/security/edit/master/docs/",
           sidebarCollapsible: false,
           docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },

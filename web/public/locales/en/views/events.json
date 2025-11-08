@@ -37,9 +37,9 @@
     "trackedPoint": "Tracked point",
     "clickToSeek": "Click to seek to this time"
   },
-  "documentTitle": "Review - Frigate",
+  "documentTitle": "Review - Security",
   "recordings": {
-    "documentTitle": "Recordings - Frigate"
+    "documentTitle": "Recordings - Security"
   },
   "calendarFilter": {
     "last24Hours": "Last 24 Hours"

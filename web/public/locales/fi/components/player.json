@@ -2,8 +2,8 @@
   "noPreviewFound": "Esikatselua ei löytynyt",
   "noPreviewFoundFor": "Ei esikatselua {{cameraName}}lle",
   "noRecordingsFoundForThisTime": "Ei tallenteita valitulta ajalta",
-  "submitFrigatePlus": {
-    "title": "Lähetä tämä kuva Frigate+:aan?",
+  "submitSecurityPlus": {
+    "title": "Lähetä tämä kuva Security+:aan?",
     "submit": "Lähetä"
   },
   "livePlayerRequiredIOSVersion": "iOS 17.1 tai uudempi vaaditaan tälle suoratoistotyypille.",
@@ -42,10 +42,10 @@
   },
   "toast": {
     "success": {
-      "submittedFrigatePlus": "Onnistuneesti lähetetty Frigate+:aan"
+      "submittedSecurityPlus": "Onnistuneesti lähetetty Security+:aan"
     },
     "error": {
-      "submitFrigatePlusFailed": "Frigate+:aan lähetys epäonnistui"
+      "submitSecurityPlusFailed": "Security+:aan lähetys epäonnistui"
     }
   }
 }

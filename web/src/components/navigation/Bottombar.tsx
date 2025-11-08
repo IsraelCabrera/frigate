@@ -2,8 +2,8 @@ import NavItem from "./NavItem";
 import { IoIosWarning } from "react-icons/io";
 import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
 import useSWR from "swr";
-import { FrigateStats } from "@/types/stats";
-import { useEmbeddingsReindexProgress, useFrigateStats } from "@/api/ws";
+import { SecurityStats } from "@/types/stats";
+import { useEmbeddingsReindexProgress, useSecurityStats } from "@/api/ws";
 import { useContext, useEffect, useMemo } from "react";
 import useStats from "@/hooks/use-stats";
 import GeneralSettings from "../menu/GeneralSettings";
@@ -45,10 +45,10 @@ type StatusAlertNavProps = {
 };
 function StatusAlertNav({ className }: StatusAlertNavProps) {
   const { t } = useTranslation(["views/system"]);
-  const { data: initialStats } = useSWR<FrigateStats>("stats", {
+  const { data: initialStats } = useSWR<SecurityStats>("stats", {
     revalidateOnFocus: false,
   });
-  const latestStats = useFrigateStats();
+  const latestStats = useSecurityStats();
 
   const { messages, addMessage, clearMessages } = useContext(
     StatusBarMessagesContext,

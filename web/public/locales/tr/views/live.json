@@ -1,6 +1,6 @@
 {
-  "documentTitle": "Canlı - Frigate",
-  "documentTitle.withCamera": "{{camera}} - Canlı - Frigate",
+  "documentTitle": "Canlı - Security",
+  "documentTitle.withCamera": "{{camera}} - Canlı - Security",
   "muteCameras": {
     "disable": "Tüm Kameraların Sesini Aç",
     "enable": "Tüm Kameraları Sustur"

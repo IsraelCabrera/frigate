@@ -1,14 +1,14 @@
 {
   "documentTitle": {
-    "cameras": "Estadístiques de càmera - Frigate",
-    "storage": "Estadístiques d'emmagatzematge - Frigate",
-    "general": "Estadístiques generals - Frigate",
+    "cameras": "Estadístiques de càmera - Security",
+    "storage": "Estadístiques d'emmagatzematge - Security",
+    "general": "Estadístiques generals - Security",
     "logs": {
-      "frigate": "Registres de Frigate - Frigate",
-      "go2rtc": "Registres de Go2RTC - Frigate",
-      "nginx": "Registres de Nginix - Frigate"
+      "security": "Registres de Security - Security",
+      "go2rtc": "Registres de Go2RTC - Security",
+      "nginx": "Registres de Nginix - Security"
     },
-    "enrichments": "Estadístiques complementàries - Frigate"
+    "enrichments": "Estadístiques complementàries - Security"
   },
   "title": "Sistema",
   "metrics": "Mètriques del sistema",
@@ -89,7 +89,7 @@
     "recordings": {
       "title": "Gravacions",
       "earliestRecording": "Gravació més antiga disponible:",
-      "tips": "Aquest valor representa l'emmagatzematge total utilitzat per les gravacions a la base de dades de Frigate. Frigate no registre l'ús de tots els arxius del disc."
+      "tips": "Aquest valor representa l'emmagatzematge total utilitzat per les gravacions a la base de dades de Security. Security no registre l'ús de tots els arxius del disc."
     },
     "cameraStorage": {
       "camera": "Càmera",
@@ -99,7 +99,7 @@
       "title": "Emmagatzematge de càmera",
       "unused": {
         "title": "Sense utilitzar",
-        "tips": "Aquest valor pot no de forma exacta representar l'espai lliure disponible a Frigate si tens altres fitxers emmagatzemats en la vostra unitat més enllà dels registres de Frigate. Frigate no rastreja l'ús d'emmagatzematge extern als seus registres."
+        "tips": "Aquest valor pot no de forma exacta representar l'espai lliure disponible a Security si tens altres fitxers emmagatzemats en la vostra unitat més enllà dels registres de Security. Security no rastreja l'ús d'emmagatzematge extern als seus registres."
       },
       "percentageOfTotalUsed": "Percentatge del total"
     },

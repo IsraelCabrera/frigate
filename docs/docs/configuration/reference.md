@@ -21,10 +21,10 @@ mqtt:
   port: 1883
   # Optional: topic prefix (default: shown below)
   # NOTE: must be unique if you are running multiple instances
-  topic_prefix: frigate
+  topic_prefix: security
   # Optional: client id (default: shown below)
   # NOTE: must be unique if you are running multiple instances
-  client_id: frigate
+  client_id: security
   # Optional: user
   # NOTE: MQTT user can be specified with an environment variable or docker secrets that must begin with 'FRIGATE_'.
   #       e.g. user: '{FRIGATE_MQTT_USER}'
@@ -57,7 +57,7 @@ detectors:
   # Required: name of the detector
   detector_name:
     # Required: type of the detector
-    # Frigate provides many types, see https://docs.frigate.video/configuration/object_detectors for more details (default: shown below)
+    # Security provides many types, see https://docs.security.video/configuration/object_detectors for more details (default: shown below)
     # Additional detector types can also be plugged in.
     # Detectors may require additional configuration.
     # Refer to the Detectors configuration page for more information.
@@ -66,7 +66,7 @@ detectors:
 # Optional: Database configuration
 database:
   # The path to store the SQLite DB (default: shown below)
-  path: /config/frigate.db
+  path: /config/security.db
 
 # Optional: TLS configuration
 tls:
@@ -81,7 +81,7 @@ networking:
 
 # Optional: Proxy configuration
 proxy:
-  # Optional: Mapping for headers from upstream proxies. Only used if Frigate's auth
+  # Optional: Mapping for headers from upstream proxies. Only used if Security's auth
   # is disabled.
   # NOTE: Many authentication proxies pass a header downstream with the authenticated
   #       user name and role. Not all values are supported. It must be a whitelisted header.
@@ -114,7 +114,7 @@ auth:
   # New password is printed in the logs
   reset_admin_password: False
   # Optional: Cookie to store the JWT token for native auth (default: shown below)
-  cookie_name: frigate_token
+  cookie_name: security_token
   # Optional: Set secure flag on cookie. (default: shown below)
   # NOTE: This should be set to True if you are using TLS
   cookie_secure: False
@@ -142,7 +142,7 @@ auth:
 # NOTE: The default values are for the EdgeTPU detector.
 # Other detectors will require the model config to be set.
 model:
-  # Required: path to the model. Frigate+ models use plus://<model_id> (default: automatic based on detector)
+  # Required: path to the model. Security+ models use plus://<model_id> (default: automatic based on detector)
   path: /edgetpu_model.tflite
   # Required: path to the labelmap (default: shown below)
   labelmap_path: /labelmap.txt
@@ -206,7 +206,7 @@ logger:
   default: info
   # Optional: Component specific logger overrides
   logs:
-    frigate.event: debug
+    security.event: debug
 
 # Optional: set environment variables
 environment_vars:
@@ -244,7 +244,7 @@ birdseye:
   idle_heartbeat_fps: 0.0
 
 # Optional: ffmpeg configuration
-# More information about presets at https://docs.frigate.video/configuration/ffmpeg_presets
+# More information about presets at https://docs.security.video/configuration/ffmpeg_presets
 ffmpeg:
   # Optional: ffmpeg binry path (default: shown below)
   # can also be set to `7.0` or `5.0` to specify one of the included versions
@@ -264,7 +264,7 @@ ffmpeg:
     # Optional: output args for record streams (default: shown below)
     record: preset-record-generic
   # Optional: Time in seconds to wait before ffmpeg retries connecting to the camera. (default: shown below)
-  # If set too low, frigate will retry a connection to the camera's stream too frequently, using up the limited streams some cameras can allow at once
+  # If set too low, security will retry a connection to the camera's stream too frequently, using up the limited streams some cameras can allow at once
   # If set too high, then if a ffmpeg crash or camera stream timeout occurs, you could potentially lose up to a maximum of retry_interval second(s) of footage
   # NOTE: this can be a useful setting for Wireless / Battery cameras to reduce how much footage is potentially lost during a connection timeout.
   retry_interval: 10
@@ -287,7 +287,7 @@ detect:
   fps: 5
   # Optional: Number of consecutive detection hits required for an object to be initialized in the tracker. (default: 1/2 the frame rate)
   min_initialized: 2
-  # Optional: Number of frames without a detection before Frigate considers an object to be gone. (default: 5x the frame rate)
+  # Optional: Number of frames without a detection before Security considers an object to be gone. (default: 5x the frame rate)
   max_disappeared: 25
   # Optional: Configuration for stationary object tracking
   stationary:
@@ -583,7 +583,7 @@ record:
 # Optional: Configuration for the jpg snapshots written to the clips directory for each tracked object
 # NOTE: Can be overridden at the camera level
 snapshots:
-  # Optional: Enable writing jpg snapshot to /media/frigate/clips (default: shown below)
+  # Optional: Enable writing jpg snapshot to /media/security/clips (default: shown below)
   enabled: False
   # Optional: save a clean copy of the snapshot image (default: shown below)
   clean_copy: True
@@ -630,7 +630,7 @@ face_recognition:
   # Optional: Minimum face distance score required to mark as a potential match (default: shown below)
   unknown_score: 0.8
   # Optional: Minimum face detection score required to detect a face (default: shown below)
-  # NOTE: This only applies when not running a Frigate+ model
+  # NOTE: This only applies when not running a Security+ model
   detection_threshold: 0.7
   # Optional: Minimum face distance score required to be considered a match (default: shown below)
   recognition_threshold: 0.9
@@ -675,7 +675,7 @@ lpr:
   # Optional: Enhance the detected plate image with contrast adjustment and denoising (default: shown below)
   # A value between 0 and 10. Higher values are not always better and may perform worse than lower values.
   enhancement: 0
-  # Optional: Save plate images to /media/frigate/clips/lpr for debugging purposes (default: shown below)
+  # Optional: Save plate images to /media/security/clips/lpr for debugging purposes (default: shown below)
   debug_save_plates: False
   # Optional: List of regex replacement rules to normalize detected plates (default: shown below)
   replace_rules: {}
@@ -720,7 +720,7 @@ go2rtc:
 # NOTE: Can be overridden at the camera level
 live:
   # Optional: Set the streams configured in go2rtc
-  # that should be used for live view in frigate WebUI. (default: name of camera)
+  # that should be used for live view in security WebUI. (default: name of camera)
   # NOTE: In most cases this should be set at the camera level only.
   streams:
     main_stream: main_stream_name
@@ -765,7 +765,7 @@ cameras:
     # If disabled: config is used but no live stream and no capture etc.
     # Events/Recordings are still viewable.
     enabled: True
-    # Optional: camera type used for some Frigate features (default: shown below)
+    # Optional: camera type used for some Security features (default: shown below)
     # Options are "generic" and "lpr"
     type: "generic"
     # Required: ffmpeg settings for the camera
@@ -834,7 +834,7 @@ cameras:
     # Optional: Configuration for the jpg snapshots published via MQTT
     mqtt:
       # Optional: Enable publishing snapshot via mqtt for camera (default: shown below)
-      # NOTE: Only applies to publishing image data to MQTT via 'frigate/<camera_name>/<object_name>/snapshot'.
+      # NOTE: Only applies to publishing image data to MQTT via 'security/<camera_name>/<object_name>/snapshot'.
       # All other messages will still be published.
       enabled: True
       # Optional: print a timestamp on the snapshots (default: shown below)
@@ -855,7 +855,7 @@ cameras:
       # Optional: Adjust sort order of cameras in the UI. Larger numbers come later (default: shown below)
       # By default the cameras are sorted alphabetically.
       order: 0
-      # Optional: Whether or not to show the camera in the Frigate UI (default: shown below)
+      # Optional: Whether or not to show the camera in the Security UI (default: shown below)
       dashboard: True
 
     # Optional: connect to ONVIF camera
@@ -884,7 +884,7 @@ cameras:
         # Optional: calibrate the camera on startup (default: shown below)
         # A calibration will move the PTZ in increments and measure the time it takes to move.
         # The results are used to help estimate the position of tracked objects after a camera move.
-        # Frigate will update your config file automatically after a calibration with
+        # Security will update your config file automatically after a calibration with
         # a "movement_weights" entry for the camera. You should then set calibrate_on_startup to False.
         calibrate_on_startup: False
         # Optional: the mode to use for zooming in/out on objects during autotracking. (default: shown below)
@@ -895,7 +895,7 @@ cameras:
         zooming: disabled
         # Optional: A value to change the behavior of zooming on autotracked objects. (default: shown below)
         # A lower value will keep more of the scene in view around a tracked object.
-        # A higher value will zoom in more on a tracked object, but Frigate may lose tracking more quickly.
+        # A higher value will zoom in more on a tracked object, but Security may lose tracking more quickly.
         # The value should be between 0.1 and 0.75
         zoom_factor: 0.3
         # Optional: list of objects to track from labelmap.txt (default: shown below)

@@ -5,9 +5,9 @@ title: Restream
 
 ## RTSP
 
-Frigate can restream your video feed as an RTSP feed for other applications such as Home Assistant to utilize it at `rtsp://<frigate_host>:8554/<camera_name>`. Port 8554 must be open. [This allows you to use a video feed for detection in Frigate and Home Assistant live view at the same time without having to make two separate connections to the camera](#reduce-connections-to-camera). The video feed is copied from the original video feed directly to avoid re-encoding. This feed does not include any annotation by Frigate.
+Security can restream your video feed as an RTSP feed for other applications such as Home Assistant to utilize it at `rtsp://<security_host>:8554/<camera_name>`. Port 8554 must be open. [This allows you to use a video feed for detection in Security and Home Assistant live view at the same time without having to make two separate connections to the camera](#reduce-connections-to-camera). The video feed is copied from the original video feed directly to avoid re-encoding. This feed does not include any annotation by Security.
 
-Frigate uses [go2rtc](https://github.com/AlexxIT/go2rtc/tree/v1.9.10) to provide its restream and MSE/WebRTC capabilities. The go2rtc config is hosted at the `go2rtc` in the config, see [go2rtc docs](https://github.com/AlexxIT/go2rtc/tree/v1.9.10#configuration) for more advanced configurations and features.
+Security uses [go2rtc](https://github.com/AlexxIT/go2rtc/tree/v1.9.10) to provide its restream and MSE/WebRTC capabilities. The go2rtc config is hosted at the `go2rtc` in the config, see [go2rtc docs](https://github.com/AlexxIT/go2rtc/tree/v1.9.10#configuration) for more advanced configurations and features.
 
 :::note
 
@@ -17,7 +17,7 @@ You can access the go2rtc stream info at `/api/go2rtc/streams` which can be help
 
 ### Birdseye Restream
 
-Birdseye RTSP restream can be accessed at `rtsp://<frigate_host>:8554/birdseye`. Enabling the birdseye restream will cause birdseye to run 24/7 which may increase CPU usage somewhat.
+Birdseye RTSP restream can be accessed at `rtsp://<security_host>:8554/birdseye`. Enabling the birdseye restream will cause birdseye to run 24/7 which may increase CPU usage somewhat.
 
 ```yaml
 birdseye:
@@ -26,7 +26,7 @@ birdseye:
 
 :::tip 
 
-To improve connection speed when using Birdseye via restream you can enable a small idle heartbeat by setting `birdseye.idle_heartbeat_fps` to a low value (e.g. `1–2`).  This makes Frigate periodically push the last frame even when no motion is detected, reducing initial connection latency.
+To improve connection speed when using Birdseye via restream you can enable a small idle heartbeat by setting `birdseye.idle_heartbeat_fps` to a low value (e.g. `1–2`).  This makes Security periodically push the last frame even when no motion is detected, reducing initial connection latency.
 
 :::
 ### Securing Restream With Authentication
@@ -41,7 +41,7 @@ go2rtc:
   streams: ...
 ```
 
-**NOTE:** This does not apply to localhost requests, there is no need to provide credentials when using the restream as a source for frigate cameras.
+**NOTE:** This does not apply to localhost requests, there is no need to provide credentials when using the restream as a source for security cameras.
 
 ## Reduce Connections To Camera
 

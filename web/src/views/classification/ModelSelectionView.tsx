@@ -9,8 +9,8 @@ import useOptimisticState from "@/hooks/use-optimistic-state";
 import { cn } from "@/lib/utils";
 import {
   CustomClassificationModelConfig,
-  FrigateConfig,
-} from "@/types/frigateConfig";
+  SecurityConfig,
+} from "@/types/securityConfig";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaFolderPlus } from "react-icons/fa";
@@ -56,7 +56,7 @@ export default function ModelSelectionView({
     setPage,
     100,
   );
-  const { data: config, mutate: refreshConfig } = useSWR<FrigateConfig>(
+  const { data: config, mutate: refreshConfig } = useSWR<SecurityConfig>(
     "config",
     {
       revalidateOnFocus: false,

@@ -5,7 +5,7 @@ import {
   usePersistedOverlayState,
   useSearchEffect,
 } from "@/hooks/use-overlay-state";
-import { FrigateConfig } from "@/types/frigateConfig";
+import { SecurityConfig } from "@/types/securityConfig";
 import LiveBirdseyeView from "@/views/live/LiveBirdseyeView";
 import LiveCameraView from "@/views/live/LiveCameraView";
 import LiveDashboardView from "@/views/live/LiveDashboardView";
@@ -18,7 +18,7 @@ import { useIsCustomRole } from "@/hooks/use-is-custom-role";
 
 function Live() {
   const { t } = useTranslation(["views/live"]);
-  const { data: config } = useSWR<FrigateConfig>("config");
+  const { data: config } = useSWR<SecurityConfig>("config");
   const isCustomRole = useIsCustomRole();
 
   // selection

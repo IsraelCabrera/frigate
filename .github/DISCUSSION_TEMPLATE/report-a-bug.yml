@@ -4,30 +4,30 @@ body:
   - type: markdown
     attributes:
       value: |
-        Use this form to submit a reproducible bug in Frigate or Frigate's UI.
+        Use this form to submit a reproducible bug in Security or Security's UI.
 
-        Before submitting your bug report, please ask the AI with the "Ask AI" button on the [official documentation site][ai] about your issue, [search the discussions][discussions], look at recent open and closed [pull requests][prs], read the [official Frigate documentation][docs], and read the [Frigate FAQ][faq] pinned at the Discussion page to see if your bug has already been fixed by the developers or reported by the community.
+        Before submitting your bug report, please ask the AI with the "Ask AI" button on the [official documentation site][ai] about your issue, [search the discussions][discussions], look at recent open and closed [pull requests][prs], read the [official Security documentation][docs], and read the [Security FAQ][faq] pinned at the Discussion page to see if your bug has already been fixed by the developers or reported by the community.
 
         **If you are unsure if your issue is actually a bug or not, please submit a support request first.**
 
-        [discussions]: https://www.github.com/blakeblackshear/frigate/discussions
-        [prs]: https://www.github.com/blakeblackshear/frigate/pulls
-        [docs]: https://docs.frigate.video
-        [faq]: https://github.com/blakeblackshear/frigate/discussions/12724
-        [ai]: https://docs.frigate.video
+        [discussions]: https://www.github.com/blakeblackshear/security/discussions
+        [prs]: https://www.github.com/blakeblackshear/security/pulls
+        [docs]: https://docs.security.video
+        [faq]: https://github.com/blakeblackshear/security/discussions/12724
+        [ai]: https://docs.security.video
   - type: checkboxes
     attributes:
       label: Checklist
       description: Please verify that you've followed these steps
       options:
-        - label: I have updated to the latest available Frigate version.
+        - label: I have updated to the latest available Security version.
           required: true
         - label: I have cleared the cache of my browser.
           required: true
         - label: I have tried a different browser to see if it is related to my browser.
           required: true
         - label: I have tried reproducing the issue in [incognito mode](https://www.computerworld.com/article/1719851/how-to-go-incognito-in-chrome-firefox-safari-and-edge.html) to rule out problems with any third party extensions or plugins I have installed.
-        - label: I have asked the AI at https://docs.frigate.video about my issue.
+        - label: I have asked the AI at https://docs.security.video about my issue.
           required: true
   - type: textarea
     id: description
@@ -66,7 +66,7 @@ body:
   - type: textarea
     id: config
     attributes:
-      label: Frigate config file
+      label: Security config file
       description: This will be automatically formatted into code, so no need for backticks.
       render: yaml
     validations:
@@ -80,10 +80,10 @@ body:
     validations:
       required: true
   - type: textarea
-    id: frigatelogs
+    id: securitylogs
     attributes:
-      label: Relevant Frigate log output
-      description: Please copy and paste any relevant Frigate log output. Include logs before and after your exact error when possible. This will be automatically formatted into code, so no need for backticks.
+      label: Relevant Security log output
+      description: Please copy and paste any relevant Security log output. Include logs before and after your exact error when possible. This will be automatically formatted into code, so no need for backticks.
       render: shell
     validations:
       required: true
@@ -91,7 +91,7 @@ body:
     id: go2rtclogs
     attributes:
       label: Relevant go2rtc log output
-      description: Please copy and paste any relevant go2rtc log output. Include logs before and after your exact error when possible. Logs can be viewed via the Frigate UI, Docker, or the go2rtc dashboard. This will be automatically formatted into code, so no need for backticks.
+      description: Please copy and paste any relevant go2rtc log output. Include logs before and after your exact error when possible. Logs can be viewed via the Security UI, Docker, or the go2rtc dashboard. This will be automatically formatted into code, so no need for backticks.
       render: shell
     validations:
       required: true
@@ -139,7 +139,7 @@ body:
   - type: textarea
     id: screenshots
     attributes:
-      label: Screenshots of the Frigate UI's System metrics pages
+      label: Screenshots of the Security UI's System metrics pages
       description: Drag and drop for images is possible in this field. Please post screenshots of all tabs.
     validations:
       required: true

@@ -1,7 +1,7 @@
 {
   "time": {
     "untilForTime": "Do{{time}}",
-    "untilForRestart": "Do reštartu Frigate.",
+    "untilForRestart": "Do reštartu Security.",
     "untilRestart": "Do reštartu",
     "ago": "{{timeAgo}} pred časom",
     "justNow": "Práve teraz",
@@ -195,7 +195,7 @@
         "label": "Použiť systémové nastavenia pre jazyk"
       }
     },
-    "restart": "Reštartovať Frigate",
+    "restart": "Reštartovať Security",
     "live": {
       "title": "Naživo",
       "allCameras": "Všetky kamery",
@@ -239,7 +239,7 @@
     "help": "Pomocník",
     "documentation": {
       "title": "Dokumentácia",
-      "label": "Dokumentácia Frigate"
+      "label": "Dokumentácia Security"
     },
     "review": "Recenzia",
     "explore": "Preskúmať"
@@ -258,7 +258,7 @@
     "title": "Rola",
     "admin": "Správca",
     "viewer": "Divák",
-    "desc": "Správcovia majú plný prístup ku všetkým funkciám v užívateľskom rozhraní Frigate. Diváci sú obmedzení na sledovanie kamier, položiek prehľadu a historických záznamov v UI."
+    "desc": "Správcovia majú plný prístup ku všetkým funkciám v užívateľskom rozhraní Security. Diváci sú obmedzení na sledovanie kamier, položiek prehľadu a historických záznamov v UI."
   },
   "pagination": {
     "label": "stránkovanie",
@@ -273,12 +273,12 @@
     "more": "Viac strán"
   },
   "accessDenied": {
-    "documentTitle": "Prístup odmietnutý - Frigate",
+    "documentTitle": "Prístup odmietnutý - Security",
     "title": "Prístup odmietnutý",
     "desc": "Nemáte oprávnenie zobraziť túto stránku."
   },
   "notFound": {
-    "documentTitle": "Nenájdené - Frigate",
+    "documentTitle": "Nenájdené - Security",
     "title": "404",
     "desc": "Stránka nenájdená"
   },
@@ -292,6 +292,6 @@
   },
   "field": {
     "optional": "Voliteľné",
-    "internalID": "Interné ID Frigate používa v konfigurácii a databáze"
+    "internalID": "Interné ID Security používa v konfigurácii a databáze"
   }
 }

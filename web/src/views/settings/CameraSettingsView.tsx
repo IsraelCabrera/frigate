@@ -16,7 +16,7 @@ import { z } from "zod";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import useSWR from "swr";
-import { FrigateConfig } from "@/types/frigateConfig";
+import { SecurityConfig } from "@/types/securityConfig";
 import { Checkbox } from "@/components/ui/checkbox";
 import ActivityIndicator from "@/components/indicators/activity-indicator";
 import { StatusBarMessagesContext } from "@/context/statusbar-provider";
@@ -61,7 +61,7 @@ export default function CameraSettingsView({
   const { getLocaleDocUrl } = useDocDomain();
 
   const { data: config, mutate: updateConfig } =
-    useSWR<FrigateConfig>("config");
+    useSWR<SecurityConfig>("config");
 
   const cameraConfig = useMemo(() => {
     if (config && selectedCamera) {

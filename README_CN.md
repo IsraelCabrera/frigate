@@ -1,19 +1,19 @@
 <p align="center">
-  <img align="center" alt="logo" src="docs/static/img/frigate.png">
+  <img align="center" alt="logo" src="docs/static/img/security.png">
 </p>
 
-# Frigate - 一个具有实时目标检测的本地NVR
+# Security - 一个具有实时目标检测的本地NVR
 
-[English](https://github.com/blakeblackshear/frigate) | \[简体中文\] 
+[English](https://github.com/blakeblackshear/security) | \[简体中文\] 
 
-<a href="https://hosted.weblate.org/engage/frigate-nvr/-/zh_Hans/">
-<img src="https://hosted.weblate.org/widget/frigate-nvr/-/zh_Hans/svg-badge.svg" alt="翻译状态" />
+<a href="https://hosted.weblate.org/engage/security-nvr/-/zh_Hans/">
+<img src="https://hosted.weblate.org/widget/security-nvr/-/zh_Hans/svg-badge.svg" alt="翻译状态" />
 </a>
 
 一个完整的本地网络视频录像机（NVR），专为[Home Assistant](https://www.home-assistant.io)设计，具备AI物体检测功能。使用OpenCV和TensorFlow在本地为IP摄像头执行实时物体检测。
 
 强烈推荐使用GPU或者AI加速器（例如[Google Coral加速器](https://coral.ai/products/) 或者 [Hailo](https://hailo.ai/)）。它们的性能甚至超过目前的顶级CPU，并且可以以极低的耗电实现更优的性能。
-- 通过[自定义组件](https://github.com/blakeblackshear/frigate-hass-integration)与Home Assistant紧密集成
+- 通过[自定义组件](https://github.com/blakeblackshear/security-hass-integration)与Home Assistant紧密集成
 - 设计上通过仅在必要时和必要地点寻找物体，最大限度地减少资源使用并最大化性能
 - 大量利用多进程处理，强调实时性而非处理每一帧
 - 使用非常低开销的运动检测来确定运行物体检测的位置
@@ -26,7 +26,7 @@
 
 ## 社区中文翻译文档
 
-你可以在这里查看文档 https://docs.frigate-cn.video
+你可以在这里查看文档 https://docs.security-cn.video
 
 ## 赞助
 
@@ -36,27 +36,27 @@
 
 ### 实时监控面板
 <div>
-<img width="800" alt="实时监控面板" src="https://github.com/blakeblackshear/frigate/assets/569905/5e713cb9-9db5-41dc-947a-6937c3bc376e">
+<img width="800" alt="实时监控面板" src="https://github.com/blakeblackshear/security/assets/569905/5e713cb9-9db5-41dc-947a-6937c3bc376e">
 </div>
 
 ### 简单的核查工作流程
 <div>
-<img width="800" alt="简单的审查工作流程" src="https://github.com/blakeblackshear/frigate/assets/569905/6fed96e8-3b18-40e5-9ddc-31e6f3c9f2ff">
+<img width="800" alt="简单的审查工作流程" src="https://github.com/blakeblackshear/security/assets/569905/6fed96e8-3b18-40e5-9ddc-31e6f3c9f2ff">
 </div>
 
 ### 多摄像头可按时间轴查看
 <div>
-<img width="800" alt="多摄像头可按时间轴查看" src="https://github.com/blakeblackshear/frigate/assets/569905/d6788a15-0eeb-4427-a8d4-80b93cae3d74">
+<img width="800" alt="多摄像头可按时间轴查看" src="https://github.com/blakeblackshear/security/assets/569905/d6788a15-0eeb-4427-a8d4-80b93cae3d74">
 </div>
 
 ### 内置遮罩和区域编辑器
 <div>
-<img width="800" alt="内置遮罩和区域编辑器" src="https://github.com/blakeblackshear/frigate/assets/569905/d7885fc3-bfe6-452f-b7d0-d957cb3e31f5">
+<img width="800" alt="内置遮罩和区域编辑器" src="https://github.com/blakeblackshear/security/assets/569905/d7885fc3-bfe6-452f-b7d0-d957cb3e31f5">
 </div>
 
 
 ## 翻译
-我们使用 [Weblate](https://hosted.weblate.org/projects/frigate-nvr/) 平台提供翻译支持，欢迎参与进来一起完善。
+我们使用 [Weblate](https://hosted.weblate.org/projects/security-nvr/) 平台提供翻译支持，欢迎参与进来一起完善。
 
 
 ## 非官方中文讨论社区

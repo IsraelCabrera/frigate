@@ -1,6 +1,6 @@
 import { Button } from "../ui/button";
 import useSWR from "swr";
-import { FrigateConfig } from "@/types/frigateConfig";
+import { SecurityConfig } from "@/types/securityConfig";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { DropdownMenuSeparator } from "../ui/dropdown-menu";
 import {
@@ -72,7 +72,7 @@ export default function ReviewFilterGroup({
   onUpdateFilter,
   setMotionOnly,
 }: ReviewFilterGroupProps) {
-  const { data: config } = useSWR<FrigateConfig>("config");
+  const { data: config } = useSWR<SecurityConfig>("config");
   const allowedCameras = useAllowedCameras();
 
   const allLabels = useMemo<string[]>(() => {

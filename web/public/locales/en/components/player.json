@@ -2,8 +2,8 @@
   "noRecordingsFoundForThisTime": "No recordings found for this time",
   "noPreviewFound": "No Preview Found",
   "noPreviewFoundFor": "No Preview Found for {{cameraName}}",
-  "submitFrigatePlus": {
-    "title": "Submit this frame to Frigate+?",
+  "submitSecurityPlus": {
+    "title": "Submit this frame to Security+?",
     "submit": "Submit"
   },
   "livePlayerRequiredIOSVersion": "iOS 17.1 or greater is required for this live stream type.",
@@ -42,10 +42,10 @@
   },
   "toast": {
     "success": {
-      "submittedFrigatePlus": "Successfully submitted frame to Frigate+"
+      "submittedSecurityPlus": "Successfully submitted frame to Security+"
     },
     "error": {
-      "submitFrigatePlusFailed": "Failed to submit frame to Frigate+"
+      "submitSecurityPlusFailed": "Failed to submit frame to Security+"
     }
   }
 }

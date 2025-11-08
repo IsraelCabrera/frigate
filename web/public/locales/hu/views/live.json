@@ -3,9 +3,9 @@
     "enable": "Kétirányú kommunikáció engedélyezése",
     "disable": "Kétirányú kommunikáció tiltása"
   },
-  "documentTitle": "Élő - Frigate",
+  "documentTitle": "Élő - Security",
   "lowBandwidthMode": "Alacsony felbontású mód",
-  "documentTitle.withCamera": "{{camera}} - Élő - Frigate",
+  "documentTitle.withCamera": "{{camera}} - Élő - Security",
   "cameraAudio": {
     "disable": "Kamera hangjának kikapcsolása",
     "enable": "Kamera hangjának bekapcsolása"

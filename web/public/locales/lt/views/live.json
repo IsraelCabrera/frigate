@@ -1,6 +1,6 @@
 {
-  "documentTitle": "Gyvai - Frigate",
-  "documentTitle.withCamera": "{{camera}} - Tiesiogiai - Frigate",
+  "documentTitle": "Gyvai - Security",
+  "documentTitle.withCamera": "{{camera}} - Tiesiogiai - Security",
   "lowBandwidthMode": "Mažo-pralaidumo Rėžimas",
   "cameraAudio": {
     "enable": "Įgalinti Kamerų Garsą",
@@ -171,7 +171,7 @@
   },
   "noCameras": {
     "title": "Nėra Sukonfiguruotų Kamerų",
-    "description": "Pradėti nuo kameros prijungimo pire Frigate.",
+    "description": "Pradėti nuo kameros prijungimo pire Security.",
     "buttonText": "Pridėti Kamerą"
   },
   "snapshot": {

@@ -27,9 +27,9 @@
   },
   "camera": "Kamera",
   "timeline.aria": "Válassza ki az idővonalat",
-  "documentTitle": "Áttekintés - Frigate",
+  "documentTitle": "Áttekintés - Security",
   "recordings": {
-    "documentTitle": "Felvételek - Frigate"
+    "documentTitle": "Felvételek - Security"
   },
   "markTheseItemsAsReviewed": "Ezen elemek megjelölése áttekintettként",
   "markAsReviewed": "Megjelölés Áttekintettként",

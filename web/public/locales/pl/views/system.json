@@ -1,13 +1,13 @@
 {
   "documentTitle": {
-    "cameras": "Statystyki kamer - Frigate",
-    "storage": "Statystyki Magazynowania - Frigate",
-    "general": "Statystyki Ogólne - Frigate",
-    "enrichments": "Statystyki Wzbogacania - Frigate",
+    "cameras": "Statystyki kamer - Security",
+    "storage": "Statystyki Magazynowania - Security",
+    "general": "Statystyki Ogólne - Security",
+    "enrichments": "Statystyki Wzbogacania - Security",
     "logs": {
-      "frigate": "Logi Frigate - Frigate",
-      "go2rtc": "Logi Go2RTC - Frigate",
-      "nginx": "Logi Nginx - Frigate"
+      "security": "Logi Security - Security",
+      "go2rtc": "Logi Go2RTC - Security",
+      "nginx": "Logi Nginx - Security"
     }
   },
   "general": {
@@ -109,7 +109,7 @@
     "cameraStorage": {
       "unused": {
         "title": "Niewykorzystane",
-        "tips": "Ta wartość może niedokładnie przedstawiać wolne miejsce dostępne dla Frigate, jeśli masz inne pliki przechowywane na dysku poza nagraniami Frigate. Frigate nie śledzi wykorzystania magazynu poza swoimi nagraniami."
+        "tips": "Ta wartość może niedokładnie przedstawiać wolne miejsce dostępne dla Security, jeśli masz inne pliki przechowywane na dysku poza nagraniami Security. Security nie śledzi wykorzystania magazynu poza swoimi nagraniami."
       },
       "title": "Magazyn kamery",
       "camera": "Kamera",
@@ -122,7 +122,7 @@
     "overview": "Przegląd",
     "recordings": {
       "title": "Nagrania",
-      "tips": "Ta wartość reprezentuje całkowite miejsce zajmowane przez nagrania w bazie danych Frigate. Frigate nie śledzi wykorzystania magazynu dla wszystkich plików na twoim dysku.",
+      "tips": "Ta wartość reprezentuje całkowite miejsce zajmowane przez nagrania w bazie danych Security. Security nie śledzi wykorzystania magazynu dla wszystkich plików na twoim dysku.",
       "earliestRecording": "Najwcześniejsze dostępne nagranie:"
     },
     "shm": {

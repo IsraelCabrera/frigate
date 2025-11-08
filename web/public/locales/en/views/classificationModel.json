@@ -140,7 +140,7 @@
       "selectImagesDescription": "Click on images to select them. Click Continue when you're done with this class.",
       "generating": {
         "title": "Generating Sample Images",
-        "description": "Frigate is pulling representative images from your recordings. This may take a moment..."
+        "description": "Security is pulling representative images from your recordings. This may take a moment..."
       },
       "training": {
         "title": "Training Model",

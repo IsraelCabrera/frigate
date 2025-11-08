@@ -65,10 +65,10 @@ jobs:
           python3 -m pip install -r docker/main/requirements-dev.txt
       - name: Check formatting
         run: |
-          ruff format --check --diff frigate migrations docker *.py
+          ruff format --check --diff security migrations docker *.py
       - name: Check lint
         run: |
-          ruff check frigate migrations docker *.py
+          ruff check security migrations docker *.py
 
   python_tests:
     runs-on: ubuntu-latest
@@ -90,6 +90,6 @@ jobs:
       - name: Start devcontainer
         run: devcontainer up --workspace-folder .
       - name: Run mypy in devcontainer
-        run: devcontainer exec --workspace-folder . bash -lc "python3 -u -m mypy --config-file frigate/mypy.ini frigate"
+        run: devcontainer exec --workspace-folder . bash -lc "python3 -u -m mypy --config-file security/mypy.ini security"
       - name: Run unit tests in devcontainer
         run: devcontainer exec --workspace-folder . bash -lc "python3 -u -m unittest"

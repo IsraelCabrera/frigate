@@ -49,7 +49,7 @@ import {
 } from "@/utils/dateUtil";
 import { toast } from "sonner";
 import useSWR from "swr";
-import { FrigateConfig } from "@/types/frigateConfig";
+import { SecurityConfig } from "@/types/securityConfig";
 import { MdImageSearch } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 import { getTranslatedLabel } from "@/utils/i18n";
@@ -77,7 +77,7 @@ export default function InputWithTags({
   allSuggestions,
 }: InputWithTagsProps) {
   const { t, i18n } = useTranslation(["views/search"]);
-  const { data: config } = useSWR<FrigateConfig>("config", {
+  const { data: config } = useSWR<SecurityConfig>("config", {
     revalidateOnFocus: false,
   });
 
@@ -93,7 +93,7 @@ export default function InputWithTags({
 
   const [searchHistory, setSearchHistory, searchHistoryLoaded] = usePersistence<
     SavedSearchQuery[]
-  >("frigate-search-history");
+  >("security-search-history");
 
   const [isSaveDialogOpen, setIsSaveDialogOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -853,7 +853,7 @@ export default function InputWithTags({
                           {filterType === "event_id"
                             ? t("trackedObjectId")
                             : filterType === "is_submitted"
-                              ? t("features.submittedToFrigatePlus.label", {
+                              ? t("features.submittedToSecurityPlus.label", {
                                   ns: "components/filter",
                                 })
                               : t("filter.label." + filterType)}

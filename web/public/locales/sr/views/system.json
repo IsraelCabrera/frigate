@@ -1,13 +1,13 @@
 {
   "documentTitle": {
-    "cameras": "Statusi kamera - Frigate",
-    "storage": "Statistika skladištenja - Frigate",
-    "general": "Opšta statistika - Frigate",
-    "enrichments": "Statistika obogaćivanja - Frigate",
+    "cameras": "Statusi kamera - Security",
+    "storage": "Statistika skladištenja - Security",
+    "general": "Opšta statistika - Security",
+    "enrichments": "Statistika obogaćivanja - Security",
     "logs": {
-      "frigate": "Frigate logovi - Frigate",
-      "go2rtc": "Go2RTC dnevnici - Frigate",
-      "nginx": "Nginx logovi - Frigate"
+      "security": "Security logovi - Security",
+      "go2rtc": "Go2RTC dnevnici - Security",
+      "nginx": "Nginx logovi - Security"
     }
   },
   "title": "Sistem"

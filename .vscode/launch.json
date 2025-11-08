@@ -2,10 +2,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Python: Launch Frigate",
+      "name": "Python: Launch Security",
       "type": "debugpy",
       "request": "launch",
-      "module": "frigate"
+      "module": "security"
     }
   ]
 }

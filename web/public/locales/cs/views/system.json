@@ -128,7 +128,7 @@
       "title": "Úložiště kamery",
       "unused": {
         "title": "Nepoužité",
-        "tips": "Tato hodnota nemusí přesně reprezentovat volné místo dostupné pro Frigate, pokud máte na disku uloženy další soubory kromě nahrávek Frigate. Frigate nesleduje využití úložiště mimo své nahrávky."
+        "tips": "Tato hodnota nemusí přesně reprezentovat volné místo dostupné pro Security, pokud máte na disku uloženy další soubory kromě nahrávek Security. Security nesleduje využití úložiště mimo své nahrávky."
       },
       "bandwidth": "Šířka pásma",
       "unusedStorageInformation": "Informace o nepoužitém úložišti",
@@ -137,7 +137,7 @@
     "recordings": {
       "title": "Záznamy",
       "earliestRecording": "Nejstarší dostupná nahrávka:",
-      "tips": "Tato hodnota uvádí celkové využití disku záznamy uloženými v databázi Frigate. Frigate nesleduje využití disku ostatními soubory na vašem disku."
+      "tips": "Tato hodnota uvádí celkové využití disku záznamy uloženými v databázi Security. Security nesleduje využití disku ostatními soubory na vašem disku."
     },
     "title": "Úložiště",
     "overview": "Přehled",
@@ -148,14 +148,14 @@
   },
   "lastRefreshed": "Poslední aktualizace: ",
   "documentTitle": {
-    "cameras": "Statistiky kamer – Frigate",
-    "storage": "Statistiky uložiště - Frigate",
-    "general": "Obecné statistiky - Frigate",
-    "enrichments": "Statistiky obohacení - Frigate",
+    "cameras": "Statistiky kamer – Security",
+    "storage": "Statistiky uložiště - Security",
+    "general": "Obecné statistiky - Security",
+    "enrichments": "Statistiky obohacení - Security",
     "logs": {
-      "frigate": "Protokoly Frigate - Frigate",
-      "go2rtc": "Protokoly Go2RTC - Frigate",
-      "nginx": "Protokoly Nginx - Frigate"
+      "security": "Protokoly Security - Security",
+      "go2rtc": "Protokoly Go2RTC - Security",
+      "nginx": "Protokoly Nginx - Security"
     }
   },
   "title": "Systém",

@@ -1,7 +1,7 @@
 {
-  "documentTitle": "Direkte - Frigate",
+  "documentTitle": "Direkte - Security",
   "lowBandwidthMode": "Lav båndbreddemodus",
-  "documentTitle.withCamera": "{{camera}} - Direkte - Frigate",
+  "documentTitle.withCamera": "{{camera}} - Direkte - Security",
   "ptz": {
     "move": {
       "clickMove": {
@@ -179,7 +179,7 @@
   },
   "noCameras": {
     "title": "Ingen kameraer konfigurert",
-    "description": "Kom i gang ved å koble et kamera til Frigate.",
+    "description": "Kom i gang ved å koble et kamera til Security.",
     "buttonText": "Legg til kamera"
   }
 }

@@ -1,17 +1,17 @@
 ---
 id: pwa
-title: Installing Frigate App
+title: Installing Security App
 ---
 
-Frigate supports being installed as a [Progressive Web App](https://web.dev/explore/progressive-web-apps) on Desktop, Android, and iOS.
+Security supports being installed as a [Progressive Web App](https://web.dev/explore/progressive-web-apps) on Desktop, Android, and iOS.
 
 This adds features including the ability to deep link directly into the app.
 
 ## Requirements
 
-In order to install Frigate as a PWA, the following requirements must be met:
+In order to install Security as a PWA, the following requirements must be met:
 
-- Frigate must be accessed via a secure context (localhost, secure https, etc.)
+- Security must be accessed via a secure context (localhost, secure https, etc.)
 - On Android, Firefox, Chrome, Edge, Opera, and Samsung Internet Browser all support installing PWAs.
 - On iOS 16.4 and later, PWAs can be installed from the Share menu in Safari, Chrome, Edge, Firefox, and Orion.
 

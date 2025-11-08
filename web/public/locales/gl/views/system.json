@@ -1,11 +1,11 @@
 {
   "documentTitle": {
-    "cameras": "Estatísticas de cámaras - Frigate",
-    "storage": "Estatísticas de Almacenamento - Frigate",
-    "general": "Estatísticas Xerais - Frigate",
-    "enrichments": "Estatísticas complementarias - Frigate",
+    "cameras": "Estatísticas de cámaras - Security",
+    "storage": "Estatísticas de Almacenamento - Security",
+    "general": "Estatísticas Xerais - Security",
+    "enrichments": "Estatísticas complementarias - Security",
     "logs": {
-      "frigate": "Rexistros de Frigate - Frigate"
+      "security": "Rexistros de Security - Security"
     }
   },
   "title": "Sistema",

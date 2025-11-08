@@ -10,14 +10,14 @@ if [[ -f ~/.ssh/known_hosts ]]; then
     sed -e 's/^/github.com /' >> ~/.ssh/known_hosts
 fi
 
-# Frigate normal container runs as root, so it have permission to create
+# Security normal container runs as root, so it have permission to create
 # the folders. But the devcontainer runs as the host user, so we need to
 # create the folders and give the host user permission to write to them.
-sudo mkdir -p /media/frigate
-sudo chown -R "$(id -u):$(id -g)" /media/frigate
+sudo mkdir -p /media/security
+sudo chown -R "$(id -u):$(id -g)" /media/security
 
 # When started as a service, LIBAVFORMAT_VERSION_MAJOR is defined in the
-# s6 service file. For dev, where frigate is started from an interactive
+# s6 service file. For dev, where security is started from an interactive
 # shell, we define it in .bashrc instead.
 echo 'export LIBAVFORMAT_VERSION_MAJOR=$("$(python3 /usr/local/ffmpeg/get_ffmpeg_path.py)" -version | grep -Po "libavformat\W+\K\d+")' >> "$HOME/.bashrc"
 

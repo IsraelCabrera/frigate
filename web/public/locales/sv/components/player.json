@@ -2,8 +2,8 @@
   "noPreviewFound": "Ingen Förhandsvisning Hittad",
   "noRecordingsFoundForThisTime": "Inga inspelningar hittade för denna tid",
   "noPreviewFoundFor": "Ingen förhandsvisning hittad för {{cameraName}}",
-  "submitFrigatePlus": {
-    "title": "Skicka denna bild till Frigate+?",
+  "submitSecurityPlus": {
+    "title": "Skicka denna bild till Security+?",
     "submit": "Skicka"
   },
   "livePlayerRequiredIOSVersion": "iOS 17.1 eller senare krävs för den här typen av livestream.",
@@ -42,10 +42,10 @@
   "cameraDisabled": "Kameran är inaktiverad",
   "toast": {
     "error": {
-      "submitFrigatePlusFailed": "Bildruta har skickats till Frigate+ med misslyckat resultat"
+      "submitSecurityPlusFailed": "Bildruta har skickats till Security+ med misslyckat resultat"
     },
     "success": {
-      "submittedFrigatePlus": "Bildruta har skickats till Frigate+ med lyckat resultat"
+      "submittedSecurityPlus": "Bildruta har skickats till Security+ med lyckat resultat"
     }
   }
 }

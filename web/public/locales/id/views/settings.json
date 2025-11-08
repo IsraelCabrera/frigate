@@ -1,15 +1,15 @@
 {
   "documentTitle": {
-    "default": "Pengaturan - Frigate",
-    "camera": "Pengaturan Kamera - Frigate",
-    "classification": "Pengaturan Klasifikasi - Frigate",
-    "authentication": "Pengaturan Autentikasi - Frigate",
-    "masksAndZones": "Editor Mask dan Zona - Frigate",
-    "motionTuner": "Penyetel Gerakan - Frigate",
-    "general": "Frigate - Pengaturan Umum",
-    "object": "Debug - Frigate",
-    "enrichments": "Frigate - Pengaturan Pengayaan",
-    "cameraManagement": "Pengaturan Kamera - Frigate"
+    "default": "Pengaturan - Security",
+    "camera": "Pengaturan Kamera - Security",
+    "classification": "Pengaturan Klasifikasi - Security",
+    "authentication": "Pengaturan Autentikasi - Security",
+    "masksAndZones": "Editor Mask dan Zona - Security",
+    "motionTuner": "Penyetel Gerakan - Security",
+    "general": "Security - Pengaturan Umum",
+    "object": "Debug - Security",
+    "enrichments": "Security - Pengaturan Pengayaan",
+    "cameraManagement": "Pengaturan Kamera - Security"
   },
   "menu": {
     "cameraManagement": "Pengaturan",

@@ -21,7 +21,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import useOptimisticState from "@/hooks/use-optimistic-state";
 import { isMobile } from "react-device-detect";
 import { FaVideo } from "react-icons/fa";
-import { CameraConfig, FrigateConfig } from "@/types/frigateConfig";
+import { CameraConfig, SecurityConfig } from "@/types/securityConfig";
 import useSWR from "swr";
 import FilterSwitch from "@/components/filter/FilterSwitch";
 import { ZoneMaskFilterButton } from "@/components/filter/ZoneMaskFilter";
@@ -35,7 +35,7 @@ import RolesView from "@/views/settings/RolesView";
 import NotificationView from "@/views/settings/NotificationsSettingsView";
 import EnrichmentsSettingsView from "@/views/settings/EnrichmentsSettingsView";
 import UiSettingsView from "@/views/settings/UiSettingsView";
-import FrigatePlusSettingsView from "@/views/settings/FrigatePlusSettingsView";
+import SecurityPlusSettingsView from "@/views/settings/SecurityPlusSettingsView";
 import { useSearchEffect } from "@/hooks/use-overlay-state";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useInitialCameraState } from "@/api/ws";
@@ -80,7 +80,7 @@ const allSettingsViews = [
   "users",
   "roles",
   "notifications",
-  "frigateplus",
+  "securityplus",
 ] as const;
 type SettingsType = (typeof allSettingsViews)[number];
 
@@ -117,8 +117,8 @@ const settingsGroups = [
     ],
   },
   {
-    label: "frigateplus",
-    items: [{ key: "frigateplus", component: FrigatePlusSettingsView }],
+    label: "securityplus",
+    items: [{ key: "securityplus", component: SecurityPlusSettingsView }],
   },
 ];
 
@@ -179,7 +179,7 @@ export default function Settings() {
   const [pageToggle, setPageToggle] = useOptimisticState(page, setPage, 100);
   const [contentMobileOpen, setContentMobileOpen] = useState(false);
 
-  const { data: config } = useSWR<FrigateConfig>("config");
+  const { data: config } = useSWR<SecurityConfig>("config");
 
   const [searchParams] = useSearchParams();
 

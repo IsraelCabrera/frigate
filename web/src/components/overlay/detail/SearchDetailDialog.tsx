@@ -1,7 +1,7 @@
 import { isDesktop, isIOS, isMobile, isSafari } from "react-device-detect";
 import { SearchResult } from "@/types/search";
 import useSWR from "swr";
-import { FrigateConfig } from "@/types/frigateConfig";
+import { SecurityConfig } from "@/types/securityConfig";
 import { useFormattedTimestamp } from "@/hooks/use-date-utils";
 import { getIconForLabel } from "@/utils/iconUtil";
 import { useApiHost } from "@/api";
@@ -93,7 +93,7 @@ type TabsWithActionsProps = {
   searchTabs: SearchTab[];
   pageToggle: SearchTab;
   setPageToggle: (v: SearchTab) => void;
-  config?: FrigateConfig;
+  config?: SecurityConfig;
   setSearch: (s: SearchResult | undefined) => void;
   setSimilarity?: () => void;
   isPopoverOpen: boolean;
@@ -275,7 +275,7 @@ type DialogContentComponentProps = {
   search: SearchResult;
   isDesktop: boolean;
   apiHost: string;
-  config?: FrigateConfig;
+  config?: SecurityConfig;
   searchTabs: SearchTab[];
   pageToggle: SearchTab;
   setPageToggle: (v: SearchTab) => void;
@@ -430,7 +430,7 @@ export default function SearchDetailDialog({
   onNext,
 }: SearchDetailDialogProps) {
   const { t } = useTranslation(["views/explore", "views/faceLibrary"]);
-  const { data: config } = useSWR<FrigateConfig>("config", {
+  const { data: config } = useSWR<SecurityConfig>("config", {
     revalidateOnFocus: false,
   });
   const apiHost = useApiHost();
@@ -645,7 +645,7 @@ export default function SearchDetailDialog({
 
 type ObjectDetailsTabProps = {
   search: SearchResult;
-  config?: FrigateConfig;
+  config?: SecurityConfig;
   setSearch: (search: SearchResult | undefined) => void;
   setInputFocused: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -1053,7 +1053,7 @@ function ObjectDetailsTab({
       });
   }, [search, t]);
 
-  // frigate+ submission
+  // security+ submission
 
   type SubmissionState = "reviewing" | "uploading" | "submitted";
   const [state, setState] = useState<SubmissionState>(

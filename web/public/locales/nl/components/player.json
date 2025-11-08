@@ -28,8 +28,8 @@
     },
     "decodedFrames": "Gedecodeerde frames:"
   },
-  "submitFrigatePlus": {
-    "title": "Dit frame indienen bij Frigate+?",
+  "submitSecurityPlus": {
+    "title": "Dit frame indienen bij Security+?",
     "submit": "Indienen"
   },
   "streamOffline": {
@@ -42,10 +42,10 @@
   "cameraDisabled": "Camera is uitgeschakeld",
   "toast": {
     "success": {
-      "submittedFrigatePlus": "Frame succesvol ingediend bij Frigate+"
+      "submittedSecurityPlus": "Frame succesvol ingediend bij Security+"
     },
     "error": {
-      "submitFrigatePlusFailed": "Het is niet gelukt om een frame naar Frigate+ te sturen"
+      "submitSecurityPlusFailed": "Het is niet gelukt om een frame naar Security+ te sturen"
     }
   }
 }

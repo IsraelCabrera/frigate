@@ -1,7 +1,7 @@
 {
   "time": {
     "untilForTime": "Until {{time}}",
-    "untilForRestart": "Until Frigate restarts.",
+    "untilForRestart": "Until Security restarts.",
     "untilRestart": "Until restart",
     "ago": "{{timeAgo}} ago",
     "justNow": "Just now",
@@ -105,7 +105,7 @@
   },
   "field": {
     "optional": "Optional",
-    "internalID": "The Internal ID Frigate uses in the configuration and database"
+    "internalID": "The Internal ID Security uses in the configuration and database"
   },
   "button": {
     "apply": "Apply",
@@ -218,9 +218,9 @@
     "help": "Help",
     "documentation": {
       "title": "Documentation",
-      "label": "Frigate documentation"
+      "label": "Security documentation"
     },
-    "restart": "Restart Frigate",
+    "restart": "Restart Security",
     "live": {
       "title": "Live",
       "allCameras": "All Cameras",
@@ -258,7 +258,7 @@
     "title": "Role",
     "admin": "Admin",
     "viewer": "Viewer",
-    "desc": "Admins have full access to all features in the Frigate UI. Viewers are limited to viewing cameras, review items, and historical footage in the UI."
+    "desc": "Admins have full access to all features in the Security UI. Viewers are limited to viewing cameras, review items, and historical footage in the UI."
   },
   "pagination": {
     "label": "pagination",
@@ -273,12 +273,12 @@
     "more": "More pages"
   },
   "accessDenied": {
-    "documentTitle": "Access Denied - Frigate",
+    "documentTitle": "Access Denied - Security",
     "title": "Access Denied",
     "desc": "You don't have permission to view this page."
   },
   "notFound": {
-    "documentTitle": "Not Found - Frigate",
+    "documentTitle": "Not Found - Security",
     "title": "404",
     "desc": "Page not found"
   },

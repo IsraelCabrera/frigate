@@ -5,7 +5,7 @@ title: Video Decoding
 
 # Video Decoding
 
-It is highly recommended to use a GPU for hardware acceleration video decoding in Frigate. Some types of hardware acceleration are detected and used automatically, but you may need to update your configuration to enable hardware accelerated decoding in ffmpeg.
+It is highly recommended to use a GPU for hardware acceleration video decoding in Security. Some types of hardware acceleration are detected and used automatically, but you may need to update your configuration to enable hardware accelerated decoding in ffmpeg.
 
 Depending on your system, these parameters may not be compatible. More information on hardware accelerated decoding for ffmpeg can be found here: https://trac.ffmpeg.org/wiki/HWAccelIntro
 
@@ -27,12 +27,12 @@ ffmpeg:
 
 :::note
 
-If running Frigate through Docker, you either need to run in privileged mode or
-map the `/dev/video*` devices to Frigate. With Docker Compose add:
+If running Security through Docker, you either need to run in privileged mode or
+map the `/dev/video*` devices to Security. With Docker Compose add:
 
 ```yaml
 services:
-  frigate:
+  security:
     ...
     devices:
       - /dev/video11:/dev/video11
@@ -42,10 +42,10 @@ Or with `docker run`:
 
 ```bash
 docker run -d \
-  --name frigate \
+  --name security \
   ...
   --device /dev/video11 \
-  ghcr.io/blakeblackshear/frigate:stable
+  ghcr.io/blakeblackshear/security:stable
 ```
 
 `/dev/video11` is the correct device (on Raspberry Pi 4B). You can check
@@ -126,9 +126,9 @@ This method works, but it gives more permissions to the container than are actua
 
 ```yaml
 services:
-  frigate:
+  security:
     ...
-    image: ghcr.io/blakeblackshear/frigate:stable
+    image: ghcr.io/blakeblackshear/security:stable
     privileged: true
 ```
 
@@ -136,10 +136,10 @@ services:
 
 ```bash
 docker run -d \
-  --name frigate \
+  --name security \
   ...
   --privileged \
-  ghcr.io/blakeblackshear/frigate:stable
+  ghcr.io/blakeblackshear/security:stable
 ```
 
 #### CAP_PERFMON
@@ -150,9 +150,9 @@ Only recent versions of Docker support the `CAP_PERFMON` capability. You can tes
 
 ```yaml
 services:
-  frigate:
+  security:
     ...
-    image: ghcr.io/blakeblackshear/frigate:stable
+    image: ghcr.io/blakeblackshear/security:stable
     cap_add:
       - CAP_PERFMON
 ```
@@ -161,10 +161,10 @@ services:
 
 ```bash
 docker run -d \
-  --name frigate \
+  --name security \
   ...
   --cap-add=CAP_PERFMON \
-  ghcr.io/blakeblackshear/frigate:stable
+  ghcr.io/blakeblackshear/security:stable
 ```
 
 #### perf_event_paranoid
@@ -212,7 +212,7 @@ ffmpeg:
 
 ## NVIDIA GPUs
 
-While older GPUs may work, it is recommended to use modern, supported GPUs. NVIDIA provides a [matrix of supported GPUs and features](https://developer.nvidia.com/video-encode-and-decode-gpu-support-matrix-new). If your card is on the list and supports CUVID/NVDEC, it will most likely work with Frigate for decoding. However, you must also use [a driver version that will work with FFmpeg](https://github.com/FFmpeg/nv-codec-headers/blob/master/README). Older driver versions may be missing symbols and fail to work, and older cards are not supported by newer driver versions. The only way around this is to [provide your own FFmpeg](/configuration/advanced#custom-ffmpeg-build) that will work with your driver version, but this is unsupported and may not work well if at all.
+While older GPUs may work, it is recommended to use modern, supported GPUs. NVIDIA provides a [matrix of supported GPUs and features](https://developer.nvidia.com/video-encode-and-decode-gpu-support-matrix-new). If your card is on the list and supports CUVID/NVDEC, it will most likely work with Security for decoding. However, you must also use [a driver version that will work with FFmpeg](https://github.com/FFmpeg/nv-codec-headers/blob/master/README). Older driver versions may be missing symbols and fail to work, and older cards are not supported by newer driver versions. The only way around this is to [provide your own FFmpeg](/configuration/advanced#custom-ffmpeg-build) that will work with your driver version, but this is unsupported and may not work well if at all.
 
 A more complete list of cards and their compatible drivers is available in the [driver release readme](https://download.nvidia.com/XFree86/Linux-x86_64/525.85.05/README/supportedchips.html).
 
@@ -226,9 +226,9 @@ Additional configuration is needed for the Docker container to be able to access
 
 ```yaml
 services:
-  frigate:
+  security:
     ...
-    image: ghcr.io/blakeblackshear/frigate:stable-tensorrt
+    image: ghcr.io/blakeblackshear/security:stable-tensorrt
     deploy:    # <------------- Add this section
       resources:
         reservations:
@@ -243,10 +243,10 @@ services:
 
 ```bash
 docker run -d \
-  --name frigate \
+  --name security \
   ...
   --gpus=all \
-  ghcr.io/blakeblackshear/frigate:stable-tensorrt
+  ghcr.io/blakeblackshear/security:stable-tensorrt
 ```
 
 ### Setup Decoder
@@ -305,7 +305,7 @@ These instructions were originally based on the [Jellyfin documentation](https:/
 ## NVIDIA Jetson (Orin AGX, Orin NX, Orin Nano\*, Xavier AGX, Xavier NX, TX2, TX1, Nano)
 
 A separate set of docker images is available that is based on Jetpack/L4T. They come with an `ffmpeg` build
-with codecs that use the Jetson's dedicated media engine. If your Jetson host is running Jetpack 6.0+ use the `stable-tensorrt-jp6` tagged image. Note that the Orin Nano has no video encoder, so frigate will use software encoding on this platform, but the image will still allow hardware decoding and tensorrt object detection.
+with codecs that use the Jetson's dedicated media engine. If your Jetson host is running Jetpack 6.0+ use the `stable-tensorrt-jp6` tagged image. Note that the Orin Nano has no video encoder, so security will use software encoding on this platform, but the image will still allow hardware decoding and tensorrt object detection.
 
 You will need to use the image with the nvidia container runtime:
 
@@ -315,16 +315,16 @@ You will need to use the image with the nvidia container runtime:
 docker run -d \
   ...
   --runtime nvidia
-  ghcr.io/blakeblackshear/frigate:stable-tensorrt-jp6
+  ghcr.io/blakeblackshear/security:stable-tensorrt-jp6
 ```
 
 ### Docker Compose - Jetson
 
 ```yaml
 services:
-  frigate:
+  security:
     ...
-    image: ghcr.io/blakeblackshear/frigate:stable-tensorrt-jp6
+    image: ghcr.io/blakeblackshear/security:stable-tensorrt-jp6
     runtime: nvidia   # Add this
 ```
 
@@ -378,7 +378,7 @@ Hardware accelerated video de-/encoding is supported on all Rockchip SoCs using 
 
 ### Prerequisites
 
-Make sure to follow the [Rockchip specific installation instructions](/frigate/installation#rockchip-platform).
+Make sure to follow the [Rockchip specific installation instructions](/security/installation#rockchip-platform).
 
 ### Configuration
 
@@ -434,7 +434,7 @@ Hardware accelerated video de-/encoding is supported on Synpatics SL-series SoC.
 
 ### Prerequisites
 
-Make sure to follow the [Synaptics specific installation instructions](/frigate/installation#synaptics).
+Make sure to follow the [Synaptics specific installation instructions](/security/installation#synaptics).
 
 ### Configuration
 

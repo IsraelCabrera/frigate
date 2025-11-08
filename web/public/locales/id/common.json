@@ -1,6 +1,6 @@
 {
   "time": {
-    "untilForRestart": "Hingga Frigate memulai ulang.",
+    "untilForRestart": "Hingga Security memulai ulang.",
     "untilRestart": "Sampai memulai ulang",
     "ago": "{{timeAgo}} Lalu",
     "justNow": "Sekarang",

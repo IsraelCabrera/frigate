@@ -20,7 +20,7 @@ function migrate_addon_config_dir() {
         return 0
     fi
 
-    local old_config_file="${home_assistant_config_dir}/frigate.yml"
+    local old_config_file="${home_assistant_config_dir}/security.yml"
     local old_config_file_yaml="${old_config_file//.yml/.yaml}"
     if [[ -f "${old_config_file}" ]]; then
         :
@@ -38,7 +38,7 @@ function migrate_addon_config_dir() {
     local db_path
     db_path=$(yq -r '.database.path' "${old_config_file}")
     if [[ "${db_path}" == "null" ]]; then
-        db_path="${config_dir}/frigate.db"
+        db_path="${config_dir}/security.db"
     fi
     if [[ "${db_path}" == "${config_dir}/"* ]]; then
         # replace /config/ prefix with /homeassistant/
@@ -108,7 +108,7 @@ function migrate_db_from_media_to_config() {
     elif [[ -f "${config_file_yaml}" ]]; then
         config_file="${config_file_yaml}"
     else
-        # Frigate will create the config file on startup
+        # Security will create the config file on startup
         return 0
     fi
     unset config_file_yaml
@@ -116,7 +116,7 @@ function migrate_db_from_media_to_config() {
     local user_db_path
     user_db_path=$(yq -r '.database.path' "${config_file}")
     if [[ "${user_db_path}" == "null" ]]; then
-        local old_db_path="/media/frigate/frigate.db"
+        local old_db_path="/media/security/security.db"
         local new_db_dir="/config"
         if [[ -f "${old_db_path}" ]]; then
             echo "[INFO] Migrating database from '${old_db_path}' to '${new_db_dir}' dir..." >&2
@@ -140,7 +140,7 @@ function migrate_db_from_media_to_config() {
 
 # remove leftover from last run, not normally needed, but just in case
 # used by the docker healthcheck
-rm -f /dev/shm/.frigate-is-stopping
+rm -f /dev/shm/.security-is-stopping
 
 migrate_addon_config_dir
 migrate_db_from_media_to_config

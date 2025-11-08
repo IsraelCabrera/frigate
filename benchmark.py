@@ -4,13 +4,13 @@ from statistics import mean
 
 import numpy as np
 
-from frigate.config import DetectorTypeEnum
-from frigate.object_detection.base import (
+from security.config import DetectorTypeEnum
+from security.object_detection.base import (
     ObjectDetectProcess,
     RemoteObjectDetector,
     load_labels,
 )
-from frigate.util.process import FrigateProcess
+from security.util.process import SecurityProcess
 
 my_frame = np.expand_dims(np.full((300, 300, 3), 1, np.uint8), axis=0)
 labels = load_labels("/labelmap.txt")
@@ -91,7 +91,7 @@ edgetpu_process_2 = ObjectDetectProcess(
 )
 
 for x in range(0, 10):
-    camera_process = FrigateProcess(
+    camera_process = SecurityProcess(
         target=start, args=(x, 300, detection_queue, events[str(x)])
     )
     camera_process.daemon = True

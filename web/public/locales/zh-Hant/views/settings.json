@@ -1,17 +1,17 @@
 {
   "documentTitle": {
-    "default": "設定 - Frigate",
-    "authentication": "認證設定 - Frigate",
-    "camera": "鏡頭設定 - Frigate",
-    "enrichments": "進階設定 - Frigate",
-    "general": "一般設定 - Frigate",
-    "frigatePlus": "Frigate+ 設定 - Frigate",
-    "notifications": "通知設定 - Frigate",
-    "masksAndZones": "遮罩與區域編輯器 - Frigate",
-    "motionTuner": "移動偵測調教器 - Frigate",
-    "object": "除錯 - Frigate",
-    "cameraManagement": "管理鏡頭 - Frigate",
-    "cameraReview": "相機預覽設置 - Frigate"
+    "default": "設定 - Security",
+    "authentication": "認證設定 - Security",
+    "camera": "鏡頭設定 - Security",
+    "enrichments": "進階設定 - Security",
+    "general": "一般設定 - Security",
+    "SecurityPlus": "Security+ 設定 - Security",
+    "notifications": "通知設定 - Security",
+    "masksAndZones": "遮罩與區域編輯器 - Security",
+    "motionTuner": "移動偵測調教器 - Security",
+    "object": "除錯 - Security",
+    "cameraManagement": "管理鏡頭 - Security",
+    "cameraReview": "相機預覽設置 - Security"
   },
   "menu": {
     "ui": "使用者介面",
@@ -22,7 +22,7 @@
     "debug": "除錯",
     "users": "使用者",
     "notifications": "通知",
-    "frigateplus": "Frigate+",
+    "securityplus": "Security+",
     "triggers": "觸發",
     "cameraManagement": "管理",
     "cameraReview": "預覽"

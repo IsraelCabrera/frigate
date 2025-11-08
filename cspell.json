@@ -13,10 +13,10 @@
   "language": "en",
   "dictionaryDefinitions": [
     {
-      "name": "frigate-dictionary",
-      "path": "./.cspell/frigate-dictionary.txt",
+      "name": "security-dictionary",
+      "path": "./.cspell/security-dictionary.txt",
       "addWords": true
     }
   ],
-  "dictionaries": ["frigate-dictionary"]
+  "dictionaries": ["security-dictionary"]
 }

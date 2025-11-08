@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/popover";
 import { useResizeObserver } from "@/hooks/resize-observer";
 import useKeyboardListener from "@/hooks/use-keyboard-listener";
-import { CameraConfig, FrigateConfig } from "@/types/frigateConfig";
+import { CameraConfig, SecurityConfig } from "@/types/securityConfig";
 import {
   LivePlayerError,
   LiveStreamMetadata,
@@ -123,7 +123,7 @@ import {
 import ActivityIndicator from "@/components/indicators/activity-indicator";
 
 type LiveCameraViewProps = {
-  config?: FrigateConfig;
+  config?: SecurityConfig;
   camera: CameraConfig;
   supportsFullscreen: boolean;
   fullscreen: boolean;
@@ -601,7 +601,7 @@ export default function LiveCameraView({
                 disabled={!cameraEnabled || debug}
               />
             )}
-            <FrigateCameraFeatures
+            <SecurityCameraFeatures
               camera={camera}
               recordingEnabled={camera.record.enabled_in_config}
               audioDetectEnabled={camera.audio.enabled_in_config}
@@ -713,7 +713,7 @@ export default function LiveCameraView({
   );
 }
 
-type FrigateCameraFeaturesProps = {
+type SecurityCameraFeaturesProps = {
   camera: CameraConfig;
   recordingEnabled: boolean;
   audioDetectEnabled: boolean;
@@ -735,7 +735,7 @@ type FrigateCameraFeaturesProps = {
   debug: boolean;
   setDebug: (debug: boolean) => void;
 };
-function FrigateCameraFeatures({
+function SecurityCameraFeatures({
   camera,
   recordingEnabled,
   audioDetectEnabled,
@@ -756,7 +756,7 @@ function FrigateCameraFeatures({
   cameraEnabled,
   debug,
   setDebug,
-}: FrigateCameraFeaturesProps) {
+}: SecurityCameraFeaturesProps) {
   const { t } = useTranslation(["views/live", "components/dialog"]);
   const { getLocaleDocUrl } = useDocDomain();
 

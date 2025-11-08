@@ -1,6 +1,6 @@
 import { Button } from "../ui/button";
 import useSWR from "swr";
-import { FrigateConfig } from "@/types/frigateConfig";
+import { SecurityConfig } from "@/types/securityConfig";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { DropdownMenuSeparator } from "../ui/dropdown-menu";
 import { getEndOfDayTimestamp } from "@/utils/dateUtil";
@@ -43,7 +43,7 @@ export default function SearchFilterGroup({
   onUpdateFilter,
 }: SearchFilterGroupProps) {
   const { t } = useTranslation(["components/filter"]);
-  const { data: config } = useSWR<FrigateConfig>("config", {
+  const { data: config } = useSWR<SecurityConfig>("config", {
     revalidateOnFocus: false,
   });
   const allowedCameras = useAllowedCameras();
@@ -348,7 +348,7 @@ export function GeneralFilterContent({
   onClose,
 }: GeneralFilterContentProps) {
   const { t } = useTranslation(["components/filter"]);
-  const { data: config } = useSWR<FrigateConfig>("config", {
+  const { data: config } = useSWR<SecurityConfig>("config", {
     revalidateOnFocus: false,
   });
 

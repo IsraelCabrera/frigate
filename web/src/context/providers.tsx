@@ -18,7 +18,7 @@ function providers({ children }: TProvidersProps) {
     <RecoilRoot>
       <AuthProvider>
         <ApiProvider>
-          <ThemeProvider defaultTheme="system" storageKey="frigate-ui-theme">
+          <ThemeProvider defaultTheme="system" storageKey="security-ui-theme">
             <LanguageProvider>
               <TooltipProvider>
                 <IconContext.Provider value={{ size: "20" }}>

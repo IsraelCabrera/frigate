@@ -1,7 +1,7 @@
 import useSWR from "swr";
-import { FrigateStats } from "@/types/stats";
+import { SecurityStats } from "@/types/stats";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useFrigateStats } from "@/api/ws";
+import { useSecurityStats } from "@/api/ws";
 import { EmbeddingThreshold, GenAIThreshold, Threshold } from "@/types/graph";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ThresholdBarGraph } from "@/components/graph/SystemGraph";
@@ -20,15 +20,15 @@ export default function EnrichmentMetrics({
   // stats
   const { t } = useTranslation(["views/system"]);
 
-  const { data: initialStats } = useSWR<FrigateStats[]>(
+  const { data: initialStats } = useSWR<SecurityStats[]>(
     ["stats/history", { keys: "embeddings,service" }],
     {
       revalidateOnFocus: false,
     },
   );
 
-  const [statsHistory, setStatsHistory] = useState<FrigateStats[]>([]);
-  const updatedStats = useFrigateStats();
+  const [statsHistory, setStatsHistory] = useState<SecurityStats[]>([]);
+  const updatedStats = useSecurityStats();
 
   useEffect(() => {
     if (initialStats == undefined || initialStats.length == 0) {

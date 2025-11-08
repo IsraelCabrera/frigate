@@ -1,9 +1,9 @@
-import { useFrigateStats } from "@/api/ws";
+import { useSecurityStats } from "@/api/ws";
 import { CameraLineGraph } from "@/components/graph/LineGraph";
 import CameraInfoDialog from "@/components/overlay/CameraInfoDialog";
 import { Skeleton } from "@/components/ui/skeleton";
-import { FrigateConfig } from "@/types/frigateConfig";
-import { FrigateStats } from "@/types/stats";
+import { SecurityConfig } from "@/types/securityConfig";
+import { SecurityStats } from "@/types/stats";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { MdInfo } from "react-icons/md";
 import {
@@ -24,7 +24,7 @@ export default function CameraMetrics({
   lastUpdated,
   setLastUpdated,
 }: CameraMetricsProps) {
-  const { data: config } = useSWR<FrigateConfig>("config");
+  const { data: config } = useSWR<SecurityConfig>("config");
   const { t } = useTranslation(["views/system"]);
   // camera info dialog
 
@@ -38,7 +38,7 @@ export default function CameraMetrics({
 
   // stats
 
-  const { data: initialStats } = useSWR<FrigateStats[]>(
+  const { data: initialStats } = useSWR<SecurityStats[]>(
     [
       "stats/history",
       {
@@ -50,8 +50,8 @@ export default function CameraMetrics({
     },
   );
 
-  const [statsHistory, setStatsHistory] = useState<FrigateStats[]>([]);
-  const updatedStats = useFrigateStats();
+  const [statsHistory, setStatsHistory] = useState<SecurityStats[]>([]);
+  const updatedStats = useSecurityStats();
 
   useEffect(() => {
     if (initialStats == undefined || initialStats.length == 0) {

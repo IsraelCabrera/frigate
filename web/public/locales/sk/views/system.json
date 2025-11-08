@@ -1,13 +1,13 @@
 {
   "documentTitle": {
-    "cameras": "Štatistiky kamier - Frigate",
-    "storage": "Štatistiky úložiska - Frigate",
-    "general": "Všeobecné štatistiky - Frigate",
-    "enrichments": "Štatistiky obohatenia - Frigate",
+    "cameras": "Štatistiky kamier - Security",
+    "storage": "Štatistiky úložiska - Security",
+    "general": "Všeobecné štatistiky - Security",
+    "enrichments": "Štatistiky obohatenia - Security",
     "logs": {
-      "frigate": "Protokoly Frigate - Frigate",
-      "go2rtc": "Protokoly Go2RTC - Frigate",
-      "nginx": "Protokoly Ngnix - Frigate"
+      "security": "Protokoly Security - Security",
+      "go2rtc": "Protokoly Go2RTC - Security",
+      "nginx": "Protokoly Ngnix - Security"
     }
   },
   "title": "System",
@@ -89,7 +89,7 @@
     "overview": "Prehľad",
     "recordings": {
       "title": "Nahrávky",
-      "tips": "Táto hodnota predstavuje celkové úložisko, ktoré používajú nahrávky v databáze Frigate. Frigate nesleduje využitie úložiska pre všetky súbory na vašom disku.",
+      "tips": "Táto hodnota predstavuje celkové úložisko, ktoré používajú nahrávky v databáze Security. Security nesleduje využitie úložiska pre všetky súbory na vašom disku.",
       "earliestRecording": "Najstaršia dostupná nahrávka:"
     },
     "shm": {
@@ -105,7 +105,7 @@
       "bandwidth": "Šírka pásma",
       "unused": {
         "title": "Nepoužité",
-        "tips": "Táto hodnota nemusí presne zodpovedať voľnému miestu dostupnému pre Frigate, ak máte na disku uložené aj iné súbory okrem nahrávok Frigate. Frigate nesleduje využitie úložiska mimo svojich nahrávok."
+        "tips": "Táto hodnota nemusí presne zodpovedať voľnému miestu dostupnému pre Security, ak máte na disku uložené aj iné súbory okrem nahrávok Security. Security nesleduje využitie úložiska mimo svojich nahrávok."
       }
     }
   },

@@ -1,8 +1,8 @@
 {
   "noRecordingsFoundForThisTime": "Keine Aufnahmen für diesen Zeitpunkt gefunden",
   "noPreviewFound": "Keine Vorschau gefunden",
-  "submitFrigatePlus": {
-    "title": "Dieses Bild an Frigate+ senden?",
+  "submitSecurityPlus": {
+    "title": "Dieses Bild an Security+ senden?",
     "submit": "Senden"
   },
   "livePlayerRequiredIOSVersion": "iOS 17.1 oder höher ist für diesen Typ eines Live-Streams erforderlich.",
@@ -41,10 +41,10 @@
   },
   "toast": {
     "error": {
-      "submitFrigatePlusFailed": "Bild an Frigate+ senden gescheitert"
+      "submitSecurityPlusFailed": "Bild an Security+ senden gescheitert"
     },
     "success": {
-      "submittedFrigatePlus": "Bild erfolgreich an Frigate+ gesendet"
+      "submittedSecurityPlus": "Bild erfolgreich an Security+ gesendet"
     }
   },
   "noPreviewFoundFor": "Keine Vorschau für {{cameraName}} gefunden"

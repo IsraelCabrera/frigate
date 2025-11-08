@@ -1,14 +1,14 @@
 {
   "documentTitle": {
-    "cameras": "Kamerų Statistika - Frigate",
-    "storage": "Saugyklos Statistika - Frigate",
+    "cameras": "Kamerų Statistika - Security",
+    "storage": "Saugyklos Statistika - Security",
     "logs": {
-      "frigate": "Frigate Žurnalas - Frigate",
-      "go2rtc": "Go2RTC Žurnalas - Frigate",
-      "nginx": "Nginx Žurnalas - Frigate"
+      "security": "Security Žurnalas - Security",
+      "go2rtc": "Go2RTC Žurnalas - Security",
+      "nginx": "Nginx Žurnalas - Security"
     },
-    "general": "Bendroji Statistika - Frigate",
-    "enrichments": "Pagerinimų Statistika - Frigate"
+    "general": "Bendroji Statistika - Security",
+    "enrichments": "Pagerinimų Statistika - Security"
   },
   "title": "Sistema",
   "metrics": "Sistemos metrikos",
@@ -89,7 +89,7 @@
     "overview": "Apžvalga",
     "recordings": {
       "title": "Įrašai",
-      "tips": "Ši reikšmė nurodo kiek iš viso Frigate duombazėje esantys įrašai užima vietos saugykloje. Frigate neseka kiek vietos užima visi kiti failai esantys laikmenoje.",
+      "tips": "Ši reikšmė nurodo kiek iš viso Security duombazėje esantys įrašai užima vietos saugykloje. Security neseka kiek vietos užima visi kiti failai esantys laikmenoje.",
       "earliestRecording": "Anksčiausias esantis įrašas:"
     },
     "cameraStorage": {
@@ -101,7 +101,7 @@
       "bandwidth": "Pralaidumas",
       "unused": {
         "title": "Nepanaudota",
-        "tips": "Jei saugykloje turite daugiau failų apart Frigate įrašų, ši reikšmė neatspindės tikslios likusios laisvos vietos Frigate panaudojimui. Frigate neseka saugyklos panaudojimo už savo įrašų ribų."
+        "tips": "Jei saugykloje turite daugiau failų apart Security įrašų, ši reikšmė neatspindės tikslios likusios laisvos vietos Security panaudojimui. Security neseka saugyklos panaudojimo už savo įrašų ribų."
       }
     },
     "shm": {

@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Toaster } from "@/components/ui/sonner";
 import { StatusBarMessagesContext } from "@/context/statusbar-provider";
-import { FrigateConfig } from "@/types/frigateConfig";
+import { SecurityConfig } from "@/types/securityConfig";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 
@@ -70,7 +70,7 @@ export default function NotificationView({
 
   const isAdmin = useIsAdmin();
 
-  const { data: config, mutate: updateConfig } = useSWR<FrigateConfig>(
+  const { data: config, mutate: updateConfig } = useSWR<SecurityConfig>(
     "config",
     {
       revalidateOnFocus: false,
@@ -651,7 +651,7 @@ export default function NotificationView({
 }
 
 type CameraNotificationSwitchProps = {
-  config?: FrigateConfig;
+  config?: SecurityConfig;
   camera: string;
 };
 

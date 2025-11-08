@@ -2,8 +2,8 @@
   "noRecordingsFoundForThisTime": "找不到此次录制",
   "noPreviewFound": "没有找到预览",
   "noPreviewFoundFor": "没有在 {{cameraName}} 下找到预览",
-  "submitFrigatePlus": {
-    "title": "提交此帧到 Frigate+？",
+  "submitSecurityPlus": {
+    "title": "提交此帧到 Security+？",
     "submit": "提交"
   },
   "livePlayerRequiredIOSVersion": "此直播流类型需要 iOS 17.1 或更高版本。",
@@ -42,10 +42,10 @@
   },
   "toast": {
     "success": {
-      "submittedFrigatePlus": "已成功提交帧到 Frigate+"
+      "submittedSecurityPlus": "已成功提交帧到 Security+"
     },
     "error": {
-      "submitFrigatePlusFailed": "提交帧到 Frigate+ 失败"
+      "submitSecurityPlusFailed": "提交帧到 Security+ 失败"
     }
   }
 }

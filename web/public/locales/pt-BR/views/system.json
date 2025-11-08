@@ -1,13 +1,13 @@
 {
   "documentTitle": {
-    "cameras": "Estatísticas das Câmeras - Frigate",
-    "storage": "Status de Armazenamento - Frigate",
-    "general": "Estatísticas Gerais - Frigate",
-    "enrichments": "Estatísticas de Enriquecimento - Frigate",
+    "cameras": "Estatísticas das Câmeras - Security",
+    "storage": "Status de Armazenamento - Security",
+    "general": "Estatísticas Gerais - Security",
+    "enrichments": "Estatísticas de Enriquecimento - Security",
     "logs": {
-      "frigate": "Registros Frigate - Frigate",
-      "go2rtc": "Registros GoRTC - Frigate",
-      "nginx": "Registros Nginx - Frigate"
+      "security": "Registros Security - Security",
+      "go2rtc": "Registros GoRTC - Security",
+      "nginx": "Registros Nginx - Security"
     }
   },
   "title": "Sistema",
@@ -90,7 +90,7 @@
     "recordings": {
       "title": "Gravações",
       "earliestRecording": "Gravação mais recente disponível:",
-      "tips": "Esse valor representa o armazenamento total usado pelas gravações no banco de dados do Frigate. O Frigate não rastreia o uso de armazenamento para todos os arquivos do seu disco."
+      "tips": "Esse valor representa o armazenamento total usado pelas gravações no banco de dados do Security. O Security não rastreia o uso de armazenamento para todos os arquivos do seu disco."
     },
     "cameraStorage": {
       "title": "Armazenamento da Câmera",
@@ -101,7 +101,7 @@
       "bandwidth": "Largura de Banda",
       "unused": {
         "title": "Não Utilizado",
-        "tips": "Esse valor por não representar com precisão o espaço livre disponí®el para o Frigate se você possui outros arquivos armazenados no seu drive além das gravações do Frigate. O Frigate não rastreia a utilização do armazenamento além de suas próprias gravações."
+        "tips": "Esse valor por não representar com precisão o espaço livre disponí®el para o Security se você possui outros arquivos armazenados no seu drive além das gravações do Security. O Security não rastreia a utilização do armazenamento além de suas próprias gravações."
       }
     },
     "shm": {

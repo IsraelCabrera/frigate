@@ -6,7 +6,7 @@ mkdir -p /trt-wheels
 
 if [[ "${TARGETARCH}" == "arm64" ]]; then
 
-  # NVIDIA supplies python-tensorrt for python3.10, but frigate uses python3.11,
+  # NVIDIA supplies python-tensorrt for python3.10, but security uses python3.11,
   # so we must build python-tensorrt ourselves.
 
   # Get python-tensorrt source

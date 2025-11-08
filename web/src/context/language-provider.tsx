@@ -18,7 +18,7 @@ const LanguageProviderContext =
 export function LanguageProvider({
   children,
   defaultLanguage = "en",
-  storageKey = "frigate-ui-language",
+  storageKey = "security-ui-language",
   ...props
 }: {
   children: React.ReactNode;

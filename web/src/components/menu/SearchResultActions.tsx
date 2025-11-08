@@ -1,6 +1,6 @@
 import { useState, ReactNode } from "react";
 import { SearchResult } from "@/types/search";
-import { FrigateConfig } from "@/types/frigateConfig";
+import { SecurityConfig } from "@/types/securityConfig";
 import { baseUrl } from "@/api/baseUrl";
 import { toast } from "sonner";
 import axios from "axios";
@@ -8,7 +8,7 @@ import { LuCamera, LuDownload, LuTrash2 } from "react-icons/lu";
 import { FiMoreVertical } from "react-icons/fi";
 import { FaArrowsRotate } from "react-icons/fa6";
 import { MdImageSearch } from "react-icons/md";
-import FrigatePlusIcon from "@/components/icons/FrigatePlusIcon";
+import SecurityPlusIcon from "@/components/icons/SecurityPlusIcon";
 import { isMobileOnly } from "react-device-detect";
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -67,7 +67,7 @@ export default function SearchResultActions({
 }: SearchResultActionsProps) {
   const { t } = useTranslation(["views/explore"]);
 
-  const { data: config } = useSWR<FrigateConfig>("config");
+  const { data: config } = useSWR<SecurityConfig>("config");
 
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
@@ -162,7 +162,7 @@ export default function SearchResultActions({
             aria-label={t("itemMenu.submitToPlus.aria")}
             onClick={showSnapshot}
           >
-            <FrigatePlusIcon className="mr-2 size-4 cursor-pointer text-primary" />
+            <SecurityPlusIcon className="mr-2 size-4 cursor-pointer text-primary" />
             <span>{t("itemMenu.submitToPlus.label")}</span>
           </MenuItem>
         )}
@@ -240,7 +240,7 @@ export default function SearchResultActions({
                     onClick={showSnapshot}
                     aria-label={t("itemMenu.submitToPlus.aria")}
                   >
-                    <FrigatePlusIcon className="size-5" />
+                    <SecurityPlusIcon className="size-5" />
                   </BlurredIconButton>
                 </TooltipTrigger>
                 <TooltipContent>

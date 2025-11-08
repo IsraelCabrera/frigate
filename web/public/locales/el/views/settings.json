@@ -1,14 +1,14 @@
 {
   "documentTitle": {
-    "default": "Ρυθμίσεις - Frigate",
-    "authentication": "Ρυθμίσεις ελέγχου ταυτοποίησης - Frigate",
-    "camera": "Ρυθμίσεις Κάμερας - Frigate",
-    "enrichments": "Ρυθμίσεις εμπλουτισμού - Frigate",
-    "masksAndZones": "Ρυθμίσεις Μασκών και Ζωνών - Frigate",
-    "motionTuner": "Ρύθμιση Κίνησης - Frigate",
-    "object": "Επίλυση σφαλμάτων - Frigate",
-    "general": "Γενικές ρυθμίσεις - Frigate",
-    "frigatePlus": "Ρυθμίσεις Frigate+ - Frigate",
+    "default": "Ρυθμίσεις - Security",
+    "authentication": "Ρυθμίσεις ελέγχου ταυτοποίησης - Security",
+    "camera": "Ρυθμίσεις Κάμερας - Security",
+    "enrichments": "Ρυθμίσεις εμπλουτισμού - Security",
+    "masksAndZones": "Ρυθμίσεις Μασκών και Ζωνών - Security",
+    "motionTuner": "Ρύθμιση Κίνησης - Security",
+    "object": "Επίλυση σφαλμάτων - Security",
+    "general": "Γενικές ρυθμίσεις - Security",
+    "SecurityPlus": "Ρυθμίσεις Security+ - Security",
     "notifications": "Ρυθμίσεις Ειδοποιήσεων"
   },
   "masksAndZones": {

@@ -14,11 +14,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { SearchResult } from "@/types/search";
-import { FrigateConfig } from "@/types/frigateConfig";
+import { SecurityConfig } from "@/types/securityConfig";
 
 type Props = {
   search: SearchResult | Event;
-  config?: FrigateConfig;
+  config?: SecurityConfig;
   setSearch?: (s: SearchResult | undefined) => void;
   setSimilarity?: () => void;
   faceNames?: string[];

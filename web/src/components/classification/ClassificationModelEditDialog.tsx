@@ -26,8 +26,8 @@ import {
 } from "@/components/ui/select";
 import {
   CustomClassificationModelConfig,
-  FrigateConfig,
-} from "@/types/frigateConfig";
+  SecurityConfig,
+} from "@/types/securityConfig";
 import { getTranslatedLabel } from "@/utils/i18n";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
@@ -64,7 +64,7 @@ export default function ClassificationModelEditDialog({
   onSuccess,
 }: ClassificationModelEditDialogProps) {
   const { t } = useTranslation(["views/classificationModel"]);
-  const { data: config } = useSWR<FrigateConfig>("config");
+  const { data: config } = useSWR<SecurityConfig>("config");
   const [isSaving, setIsSaving] = useState(false);
 
   const isStateModel = model.state_config !== undefined;

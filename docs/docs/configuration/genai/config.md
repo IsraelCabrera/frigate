@@ -5,9 +5,9 @@ title: Configuring Generative AI
 
 ## Configuration
 
-A Generative AI provider can be configured in the global config, which will make the Generative AI features available for use. There are currently 3 native providers available to integrate with Frigate. Other providers that support the OpenAI standard API can also be used. See the OpenAI section below.
+A Generative AI provider can be configured in the global config, which will make the Generative AI features available for use. There are currently 3 native providers available to integrate with Security. Other providers that support the OpenAI standard API can also be used. See the OpenAI section below.
 
-To use Generative AI, you must define a single provider at the global level of your Frigate configuration. If the provider you choose requires an API key, you may either directly paste it in your configuration, or store it in an environment variable prefixed with `FRIGATE_`.
+To use Generative AI, you must define a single provider at the global level of your Security configuration. If the provider you choose requires an API key, you may either directly paste it in your configuration, or store it in an environment variable prefixed with `FRIGATE_`.
 
 ## Ollama
 
@@ -25,7 +25,7 @@ Parallel requests also come with some caveats. You will need to set `OLLAMA_NUM_
 
 ### Supported Models
 
-You must use a vision capable model with Frigate. Current model variants can be found [in their model library](https://ollama.com/library). Note that Frigate will not automatically download the model you specify in your config, Ollama will try to download the model but it may take longer than the timeout, it is recommended to pull the model beforehand by running `ollama pull your_model` on your Ollama server/Docker container. Note that the model specified in Frigate's config must match the downloaded model tag.
+You must use a vision capable model with Security. Current model variants can be found [in their model library](https://ollama.com/library). Note that Security will not automatically download the model you specify in your config, Ollama will try to download the model but it may take longer than the timeout, it is recommended to pull the model beforehand by running `ollama pull your_model` on your Ollama server/Docker container. Note that the model specified in Security's config must match the downloaded model tag.
 
 :::info
 
@@ -35,7 +35,7 @@ Each model is available in multiple parameter sizes (3b, 4b, 8b, etc.). Larger s
 
 :::tip
 
-If you are trying to use a single model for Frigate and HomeAssistant, it will need to support vision and tools calling. https://github.com/skye-harris/ollama-modelfiles contains optimized model configs for this task.
+If you are trying to use a single model for Security and HomeAssistant, it will need to support vision and tools calling. https://github.com/skye-harris/ollama-modelfiles contains optimized model configs for this task.
 
 :::
 
@@ -70,11 +70,11 @@ genai:
 
 ## Google Gemini
 
-Google Gemini has a free tier allowing [15 queries per minute](https://ai.google.dev/pricing) to the API, which is more than sufficient for standard Frigate usage.
+Google Gemini has a free tier allowing [15 queries per minute](https://ai.google.dev/pricing) to the API, which is more than sufficient for standard Security usage.
 
 ### Supported Models
 
-You must use a vision capable model with Frigate. Current model variants can be found [in their documentation](https://ai.google.dev/gemini-api/docs/models/gemini). At the time of writing, this includes `gemini-1.5-pro` and `gemini-1.5-flash`.
+You must use a vision capable model with Security. Current model variants can be found [in their documentation](https://ai.google.dev/gemini-api/docs/models/gemini). At the time of writing, this includes `gemini-1.5-pro` and `gemini-1.5-flash`.
 
 ### Get API Key
 
@@ -100,7 +100,7 @@ OpenAI does not have a free tier for their API. With the release of gpt-4o, pric
 
 ### Supported Models
 
-You must use a vision capable model with Frigate. Current model variants can be found [in their documentation](https://platform.openai.com/docs/models). At the time of writing, this includes `gpt-4o` and `gpt-4-turbo`.
+You must use a vision capable model with Security. Current model variants can be found [in their documentation](https://platform.openai.com/docs/models). At the time of writing, this includes `gpt-4o` and `gpt-4-turbo`.
 
 ### Get API Key
 
@@ -127,7 +127,7 @@ Microsoft offers several vision models through Azure OpenAI. A subscription is r
 
 ### Supported Models
 
-You must use a vision capable model with Frigate. Current model variants can be found [in their documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models). At the time of writing, this includes `gpt-4o` and `gpt-4-turbo`.
+You must use a vision capable model with Security. Current model variants can be found [in their documentation](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/models). At the time of writing, this includes `gpt-4o` and `gpt-4-turbo`.
 
 ### Create Resource and Get API Key
 

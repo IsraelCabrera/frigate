@@ -69,7 +69,7 @@ set_worker_processes
 mkdir -p /etc/letsencrypt/www
 
 # Create self signed certs if needed
-letsencrypt_path=/etc/letsencrypt/live/frigate
+letsencrypt_path=/etc/letsencrypt/live/security
 mkdir -p $letsencrypt_path
 
 if [ ! \( -f "$letsencrypt_path/privkey.pem" -a -f "$letsencrypt_path/fullchain.pem" \) ]; then

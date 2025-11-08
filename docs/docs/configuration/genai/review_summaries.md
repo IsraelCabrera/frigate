@@ -3,11 +3,11 @@ id: genai_review
 title: Review Summaries
 ---
 
-Generative AI can be used to automatically generate structured summaries of review items. These summaries will show up in Frigate's native notifications as well as in the UI. Generative AI can also be used to take a collection of summaries over a period of time and provide a report, which may be useful to get a quick report of everything that happened while out for some amount of time.
+Generative AI can be used to automatically generate structured summaries of review items. These summaries will show up in Security's native notifications as well as in the UI. Generative AI can also be used to take a collection of summaries over a period of time and provide a report, which may be useful to get a quick report of everything that happened while out for some amount of time.
 
 Requests for a summary are requested automatically to your AI provider for alert review items when the activity has ended, they can also be optionally enabled for detections as well.
 
-Generative AI review summaries can also be toggled dynamically for a [camera via MQTT](/integrations/mqtt/#frigatecamera_namereviewdescriptionsset).
+Generative AI review summaries can also be toggled dynamically for a [camera via MQTT](/integrations/mqtt/#securitycamera_namereviewdescriptionsset).
 
 ## Review Summary Usage and Best Practices
 
@@ -21,11 +21,11 @@ Review summaries provide structured JSON responses that are saved for each revie
 - `potential_threat_level` (integer): 0, 1, or 2 as defined below.
 ```
 
-This will show in multiple places in the UI to give additional context about each activity, and allow viewing more details when extra attention is required. Frigate's built in notifications will also automatically show the title and description when the data is available.
+This will show in multiple places in the UI to give additional context about each activity, and allow viewing more details when extra attention is required. Security's built in notifications will also automatically show the title and description when the data is available.
 
 ### Defining Typical Activity
 
-Each installation and even camera can have different parameters for what is considered suspicious activity. Frigate allows the `activity_context_prompt` to be defined globally and at the camera level, which allows you to define more specifically what should be considered normal activity. It is important that this is not overly specific as it can sway the output of the response.
+Each installation and even camera can have different parameters for what is considered suspicious activity. Security allows the `activity_context_prompt` to be defined globally and at the camera level, which allows you to define more specifically what should be considered normal activity. It is important that this is not overly specific as it can sway the output of the response.
 
 <details>
   <summary>Default Activity Context Prompt</summary>
@@ -100,7 +100,7 @@ The `camera_context` can be defined globally under `genai.review` and overridden
 
 ### Image Source
 
-By default, review summaries use preview images (cached preview frames) which have a lower resolution but use fewer tokens per image. For better image quality and more detailed analysis, you can configure Frigate to extract frames directly from recordings at a higher resolution:
+By default, review summaries use preview images (cached preview frames) which have a lower resolution but use fewer tokens per image. For better image quality and more detailed analysis, you can configure Security to extract frames directly from recordings at a higher resolution:
 
 ```yaml
 review:

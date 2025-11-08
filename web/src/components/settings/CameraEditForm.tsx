@@ -21,7 +21,7 @@ import { useTranslation } from "react-i18next";
 import { useState, useMemo } from "react";
 import { LuTrash2, LuPlus } from "react-icons/lu";
 import ActivityIndicator from "@/components/indicators/activity-indicator";
-import { FrigateConfig } from "@/types/frigateConfig";
+import { SecurityConfig } from "@/types/securityConfig";
 import useSWR from "swr";
 import { processCameraName } from "@/utils/cameraUtil";
 import { Label } from "@/components/ui/label";
@@ -42,7 +42,7 @@ export default function CameraEditForm({
   onCancel,
 }: CameraEditFormProps) {
   const { t } = useTranslation(["views/settings"]);
-  const { data: config } = useSWR<FrigateConfig>("config");
+  const { data: config } = useSWR<SecurityConfig>("config");
   const [isLoading, setIsLoading] = useState(false);
 
   const formSchema = useMemo(

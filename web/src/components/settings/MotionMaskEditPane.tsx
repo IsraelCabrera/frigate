@@ -10,7 +10,7 @@ import PolygonEditControls from "./PolygonEditControls";
 import { FaCheckCircle } from "react-icons/fa";
 import { Polygon } from "@/types/canvas";
 import useSWR from "swr";
-import { FrigateConfig } from "@/types/frigateConfig";
+import { SecurityConfig } from "@/types/securityConfig";
 import {
   flattenPoints,
   interpolatePoints,
@@ -55,7 +55,7 @@ export default function MotionMaskEditPane({
   const { t } = useTranslation(["views/settings"]);
   const { getLocaleDocUrl } = useDocDomain();
   const { data: config, mutate: updateConfig } =
-    useSWR<FrigateConfig>("config");
+    useSWR<SecurityConfig>("config");
 
   const polygon = useMemo(() => {
     if (polygons && activePolygonIndex !== undefined) {
@@ -298,7 +298,7 @@ export default function MotionMaskEditPane({
           <div className="mb-3 text-sm text-primary">
             {t("masksAndZones.motionMasks.polygonAreaTooLarge.tips")}
             <Link
-              to="https://github.com/blakeblackshear/frigate/discussions/13040"
+              to="https://github.com/blakeblackshear/security/discussions/13040"
               target="_blank"
               rel="noopener noreferrer"
               className="my-3 block"

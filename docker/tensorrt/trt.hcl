@@ -88,7 +88,7 @@ target "tensorrt" {
     deps = "target:deps",
     rootfs = "target:rootfs"
   }
-  target = "frigate-tensorrt"
+  target = "security-tensorrt"
   inherits = ["_build_args"]
 }
 

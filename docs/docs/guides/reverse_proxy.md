@@ -3,11 +3,11 @@ id: reverse_proxy
 title: Setting up a reverse proxy
 ---
 
-This guide outlines the basic configuration steps needed to set up a reverse proxy in front of your Frigate instance.
+This guide outlines the basic configuration steps needed to set up a reverse proxy in front of your Security instance.
 
-A reverse proxy is typically needed if you want to set up Frigate on a custom URL, on a subdomain, or on a host serving multiple sites. It could also be used to set up your own authentication provider or for more advanced HTTP routing.
+A reverse proxy is typically needed if you want to set up Security on a custom URL, on a subdomain, or on a host serving multiple sites. It could also be used to set up your own authentication provider or for more advanced HTTP routing.
 
-Before setting up a reverse proxy, check if any of the built-in functionality in Frigate suits your needs:
+Before setting up a reverse proxy, check if any of the built-in functionality in Security suits your needs:
 |Topic|Docs|
 |-|-|
 |TLS|Please see the  `tls` [configuration option](../configuration/tls.md)|
@@ -15,8 +15,8 @@ Before setting up a reverse proxy, check if any of the built-in functionality in
 |IPv6|[Enabling IPv6](../configuration/advanced.md#enabling-ipv6)
 
 **Note about TLS**  
-When using a reverse proxy, the TLS session is usually terminated at the proxy, sending the internal request over plain HTTP. If this is the desired behavior, TLS must first be disabled in Frigate, or you will encounter an HTTP 400 error: "The plain HTTP request was sent to HTTPS port."  
-To disable TLS, set the following in your Frigate configuration:
+When using a reverse proxy, the TLS session is usually terminated at the proxy, sending the internal request over plain HTTP. If this is the desired behavior, TLS must first be disabled in Security, or you will encounter an HTTP 400 error: "The plain HTTP request was sent to HTTPS port."  
+To disable TLS, set the following in your Security configuration:
 ```yml
 tls:
   enabled: false
@@ -44,34 +44,34 @@ On Debian Apache2 the configuration file will be named along the lines of `/etc/
 
 ### Step 1: Configure the Apache2 Reverse Proxy
 
-Make life easier for yourself by presenting your Frigate interface as a DNS sub-domain rather than as a sub-folder of your main domain.
-Here we access Frigate via https://cctv.mydomain.co.uk
+Make life easier for yourself by presenting your Security interface as a DNS sub-domain rather than as a sub-folder of your main domain.
+Here we access Security via https://cctv.mydomain.co.uk
 
 ```xml
 <VirtualHost *:443>
     ServerName cctv.mydomain.co.uk
 
     ProxyPreserveHost On
-    ProxyPass "/"  "http://frigatepi.local:8971/"
-    ProxyPassReverse "/"  "http://frigatepi.local:8971/"
+    ProxyPass "/"  "http://securitypi.local:8971/"
+    ProxyPassReverse "/"  "http://securitypi.local:8971/"
 
-    ProxyPass /ws ws://frigatepi.local:8971/ws
-    ProxyPassReverse /ws ws://frigatepi.local:8971/ws
+    ProxyPass /ws ws://securitypi.local:8971/ws
+    ProxyPassReverse /ws ws://securitypi.local:8971/ws
 
-    ProxyPass /live/ ws://frigatepi.local:8971/live/
-    ProxyPassReverse /live/ ws://frigatepi.local:8971/live/
+    ProxyPass /live/ ws://securitypi.local:8971/live/
+    ProxyPassReverse /live/ ws://securitypi.local:8971/live/
 
     RewriteEngine on
     RewriteCond %{HTTP:Upgrade} =websocket [NC]
-    RewriteRule /(.*)  ws://frigatepi.local:8971/$1 [P,L]
+    RewriteRule /(.*)  ws://securitypi.local:8971/$1 [P,L]
     RewriteCond %{HTTP:Upgrade} !=websocket [NC]
-    RewriteRule /(.*)  http://frigatepi.local:8971/$1 [P,L]
+    RewriteRule /(.*)  http://securitypi.local:8971/$1 [P,L]
 </VirtualHost>
 ```
 
-### Step 2: Use SSL to encrypt access to your Frigate instance
+### Step 2: Use SSL to encrypt access to your Security instance
 
-Whilst this won't, on its own, prevent access to your Frigate webserver it will encrypt all content (such as login credentials).
+Whilst this won't, on its own, prevent access to your Security webserver it will encrypt all content (such as login credentials).
 Installing SSL is beyond the scope of this document but [Let's Encrypt](https://letsencrypt.org/) is a widely used approach.
 This Apache2 configuration snippet then results in unencrypted requests being redirected to the webserver SSL port
 
@@ -109,7 +109,7 @@ This is set in `$server` and `$port` this should match your ports you have expos
 
 ```
 # ------------------------------------------------------------
-# frigate.domain.com
+# security.domain.com
 # ------------------------------------------------------------
 
 server {
@@ -121,7 +121,7 @@ server {
   listen 443 ssl;
   http2 on;
 
-  server_name frigate.domain.com;
+  server_name security.domain.com;
 }
 ```
 
@@ -159,30 +159,30 @@ The settings below enabled connection upgrade, sets up logging (optional) and pr
 
 ## Traefik Reverse Proxy
 
-This example shows how to add a `label` to the Frigate Docker compose file, enabling Traefik to automatically discover your Frigate instance.  
+This example shows how to add a `label` to the Security Docker compose file, enabling Traefik to automatically discover your Security instance.  
 Before using the example below, you must first set up Traefik with the [Docker provider](https://doc.traefik.io/traefik/providers/docker/)
 
 ```yml
 services:
-  frigate:
-    container_name: frigate
-    image: ghcr.io/blakeblackshear/frigate:stable
+  security:
+    container_name: security
+    image: ghcr.io/blakeblackshear/security:stable
     ...
     ...
     labels:
       - "traefik.enable=true"
-      - "traefik.http.services.frigate.loadbalancer.server.port=8971"
-      - "traefik.http.routers.frigate.rule=Host(`traefik.example.com`)"
+      - "traefik.http.services.security.loadbalancer.server.port=8971"
+      - "traefik.http.routers.security.rule=Host(`traefik.example.com`)"
 ```
 
 The above configuration will create a "service" in Traefik, automatically adding your container's IP on port 8971 as a backend.
 It will also add a router, routing requests to "traefik.example.com" to your local container.
 
-Note that with this approach, you don't need to expose any ports for the Frigate instance since all traffic will be routed over the internal Docker network.
+Note that with this approach, you don't need to expose any ports for the Security instance since all traffic will be routed over the internal Docker network.
 
 ## Caddy Reverse Proxy
 
-This example shows Frigate running under a subdomain with logging and a tls cert (in this case a wildcard domain cert obtained independently of caddy) handled via imports
+This example shows Security running under a subdomain with logging and a tls cert (in this case a wildcard domain cert obtained independently of caddy) handled via imports
 
 ```caddy
 (logging) {
@@ -202,10 +202,10 @@ This example shows Frigate running under a subdomain with logging and a tls cert
         tls /var/lib/caddy/wildcard.YOUR_DOMAIN.TLD.fullchain.pem /var/lib/caddy/wildcard.YOUR_DOMAIN.TLD.privkey.pem
 }
 
-frigate.YOUR_DOMAIN.TLD {
+security.YOUR_DOMAIN.TLD {
         reverse_proxy http://localhost:8971 
         import tls
-        import logging frigate.YOUR_DOMAIN.TLD
+        import logging security.YOUR_DOMAIN.TLD
 }
 
 ```

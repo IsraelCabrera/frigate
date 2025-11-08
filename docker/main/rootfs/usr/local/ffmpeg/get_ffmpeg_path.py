@@ -4,14 +4,14 @@ from typing import Any
 
 from ruamel.yaml import YAML
 
-sys.path.insert(0, "/opt/frigate")
-from frigate.const import (
+sys.path.insert(0, "/opt/security")
+from security.const import (
     DEFAULT_FFMPEG_VERSION,
     INCLUDED_FFMPEG_VERSIONS,
 )
-from frigate.util.config import find_config_file
+from security.util.config import find_config_file
 
-sys.path.remove("/opt/frigate")
+sys.path.remove("/opt/security")
 
 yaml = YAML()
 

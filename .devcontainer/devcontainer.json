@@ -1,8 +1,8 @@
 {
-  "name": "Frigate Devcontainer",
+  "name": "Security Devcontainer",
   "dockerComposeFile": "../docker-compose.yml",
   "service": "devcontainer",
-  "workspaceFolder": "/workspace/frigate",
+  "workspaceFolder": "/workspace/security",
   "initializeCommand": ".devcontainer/initialize.sh",
   "postCreateCommand": ".devcontainer/post_create.sh",
   "overrideCommand": false,
@@ -37,7 +37,7 @@
       "onAutoForward": "silent"
     },
     "5001": {
-      "label": "Frigate API",
+      "label": "Security API",
       "onAutoForward": "silent"
     },
     "5173": {
@@ -83,7 +83,7 @@
         "python.testing.unittestArgs": [
           "-v",
           "-s",
-          "./frigate/test"
+          "./security/test"
         ],
         "files.trimTrailingWhitespace": true,
         "eslint.workingDirectories": [

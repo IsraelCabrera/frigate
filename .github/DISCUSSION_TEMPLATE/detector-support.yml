@@ -4,13 +4,13 @@ body:
   - type: markdown
     attributes:
       value: |
-        Use this form for support or questions related to Frigate's object detectors.
+        Use this form for support or questions related to Security's object detectors.
 
-        Before submitting your support request, please [search the discussions][discussions], read the [official Frigate documentation][docs], and read the [Frigate FAQ][faq] pinned at the Discussion page to see if your question has already been answered by the community.
+        Before submitting your support request, please [search the discussions][discussions], read the [official Security documentation][docs], and read the [Security FAQ][faq] pinned at the Discussion page to see if your question has already been answered by the community.
 
-        [discussions]: https://www.github.com/blakeblackshear/frigate/discussions
-        [docs]: https://docs.frigate.video
-        [faq]: https://github.com/blakeblackshear/frigate/discussions/12724
+        [discussions]: https://www.github.com/blakeblackshear/security/discussions
+        [docs]: https://docs.security.video
+        [faq]: https://github.com/blakeblackshear/security/discussions/12724
   - type: textarea
     id: description
     attributes:
@@ -27,7 +27,7 @@ body:
   - type: textarea
     id: config
     attributes:
-      label: Frigate config file
+      label: Security config file
       description: This will be automatically formatted into code, so no need for backticks.
       render: yaml
     validations:
@@ -41,10 +41,10 @@ body:
     validations:
       required: true
   - type: textarea
-    id: frigatelogs
+    id: securitylogs
     attributes:
-      label: Relevant Frigate log output
-      description: Please copy and paste any relevant Frigate log output. Include logs before and after your exact error when possible. This will be automatically formatted into code, so no need for backticks.
+      label: Relevant Security log output
+      description: Please copy and paste any relevant Security log output. Include logs before and after your exact error when possible. This will be automatically formatted into code, so no need for backticks.
       render: shell
     validations:
       required: true
@@ -77,7 +77,7 @@ body:
   - type: textarea
     id: screenshots
     attributes:
-      label: Screenshots of the Frigate UI's System metrics pages
+      label: Screenshots of the Security UI's System metrics pages
       description: Drag and drop for images is possible in this field. Please post screenshots of at least General and Cameras tabs.
     validations:
       required: true

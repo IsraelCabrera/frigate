@@ -10,7 +10,7 @@ import {
 } from "@/utils/dateUtil";
 import { useTranslation } from "react-i18next";
 import AnnotationOffsetSlider from "@/components/overlay/detail/AnnotationOffsetSlider";
-import { FrigateConfig } from "@/types/frigateConfig";
+import { SecurityConfig } from "@/types/securityConfig";
 import useSWR from "swr";
 import ActivityIndicator from "../indicators/activity-indicator";
 import { Event } from "@/types/event";
@@ -19,7 +19,7 @@ import { ReviewSegment } from "@/types/review";
 import { LuChevronDown, LuCircle, LuChevronRight } from "react-icons/lu";
 import { getTranslatedLabel } from "@/utils/i18n";
 import EventMenu from "@/components/timeline/EventMenu";
-import { FrigatePlusDialog } from "@/components/overlay/dialog/FrigatePlusDialog";
+import { SecurityPlusDialog } from "@/components/overlay/dialog/SecurityPlusDialog";
 import { cn } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { Link } from "react-router-dom";
@@ -42,7 +42,7 @@ export default function DetailStream({
   isPlaying = false,
   onSeek,
 }: DetailStreamProps) {
-  const { data: config } = useSWR<FrigateConfig>("config");
+  const { data: config } = useSWR<SecurityConfig>("config");
   const { t } = useTranslation("views/events");
   const { annotationOffset } = useDetailStream();
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -179,7 +179,7 @@ export default function DetailStream({
 
   return (
     <>
-      <FrigatePlusDialog
+      <SecurityPlusDialog
         upload={upload}
         onClose={() => setUpload(undefined)}
         onEventUploaded={() => {
@@ -270,7 +270,7 @@ export default function DetailStream({
 type ReviewGroupProps = {
   review: ReviewSegment;
   id: string;
-  config: FrigateConfig;
+  config: SecurityConfig;
   onSeek: (timestamp: number, play?: boolean) => void;
   isActive?: boolean;
   onActivate?: () => void;
@@ -505,7 +505,7 @@ function EventList({
   onSeek,
   onOpenUpload,
 }: EventListProps) {
-  const { data: config } = useSWR<FrigateConfig>("config");
+  const { data: config } = useSWR<SecurityConfig>("config");
 
   const { selectedObjectIds, setSelectedObjectIds, toggleObjectSelection } =
     useDetailStream();
@@ -650,7 +650,7 @@ function LifecycleItem({
   isTimelineActive = false,
 }: LifecycleItemProps) {
   const { t } = useTranslation("views/events");
-  const { data: config } = useSWR<FrigateConfig>("config");
+  const { data: config } = useSWR<SecurityConfig>("config");
 
   const aspectRatio = useMemo(() => {
     if (!config || !item?.camera) {

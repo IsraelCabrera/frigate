@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Event } from "@/types/event";
 import ActivityIndicator from "@/components/indicators/activity-indicator";
 import { TrackingDetailsSequence } from "@/types/timeline";
-import { FrigateConfig } from "@/types/frigateConfig";
+import { SecurityConfig } from "@/types/securityConfig";
 import { formatUnixTimestampToDateTime } from "@/utils/dateUtil";
 import { getIconForLabel } from "@/utils/iconUtil";
 import { LuCircle, LuFolderX } from "react-icons/lu";
@@ -71,7 +71,7 @@ export function TrackingDetails({
     },
   ]);
 
-  const { data: config } = useSWR<FrigateConfig>("config");
+  const { data: config } = useSWR<SecurityConfig>("config");
 
   // Use manualOverride (set when seeking in image mode) if present so
   // lifecycle rows and overlays follow image-mode seeks. Otherwise fall
@@ -377,7 +377,7 @@ export function TrackingDetails({
               hotKeys={false}
               supportsFullscreen={false}
               fullscreen={false}
-              frigateControls={true}
+              SecurityControls={true}
               onTimeUpdate={handleTimeUpdate}
               onSeekToTime={handleSeekToTime}
               isDetailMode={true}
@@ -632,7 +632,7 @@ function LifecycleIconRow({
   isTimelineActive,
 }: LifecycleIconRowProps) {
   const { t } = useTranslation(["views/explore", "components/player"]);
-  const { data: config } = useSWR<FrigateConfig>("config");
+  const { data: config } = useSWR<SecurityConfig>("config");
   const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -745,7 +745,7 @@ function LifecycleIconRow({
 
                           if (resp && resp.status == 200) {
                             toast.success(
-                              t("toast.success.submittedFrigatePlus", {
+                              t("toast.success.submittedSecurityPlus", {
                                 ns: "components/player",
                               }),
                               {
@@ -754,7 +754,7 @@ function LifecycleIconRow({
                             );
                           } else {
                             toast.success(
-                              t("toast.error.submitFrigatePlusFailed", {
+                              t("toast.error.submitSecurityPlusFailed", {
                                 ns: "components/player",
                               }),
                               {

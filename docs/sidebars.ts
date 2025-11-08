@@ -1,18 +1,18 @@
 import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 import { PropSidebarItemLink } from "@docusaurus/plugin-content-docs";
-import frigateHttpApiSidebar from "./docs/integrations/api/sidebar";
+import SecurityHttpApiSidebar from "./docs/integrations/api/sidebar";
 
 const sidebars: SidebarsConfig = {
   docs: {
-    Frigate: [
-      "frigate/index",
-      "frigate/hardware",
-      "frigate/planning_setup",
-      "frigate/installation",
-      "frigate/updating",
-      "frigate/camera_setup",
-      "frigate/video_pipeline",
-      "frigate/glossary",
+    Security: [
+      "security/index",
+      "security/hardware",
+      "security/planning_setup",
+      "security/installation",
+      "security/updating",
+      "security/camera_setup",
+      "security/video_pipeline",
+      "security/glossary",
     ],
     Guides: [
       "guides/getting_started",
@@ -109,18 +109,18 @@ const sidebars: SidebarsConfig = {
         label: "HTTP API",
         link: {
           type: "generated-index",
-          title: "Frigate HTTP API",
+          title: "Security HTTP API",
           description: "HTTP API",
-          slug: "/integrations/api/frigate-http-api",
+          slug: "/integrations/api/security-http-api",
         },
-        items: frigateHttpApiSidebar,
+        items: SecurityHttpApiSidebar,
       },
       "integrations/mqtt",
       "integrations/homekit",
       "configuration/metrics",
       "integrations/third_party_extensions",
     ],
-    "Frigate+": [
+    "Security+": [
       "plus/index",
       "plus/annotating",
       "plus/first_model",

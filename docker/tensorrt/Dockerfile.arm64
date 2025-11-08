@@ -37,7 +37,7 @@ RUN if [ "$TARGETARCH" = "amd64" ]; then \
     done; \
     fi
 
-# Frigate w/ TensorRT Support as separate image
+# Security w/ TensorRT Support as separate image
 FROM deps AS tensorrt-base
 
 #Disable S6 Global timeout
@@ -122,8 +122,8 @@ RUN --mount=type=bind,source=docker/tensorrt/build_jetson_ffmpeg.sh,target=/deps
     --mount=type=cache,target=/root/.ccache \
     /deps/build_jetson_ffmpeg.sh
 
-# Frigate w/ TensorRT for NVIDIA Jetson platforms
-FROM tensorrt-base AS frigate-tensorrt
+# Security w/ TensorRT for NVIDIA Jetson platforms
+FROM tensorrt-base AS security-tensorrt
 RUN apt-get update \
     && apt-get install -y python-is-python3 libprotobuf23  \
     && rm -rf /var/lib/apt/lists/*
@@ -149,7 +149,7 @@ RUN --mount=type=bind,from=trt-wheels,source=/trt-wheels,target=/deps/trt-wheels
     && pip3 install -U /deps/trt-model-wheels/*.whl \
     && ldconfig
 
-WORKDIR /opt/frigate/
+WORKDIR /opt/security/
 COPY --from=rootfs / /
 
 # Fixes "Error importing detector runtime: /usr/lib/aarch64-linux-gnu/libstdc++.so.6: cannot allocate memory in static TLS block"

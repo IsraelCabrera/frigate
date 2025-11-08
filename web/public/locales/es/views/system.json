@@ -1,14 +1,14 @@
 {
   "documentTitle": {
-    "storage": "Estadísticas de almacenamiento - Frigate",
-    "general": "Estadísticas generales - Frigate",
+    "storage": "Estadísticas de almacenamiento - Security",
+    "general": "Estadísticas generales - Security",
     "logs": {
-      "frigate": "Registros de Frigate - Frigate",
-      "go2rtc": "Registros de Go2RTC - Frigate",
-      "nginx": "Registros de Nginx - Frigate"
+      "security": "Registros de Security - Security",
+      "go2rtc": "Registros de Go2RTC - Security",
+      "nginx": "Registros de Nginx - Security"
     },
-    "cameras": "Estadísticas de cámaras - Frigate",
-    "enrichments": "Estadísticas de Enriquecimientos - Frigate"
+    "cameras": "Estadísticas de cámaras - Security",
+    "enrichments": "Estadísticas de Enriquecimientos - Security"
   },
   "logs": {
     "copy": {
@@ -87,7 +87,7 @@
   "storage": {
     "recordings": {
       "title": "Grabaciones",
-      "tips": "Este valor representa el almacenamiento total utilizado por las grabaciones en la base de datos de Frigate. Frigate no realiza un seguimiento del uso de almacenamiento de todos los archivos en tu disco.",
+      "tips": "Este valor representa el almacenamiento total utilizado por las grabaciones en la base de datos de Security. Security no realiza un seguimiento del uso de almacenamiento de todos los archivos en tu disco.",
       "earliestRecording": "Grabación más antigua disponible:"
     },
     "overview": "Resumen",
@@ -98,7 +98,7 @@
       "camera": "Cámara",
       "unused": {
         "title": "No Utilizado",
-        "tips": "Este valor puede no representar con precisión el espacio libre disponible para Frigate si tienes otros archivos almacenados en tu disco además de las grabaciones de Frigate. Frigate no realiza un seguimiento del uso de almacenamiento fuera de sus grabaciones."
+        "tips": "Este valor puede no representar con precisión el espacio libre disponible para Security si tienes otros archivos almacenados en tu disco además de las grabaciones de Security. Security no realiza un seguimiento del uso de almacenamiento fuera de sus grabaciones."
       },
       "title": "Almacenamiento de la Cámara",
       "storageUsed": "Almacenamiento",

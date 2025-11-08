@@ -5,7 +5,7 @@ import {
   ReactNode,
   useContext,
 } from "react";
-import { AllGroupsStreamingSettings } from "@/types/frigateConfig";
+import { AllGroupsStreamingSettings } from "@/types/securityConfig";
 import { usePersistence } from "@/hooks/use-persistence";
 
 type StreamingSettingsContextType = {

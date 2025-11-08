@@ -38,7 +38,7 @@ RUN apt-get update && \
     apt-get install -y libnuma1 && \
     apt-get install -qq -y -t bookworm-backports mesa-va-drivers mesa-vulkan-drivers
 
-WORKDIR /opt/frigate
+WORKDIR /opt/security
 COPY --from=rootfs / /
 
 RUN wget -q https://bootstrap.pypa.io/get-pip.py -O get-pip.py \

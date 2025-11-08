@@ -8,17 +8,17 @@ from typing import Any
 
 from ruamel.yaml import YAML
 
-sys.path.insert(0, "/opt/frigate")
-from frigate.const import (
+sys.path.insert(0, "/opt/security")
+from security.const import (
     BIRDSEYE_PIPE,
     DEFAULT_FFMPEG_VERSION,
     INCLUDED_FFMPEG_VERSIONS,
     LIBAVFORMAT_VERSION_MAJOR,
 )
-from frigate.ffmpeg_presets import parse_preset_hardware_acceleration_encode
-from frigate.util.config import find_config_file
+from security.ffmpeg_presets import parse_preset_hardware_acceleration_encode
+from security.util.config import find_config_file
 
-sys.path.remove("/opt/frigate")
+sys.path.remove("/opt/security")
 
 yaml = YAML()
 
@@ -46,7 +46,7 @@ except FileNotFoundError:
 
 go2rtc_config: dict[str, Any] = config.get("go2rtc", {})
 
-# Need to enable CORS for go2rtc so the frigate integration / card work automatically
+# Need to enable CORS for go2rtc so the security integration / card work automatically
 if go2rtc_config.get("api") is None:
     go2rtc_config["api"] = {"origin": "*"}
 elif go2rtc_config["api"].get("origin") is None:
@@ -119,7 +119,7 @@ for name in go2rtc_config.get("streams", {}):
             )
         except KeyError as e:
             print(
-                "[ERROR] Invalid substitution found, see https://docs.frigate.video/configuration/restream#advanced-restream-configurations for more info."
+                "[ERROR] Invalid substitution found, see https://docs.security.video/configuration/restream#advanced-restream-configurations for more info."
             )
             sys.exit(e)
 
@@ -129,7 +129,7 @@ for name in go2rtc_config.get("streams", {}):
                 go2rtc_config["streams"][name][i] = stream.format(**FRIGATE_ENV_VARS)
             except KeyError as e:
                 print(
-                    "[ERROR] Invalid substitution found, see https://docs.frigate.video/configuration/restream#advanced-restream-configurations for more info."
+                    "[ERROR] Invalid substitution found, see https://docs.security.video/configuration/restream#advanced-restream-configurations for more info."
                 )
                 sys.exit(e)
 

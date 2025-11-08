@@ -4,15 +4,15 @@ body:
   - type: markdown
     attributes:
       value: |
-        Use this form for questions you have about Frigate.
+        Use this form for questions you have about Security.
 
-        Before submitting your question, please [search the discussions][discussions], read the [official Frigate documentation][docs], and read the [Frigate FAQ][faq] pinned at the Discussion page to see if your question has already been answered by the community.
+        Before submitting your question, please [search the discussions][discussions], read the [official Security documentation][docs], and read the [Security FAQ][faq] pinned at the Discussion page to see if your question has already been answered by the community.
 
         **If you are looking for support, start a new discussion and use a support category.**
 
-        [discussions]: https://www.github.com/blakeblackshear/frigate/discussions
-        [docs]: https://docs.frigate.video
-        [faq]: https://github.com/blakeblackshear/frigate/discussions/12724
+        [discussions]: https://www.github.com/blakeblackshear/security/discussions
+        [docs]: https://docs.security.video
+        [faq]: https://github.com/blakeblackshear/security/discussions/12724
   - type: textarea
     id: description
     attributes:
