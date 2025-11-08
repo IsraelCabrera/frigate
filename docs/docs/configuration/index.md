@@ -46,36 +46,36 @@ VS Code supports JSON schemas for automatically validating configuration files. 
 
 ## Environment Variable Substitution
 
-Security supports the use of environment variables starting with `FRIGATE_` **only** where specifically indicated in the [reference config](./reference.md). For example, the following values can be replaced at runtime by using environment variables:
+Security supports the use of environment variables starting with `SECURITY_` **only** where specifically indicated in the [reference config](./reference.md). For example, the following values can be replaced at runtime by using environment variables:
 
 ```yaml
 mqtt:
-  user: "{FRIGATE_MQTT_USER}"
-  password: "{FRIGATE_MQTT_PASSWORD}"
+  user: "{SECURITY_MQTT_USER}"
+  password: "{SECURITY_MQTT_PASSWORD}"
 ```
 
 ```yaml
-- path: rtsp://{FRIGATE_RTSP_USER}:{FRIGATE_RTSP_PASSWORD}@10.0.10.10:8554/unicast
+- path: rtsp://{SECURITY_RTSP_USER}:{SECURITY_RTSP_PASSWORD}@10.0.10.10:8554/unicast
 ```
 
 ```yaml
 onvif:
   host: 10.0.10.10
   port: 8000
-  user: "{FRIGATE_RTSP_USER}"
-  password: "{FRIGATE_RTSP_PASSWORD}"
+  user: "{SECURITY_RTSP_USER}"
+  password: "{SECURITY_RTSP_PASSWORD}"
 ```
 
 ```yaml
 go2rtc:
   rtsp:
-    username: "{FRIGATE_GO2RTC_RTSP_USERNAME}"
-    password: "{FRIGATE_GO2RTC_RTSP_PASSWORD}"
+    username: "{SECURITY_GO2RTC_RTSP_USERNAME}"
+    password: "{SECURITY_GO2RTC_RTSP_PASSWORD}"
 ```
 
 ```yaml
 genai:
-  api_key: "{FRIGATE_GENAI_API_KEY}"
+  api_key: "{SECURITY_GENAI_API_KEY}"
 ```
 
 ## Common configuration examples

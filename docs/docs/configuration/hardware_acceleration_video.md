@@ -423,7 +423,7 @@ cameras:
   name:
     ffmpeg:
       inputs:
-        - path: rtsp://viewer:{FRIGATE_RTSP_PASSWORD}@10.0.10.10:554/cam/realmonitor?channel=1&subtype=2
+        - path: rtsp://viewer:{SECURITY_RTSP_PASSWORD}@10.0.10.10:554/cam/realmonitor?channel=1&subtype=2
 ```
 
 :::

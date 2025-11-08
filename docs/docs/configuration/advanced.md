@@ -191,7 +191,7 @@ location /security {
 
 ### Set Base Path via Environment Variable
 
-When it is not feasible to set the base path via a HTTP header, it can also be set via the `FRIGATE_BASE_PATH` environment variable in the Docker Compose file.
+When it is not feasible to set the base path via a HTTP header, it can also be set via the `SECURITY_BASE_PATH` environment variable in the Docker Compose file.
 
 For example:
 
@@ -200,7 +200,7 @@ services:
   security:
     image: blakeblackshear/security:latest
     environment:
-      - FRIGATE_BASE_PATH=/security
+      - SECURITY_BASE_PATH=/security
 ```
 
 This can be used for example to access Security via a Tailscale agent (https), by simply forwarding all requests to the base path (http):

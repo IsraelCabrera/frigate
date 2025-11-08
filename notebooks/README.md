@@ -2,7 +2,7 @@
 
 ## YOLO-NAS Pretrained
 
-You can build and download a compatible model with pre-trained weights using [Google Colab](https://colab.research.google.com/github/blakeblackshear/frigate/blob/dev/notebooks/YOLO_NAS_Pretrained_Export.ipynb).
+You can build and download a compatible model with pre-trained weights using [Google Colab](https://colab.research.google.com/github/blakeblackshear/security/blob/dev/notebooks/YOLO_NAS_Pretrained_Export.ipynb).
 
 > [!WARNING]  
 > The pre-trained YOLO-NAS weights from DeciAI are subject to their license and can't be used commercially. For more information, see: https://docs.deci.ai/super-gradients/latest/LICENSE.YOLONAS.html

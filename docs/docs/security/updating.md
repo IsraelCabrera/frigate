@@ -5,15 +5,15 @@ title: Updating
 
 # Updating Frigate
 
-The current stable version of Frigate is **0.16.2**. The release notes and any breaking changes for this version can be found on the [Frigate GitHub releases page](https://github.com/blakeblackshear/frigate/releases/tag/v0.16.2).
+The current stable version of Frigate is **0.16.2**. The release notes and any breaking changes for this version can be found on the [Frigate GitHub releases page](https://github.com/blakeblackshear/security/releases/tag/v0.16.2).
 
 Keeping Frigate up to date ensures you benefit from the latest features, performance improvements, and bug fixes. The update process varies slightly depending on your installation method (Docker, Home Assistant Addon, etc.). Below are instructions for the most common setups.
 
 ## Before You Begin
 
 - **Stop Frigate**: For most methods, you’ll need to stop the running Frigate instance before backing up and updating.
-- **Backup Your Configuration**: Always back up your `/config` directory (e.g., `config.yml` and `frigate.db`, the SQLite database) before updating. This ensures you can roll back if something goes wrong.
-- **Check Release Notes**: Carefully review the [Frigate GitHub releases page](https://github.com/blakeblackshear/frigate/releases) for breaking changes or configuration updates that might affect your setup.
+- **Backup Your Configuration**: Always back up your `/config` directory (e.g., `config.yml` and `security.db`, the SQLite database) before updating. This ensures you can roll back if something goes wrong.
+- **Check Release Notes**: Carefully review the [Frigate GitHub releases page](https://github.com/blakeblackshear/security/releases) for breaking changes or configuration updates that might affect your setup.
 
 ## Updating with Docker
 
@@ -23,11 +23,11 @@ If you’re running Frigate via Docker (recommended method), follow these steps:
 
    - If using Docker Compose:
      ```bash
-     docker compose down frigate
+     docker compose down security
      ```
    - If using `docker run`:
      ```bash
-     docker stop frigate
+     docker stop security
      ```
 
 2. **Update and Pull the Latest Image**:
@@ -36,18 +36,18 @@ If you’re running Frigate via Docker (recommended method), follow these steps:
      - Edit your `docker-compose.yml` file to specify the desired version tag (e.g., `0.16.2` instead of `0.15.2`). For example:
        ```yaml
        services:
-         frigate:
-           image: ghcr.io/blakeblackshear/frigate:0.16.2
+         security:
+           image: ghcr.io/blakeblackshear/security:0.16.2
        ```
      - Then pull the image:
        ```bash
-       docker pull ghcr.io/blakeblackshear/frigate:0.16.2
+       docker pull ghcr.io/blakeblackshear/security:0.16.2
        ```
-     - **Note for `stable` Tag Users**: If your `docker-compose.yml` uses the `stable` tag (e.g., `ghcr.io/blakeblackshear/frigate:stable`), you don’t need to update the tag manually. The `stable` tag always points to the latest stable release after pulling.
+     - **Note for `stable` Tag Users**: If your `docker-compose.yml` uses the `stable` tag (e.g., `ghcr.io/blakeblackshear/security:stable`), you don’t need to update the tag manually. The `stable` tag always points to the latest stable release after pulling.
    - If using `docker run`:
      - Pull the image with the appropriate tag (e.g., `0.16.2`, `0.16.2-tensorrt`, or `stable`):
        ```bash
-       docker pull ghcr.io/blakeblackshear/frigate:0.16.2
+       docker pull ghcr.io/blakeblackshear/security:0.16.2
        ```
 
 3. **Start the Container**:
@@ -61,7 +61,7 @@ If you’re running Frigate via Docker (recommended method), follow these steps:
 4. **Verify the Update**:
    - Check the container logs to ensure Frigate starts successfully:
      ```bash
-     docker logs frigate
+     docker logs security
      ```
    - Visit the Frigate Web UI (default: `http://<your-ip>:5000`) to confirm the new version is running. The version number is displayed at the top of the System Metrics page.
 
@@ -95,7 +95,7 @@ For users running Frigate as a Home Assistant Addon:
 
 ### Notes
 
-- Ensure your `/config/frigate.yml` is compatible with the new version by reviewing the [Release notes](https://github.com/blakeblackshear/frigate/releases).
+- Ensure your `/config/security.yml` is compatible with the new version by reviewing the [Release notes](https://github.com/blakeblackshear/security/releases).
 - If using custom hardware (e.g., Coral or GPU), verify that configurations still work, as addon updates don’t modify your hardware settings.
 
 ## Rolling Back
@@ -105,15 +105,15 @@ If an update causes issues:
 1. Stop Frigate.
 2. Restore your backed-up config file and database.
 3. Revert to the previous image version:
-   - For Docker: Specify an older tag (e.g., `ghcr.io/blakeblackshear/frigate:0.15.2`) in your `docker run` command.
-   - For Docker Compose: Edit your `docker-compose.yml`, specify the older version tag (e.g., `ghcr.io/blakeblackshear/frigate:0.15.2`), and re-run `docker compose up -d`.
+   - For Docker: Specify an older tag (e.g., `ghcr.io/blakeblackshear/security:0.15.2`) in your `docker run` command.
+   - For Docker Compose: Edit your `docker-compose.yml`, specify the older version tag (e.g., `ghcr.io/blakeblackshear/security:0.15.2`), and re-run `docker compose up -d`.
    - For Home Assistant: Reinstall the previous addon version manually via the repository if needed and restart the addon.
 4. Verify the old version is running again.
 
 ## Troubleshooting
 
-- **Container Fails to Start**: Check logs (`docker logs frigate`) for errors.
+- **Container Fails to Start**: Check logs (`docker logs security`) for errors.
 - **UI Not Loading**: Ensure ports (e.g., 5000, 8971) are still mapped correctly and the service is running.
 - **Hardware Issues**: Revisit hardware-specific setup (e.g., Coral, GPU) if detection or decoding fails post-update.
 
-Common questions are often answered in the [FAQ](https://github.com/blakeblackshear/frigate/discussions), pinned at the top of the support discussions.
+Common questions are often answered in the [FAQ](https://github.com/blakeblackshear/security/discussions), pinned at the top of the support discussions.

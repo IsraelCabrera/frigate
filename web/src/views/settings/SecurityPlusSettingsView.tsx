@@ -59,7 +59,7 @@ export default function FrigatePlusSettingsView({
 
   const { addMessage, removeMessage } = useContext(StatusBarMessagesContext)!;
 
-  const [frigatePlusSettings, setFrigatePlusSettings] =
+  const [securityPlusSettings, setFrigatePlusSettings] =
     useState<FrigatePlusSettings>({
       model: {
         id: undefined,
@@ -92,7 +92,7 @@ export default function FrigatePlusSettingsView({
 
   useEffect(() => {
     if (config) {
-      if (frigatePlusSettings?.model.id == undefined) {
+      if (securityPlusSettings?.model.id == undefined) {
         setFrigatePlusSettings({
           model: {
             id: config.model.plus?.id,
@@ -127,19 +127,19 @@ export default function FrigatePlusSettingsView({
     setIsLoading(true);
 
     axios
-      .put(`config/set?model.path=plus://${frigatePlusSettings.model.id}`, {
+      .put(`config/set?model.path=plus://${securityPlusSettings.model.id}`, {
         requires_restart: 0,
       })
       .then((res) => {
         if (res.status === 200) {
-          toast.success(t("frigatePlus.toast.success"), {
+          toast.success(t("securityPlus.toast.success"), {
             position: "top-center",
           });
           setChangedValue(false);
           updateConfig();
         } else {
           toast.error(
-            t("frigatePlus.toast.error", { errorMessage: res.statusText }),
+            t("securityPlus.toast.error", { errorMessage: res.statusText }),
             {
               position: "top-center",
             },
@@ -161,13 +161,13 @@ export default function FrigatePlusSettingsView({
       .finally(() => {
         addMessage(
           "plus_restart",
-          t("frigatePlus.restart_required"),
+          t("securityPlus.restart_required"),
           undefined,
           "plus_restart",
         );
         setIsLoading(false);
       });
-  }, [updateConfig, addMessage, frigatePlusSettings, t]);
+  }, [updateConfig, addMessage, securityPlusSettings, t]);
 
   const onCancel = useCallback(() => {
     setFrigatePlusSettings(origPlusSettings);
@@ -179,7 +179,7 @@ export default function FrigatePlusSettingsView({
     if (changedValue) {
       addMessage(
         "plus_settings",
-        t("frigatePlus.unsavedChanges"),
+        t("securityPlus.unsavedChanges"),
         undefined,
         "plus_settings",
       );
@@ -191,7 +191,7 @@ export default function FrigatePlusSettingsView({
   }, [changedValue]);
 
   useEffect(() => {
-    document.title = t("documentTitle.frigatePlus");
+    document.title = t("documentTitle.securityPlus");
   }, [t]);
 
   const needCleanSnapshots = () => {
@@ -213,13 +213,13 @@ export default function FrigatePlusSettingsView({
         <Toaster position="top-center" closeButton={true} />
         <div className="scrollbar-container order-last mb-10 mt-2 flex h-full w-full flex-col overflow-y-auto pb-2 md:order-none">
           <Heading as="h4" className="mb-2">
-            {t("frigatePlus.title")}
+            {t("securityPlus.title")}
           </Heading>
 
           <Separator className="my-2 flex bg-secondary" />
 
           <Heading as="h4" className="my-2">
-            {t("frigatePlus.apiKey.title")}
+            {t("securityPlus.apiKey.title")}
           </Heading>
 
           <div className="mt-2 space-y-6">
@@ -232,22 +232,22 @@ export default function FrigatePlusSettingsView({
                 )}
                 <Label>
                   {config?.plus?.enabled
-                    ? t("frigatePlus.apiKey.validated")
-                    : t("frigatePlus.apiKey.notValidated")}
+                    ? t("securityPlus.apiKey.validated")
+                    : t("securityPlus.apiKey.notValidated")}
                 </Label>
               </div>
               <div className="my-2 max-w-5xl text-sm text-muted-foreground">
-                <p>{t("frigatePlus.apiKey.desc")}</p>
+                <p>{t("securityPlus.apiKey.desc")}</p>
                 {!config?.model.plus && (
                   <>
                     <div className="mt-2 flex items-center text-primary-variant">
                       <Link
-                        to="https://frigate.video/plus"
+                        to="https://security.video/plus"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline"
                       >
-                        {t("frigatePlus.apiKey.plusLink")}
+                        {t("securityPlus.apiKey.plusLink")}
                         <LuExternalLink className="ml-2 inline-flex size-3" />
                       </Link>
                     </div>
@@ -261,40 +261,40 @@ export default function FrigatePlusSettingsView({
                 <Separator className="my-2 flex bg-secondary" />
                 <div className="mt-2 max-w-2xl">
                   <Heading as="h4" className="my-2">
-                    {t("frigatePlus.modelInfo.title")}
+                    {t("securityPlus.modelInfo.title")}
                   </Heading>
                   <div className="mt-2 space-y-3">
                     {!config?.model?.plus && (
                       <p className="text-muted-foreground">
-                        {t("frigatePlus.modelInfo.loading")}
+                        {t("securityPlus.modelInfo.loading")}
                       </p>
                     )}
                     {config?.model?.plus === null && (
                       <p className="text-danger">
-                        {t("frigatePlus.modelInfo.error")}
+                        {t("securityPlus.modelInfo.error")}
                       </p>
                     )}
                     {config?.model?.plus && (
                       <div className="grid grid-cols-2 gap-4">
                         <div>
                           <Label className="text-muted-foreground">
-                            {t("frigatePlus.modelInfo.baseModel")}
+                            {t("securityPlus.modelInfo.baseModel")}
                           </Label>
                           <p>
                             {config.model.plus.baseModel} (
                             {config.model.plus.isBaseModel
                               ? t(
-                                  "frigatePlus.modelInfo.plusModelType.baseModel",
+                                  "securityPlus.modelInfo.plusModelType.baseModel",
                                 )
                               : t(
-                                  "frigatePlus.modelInfo.plusModelType.userModel",
+                                  "securityPlus.modelInfo.plusModelType.userModel",
                                 )}
                             )
                           </p>
                         </div>
                         <div>
                           <Label className="text-muted-foreground">
-                            {t("frigatePlus.modelInfo.trainDate")}
+                            {t("securityPlus.modelInfo.trainDate")}
                           </Label>
                           <p>
                             {new Date(
@@ -304,7 +304,7 @@ export default function FrigatePlusSettingsView({
                         </div>
                         <div>
                           <Label className="text-muted-foreground">
-                            {t("frigatePlus.modelInfo.modelType")}
+                            {t("securityPlus.modelInfo.modelType")}
                           </Label>
                           <p>
                             {config.model.plus.name} (
@@ -316,7 +316,7 @@ export default function FrigatePlusSettingsView({
                         </div>
                         <div>
                           <Label className="text-muted-foreground">
-                            {t("frigatePlus.modelInfo.supportedDetectors")}
+                            {t("securityPlus.modelInfo.supportedDetectors")}
                           </Label>
                           <p>
                             {config.model.plus.supportedDetectors.join(", ")}
@@ -325,59 +325,59 @@ export default function FrigatePlusSettingsView({
                         <div className="col-span-2">
                           <div className="space-y-2">
                             <div className="text-md">
-                              {t("frigatePlus.modelInfo.availableModels")}
+                              {t("securityPlus.modelInfo.availableModels")}
                             </div>
                             <div className="space-y-3 text-sm text-muted-foreground">
                               <p>
                                 <Trans ns="views/settings">
-                                  frigatePlus.modelInfo.modelSelect
+                                  securityPlus.modelInfo.modelSelect
                                 </Trans>
                               </p>
                             </div>
                           </div>
                           <Select
-                            value={frigatePlusSettings.model.id}
+                            value={securityPlusSettings.model.id}
                             onValueChange={(value) =>
                               handleFrigatePlusConfigChange({
                                 model: { id: value as string },
                               })
                             }
                           >
-                            {frigatePlusSettings.model.id &&
-                            availableModels?.[frigatePlusSettings.model.id] ? (
+                            {securityPlusSettings.model.id &&
+                            availableModels?.[securityPlusSettings.model.id] ? (
                               <SelectTrigger>
                                 {new Date(
                                   availableModels[
-                                    frigatePlusSettings.model.id
+                                    securityPlusSettings.model.id
                                   ].trainDate,
                                 ).toLocaleString() +
                                   " " +
-                                  availableModels[frigatePlusSettings.model.id]
+                                  availableModels[securityPlusSettings.model.id]
                                     .baseModel +
                                   " (" +
-                                  (availableModels[frigatePlusSettings.model.id]
+                                  (availableModels[securityPlusSettings.model.id]
                                     .isBaseModel
                                     ? t(
-                                        "frigatePlus.modelInfo.plusModelType.baseModel",
+                                        "securityPlus.modelInfo.plusModelType.baseModel",
                                       )
                                     : t(
-                                        "frigatePlus.modelInfo.plusModelType.userModel",
+                                        "securityPlus.modelInfo.plusModelType.userModel",
                                       )) +
                                   ") " +
-                                  availableModels[frigatePlusSettings.model.id]
+                                  availableModels[securityPlusSettings.model.id]
                                     .name +
                                   " (" +
-                                  availableModels[frigatePlusSettings.model.id]
+                                  availableModels[securityPlusSettings.model.id]
                                     .width +
                                   "x" +
-                                  availableModels[frigatePlusSettings.model.id]
+                                  availableModels[securityPlusSettings.model.id]
                                     .height +
                                   ")"}
                               </SelectTrigger>
                             ) : (
                               <SelectTrigger>
                                 {t(
-                                  "frigatePlus.modelInfo.loadingAvailableModels",
+                                  "securityPlus.modelInfo.loadingAvailableModels",
                                 )}
                               </SelectTrigger>
                             )}
@@ -404,10 +404,10 @@ export default function FrigatePlusSettingsView({
                                         {model.baseModel} {" ("}
                                         {model.isBaseModel
                                           ? t(
-                                              "frigatePlus.modelInfo.plusModelType.baseModel",
+                                              "securityPlus.modelInfo.plusModelType.baseModel",
                                             )
                                           : t(
-                                              "frigatePlus.modelInfo.plusModelType.userModel",
+                                              "securityPlus.modelInfo.plusModelType.userModel",
                                             )}
                                         {")"}
                                       </div>
@@ -417,7 +417,7 @@ export default function FrigatePlusSettingsView({
                                       </div>
                                       <div>
                                         {t(
-                                          "frigatePlus.modelInfo.supportedDetectors",
+                                          "securityPlus.modelInfo.supportedDetectors",
                                         )}
                                         : {model.supportedDetectors.join(", ")}
                                       </div>
@@ -442,13 +442,13 @@ export default function FrigatePlusSettingsView({
 
             <div className="mt-2 max-w-5xl">
               <Heading as="h4" className="my-2">
-                {t("frigatePlus.snapshotConfig.title")}
+                {t("securityPlus.snapshotConfig.title")}
               </Heading>
               <div className="mt-2 space-y-3">
                 <div className="my-2 text-sm text-muted-foreground">
                   <p>
                     <Trans ns="views/settings">
-                      frigatePlus.snapshotConfig.desc
+                      securityPlus.snapshotConfig.desc
                     </Trans>
                   </p>
                   <div className="mt-2 flex items-center text-primary-variant">
@@ -469,14 +469,14 @@ export default function FrigatePlusSettingsView({
                       <thead>
                         <tr className="border-b border-secondary">
                           <th className="px-4 py-2 text-left">
-                            {t("frigatePlus.snapshotConfig.table.camera")}
+                            {t("securityPlus.snapshotConfig.table.camera")}
                           </th>
                           <th className="px-4 py-2 text-center">
-                            {t("frigatePlus.snapshotConfig.table.snapshots")}
+                            {t("securityPlus.snapshotConfig.table.snapshots")}
                           </th>
                           <th className="px-4 py-2 text-center">
                             <Trans ns="views/settings">
-                              frigatePlus.snapshotConfig.table.cleanCopySnapshots
+                              securityPlus.snapshotConfig.table.cleanCopySnapshots
                             </Trans>
                           </th>
                         </tr>
@@ -519,7 +519,7 @@ export default function FrigatePlusSettingsView({
                       <IoIosWarning className="mr-2 size-5 text-danger" />
                       <div className="max-w-[85%] text-sm">
                         <Trans ns="views/settings">
-                          frigatePlus.snapshotConfig.cleanCopyWarning
+                          securityPlus.snapshotConfig.cleanCopyWarning
                         </Trans>
                       </div>
                     </div>

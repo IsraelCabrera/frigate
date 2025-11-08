@@ -2,10 +2,9 @@
 set -e
 
 # Download the MxAccl for Frigate github release
-# TODO: change wget by only unzip, must add copy to docker
 #wget https://github.com/memryx/mx_accl_frigate/archive/refs/tags/v2.1.0.zip -O /tmp/mxaccl.zip
-unzip /tmp/mxaccl.zip -d /tmp
-mv /tmp/mx_accl_frigate-2.1.0 /opt/mx_accl_security
+unzip /pips/mxaccl.zip -d /tmp
+mv /tmp/mx_accl_security-2.1.0 /opt/mx_accl_security
 rm /tmp/mxaccl.zip
 
 # Install Python dependencies

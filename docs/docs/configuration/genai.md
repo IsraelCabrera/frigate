@@ -11,12 +11,12 @@ Requests for a description are sent off automatically to your AI provider at the
 
 Generative AI can be enabled for all cameras or only for specific cameras. If GenAI is disabled for a camera, you can still manually generate descriptions for events using the HTTP API. There are currently 3 native providers available to integrate with Security. Other providers that support the OpenAI standard API can also be used. See the OpenAI section below.
 
-To use Generative AI, you must define a single provider at the global level of your Security configuration. If the provider you choose requires an API key, you may either directly paste it in your configuration, or store it in an environment variable prefixed with `FRIGATE_`.
+To use Generative AI, you must define a single provider at the global level of your Security configuration. If the provider you choose requires an API key, you may either directly paste it in your configuration, or store it in an environment variable prefixed with `SECURITY_`.
 
 ```yaml
 genai:
   provider: gemini
-  api_key: "{FRIGATE_GEMINI_API_KEY}"
+  api_key: "{SECURITY_GEMINI_API_KEY}"
   model: gemini-2.0-flash
 
 cameras:
@@ -95,7 +95,7 @@ To start using Gemini, you must first get an API key from [Google AI Studio](htt
 ```yaml
 genai:
   provider: gemini
-  api_key: "{FRIGATE_GEMINI_API_KEY}"
+  api_key: "{SECURITY_GEMINI_API_KEY}"
   model: gemini-2.0-flash
 ```
 
@@ -122,7 +122,7 @@ To start using OpenAI, you must first [create an API key](https://platform.opena
 ```yaml
 genai:
   provider: openai
-  api_key: "{FRIGATE_OPENAI_API_KEY}"
+  api_key: "{SECURITY_OPENAI_API_KEY}"
   model: gpt-4o
 ```
 
@@ -151,7 +151,7 @@ genai:
   provider: azure_openai
   base_url: https://instance.cognitiveservices.azure.com/openai/responses?api-version=2025-04-01-preview
   model: gpt-5-mini
-  api_key: "{FRIGATE_OPENAI_API_KEY}"
+  api_key: "{SECURITY_OPENAI_API_KEY}"
 ```
 
 ## Usage and Best Practices

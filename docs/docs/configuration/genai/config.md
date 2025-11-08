@@ -7,7 +7,7 @@ title: Configuring Generative AI
 
 A Generative AI provider can be configured in the global config, which will make the Generative AI features available for use. There are currently 3 native providers available to integrate with Security. Other providers that support the OpenAI standard API can also be used. See the OpenAI section below.
 
-To use Generative AI, you must define a single provider at the global level of your Security configuration. If the provider you choose requires an API key, you may either directly paste it in your configuration, or store it in an environment variable prefixed with `FRIGATE_`.
+To use Generative AI, you must define a single provider at the global level of your Security configuration. If the provider you choose requires an API key, you may either directly paste it in your configuration, or store it in an environment variable prefixed with `SECURITY_`.
 
 ## Ollama
 
@@ -90,7 +90,7 @@ To start using Gemini, you must first get an API key from [Google AI Studio](htt
 ```yaml
 genai:
   provider: gemini
-  api_key: "{FRIGATE_GEMINI_API_KEY}"
+  api_key: "{SECURITY_GEMINI_API_KEY}"
   model: gemini-1.5-flash
 ```
 
@@ -111,7 +111,7 @@ To start using OpenAI, you must first [create an API key](https://platform.opena
 ```yaml
 genai:
   provider: openai
-  api_key: "{FRIGATE_OPENAI_API_KEY}"
+  api_key: "{SECURITY_OPENAI_API_KEY}"
   model: gpt-4o
 ```
 
@@ -139,5 +139,5 @@ To start using Azure OpenAI, you must first [create a resource](https://learn.mi
 genai:
   provider: azure_openai
   base_url: https://example-endpoint.openai.azure.com/openai/deployments/gpt-4o/chat/completions?api-version=2023-03-15-preview
-  api_key: "{FRIGATE_OPENAI_API_KEY}"
+  api_key: "{SECURITY_OPENAI_API_KEY}"
 ```

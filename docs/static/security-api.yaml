@@ -1346,7 +1346,7 @@ paths:
         - App
         - Logs
       summary: Logs
-      description: Get logs for the requested service (frigate/nginx/go2rtc)
+      description: Get logs for the requested service (security/nginx/go2rtc)
       operationId: logs_logs__service__get
       parameters:
         - name: service
@@ -1355,7 +1355,7 @@ paths:
           schema:
             type: string
             enum:
-              - frigate
+              - security
               - nginx
               - go2rtc
             title: Service

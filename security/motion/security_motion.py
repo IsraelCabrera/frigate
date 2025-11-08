@@ -137,7 +137,7 @@ class FrigateMotionDetector(MotionDetector):
                         )
 
                 cv2.imwrite(
-                    f"debug/frames/frigate-{self.frame_counter}.jpg", thresh_dilated
+                    f"debug/frames/security-{self.frame_counter}.jpg", thresh_dilated
                 )
 
         if len(motion_boxes) > 0:

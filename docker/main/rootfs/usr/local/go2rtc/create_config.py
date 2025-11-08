@@ -22,12 +22,12 @@ sys.path.remove("/opt/security")
 
 yaml = YAML()
 
-FRIGATE_ENV_VARS = {k: v for k, v in os.environ.items() if k.startswith("FRIGATE_")}
+SECURITY_ENV_VARS = {k: v for k, v in os.environ.items() if k.startswith("SECURITY_")}
 # read docker secret files as env vars too
 if os.path.isdir("/run/secrets"):
     for secret_file in os.listdir("/run/secrets"):
-        if secret_file.startswith("FRIGATE_"):
-            FRIGATE_ENV_VARS[secret_file] = (
+        if secret_file.startswith("SECURITY_"):
+            SECURITY_ENV_VARS[secret_file] = (
                 Path(os.path.join("/run/secrets", secret_file)).read_text().strip()
             )
 
@@ -69,7 +69,7 @@ if go2rtc_config.get("webrtc") is None:
 if go2rtc_config["webrtc"].get("candidates") is None:
     default_candidates = []
     # use internal candidate if it was discovered when running through the add-on
-    internal_candidate = os.environ.get("FRIGATE_GO2RTC_WEBRTC_CANDIDATE_INTERNAL")
+    internal_candidate = os.environ.get("SECURITY_GO2RTC_WEBRTC_CANDIDATE_INTERNAL")
     if internal_candidate is not None:
         default_candidates.append(internal_candidate)
     # should set default stun server so webrtc can work
@@ -79,12 +79,12 @@ if go2rtc_config["webrtc"].get("candidates") is None:
 
 if go2rtc_config.get("rtsp", {}).get("username") is not None:
     go2rtc_config["rtsp"]["username"] = go2rtc_config["rtsp"]["username"].format(
-        **FRIGATE_ENV_VARS
+        **SECURITY_ENV_VARS
     )
 
 if go2rtc_config.get("rtsp", {}).get("password") is not None:
     go2rtc_config["rtsp"]["password"] = go2rtc_config["rtsp"]["password"].format(
-        **FRIGATE_ENV_VARS
+        **SECURITY_ENV_VARS
     )
 
 # ensure ffmpeg path is set correctly
@@ -115,7 +115,7 @@ for name in go2rtc_config.get("streams", {}):
     if isinstance(stream, str):
         try:
             go2rtc_config["streams"][name] = go2rtc_config["streams"][name].format(
-                **FRIGATE_ENV_VARS
+                **SECURITY_ENV_VARS
             )
         except KeyError as e:
             print(
@@ -126,7 +126,7 @@ for name in go2rtc_config.get("streams", {}):
     elif isinstance(stream, list):
         for i, stream in enumerate(stream):
             try:
-                go2rtc_config["streams"][name][i] = stream.format(**FRIGATE_ENV_VARS)
+                go2rtc_config["streams"][name][i] = stream.format(**SECURITY_ENV_VARS)
             except KeyError as e:
                 print(
                     "[ERROR] Invalid substitution found, see https://docs.security.video/configuration/restream#advanced-restream-configurations for more info."

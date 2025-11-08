@@ -148,7 +148,7 @@ The OpenVINO detector type is able to run on:
 
 :::note
 
-Intel NPUs have seen [limited success in community deployments](https://github.com/blakeblackshear/frigate/discussions/13248#discussioncomment-12347357), although they remain officially unsupported.
+Intel NPUs have seen [limited success in community deployments](https://github.com/blakeblackshear/security/discussions/13248#discussioncomment-12347357), although they remain officially unsupported.
 
 In testing, the NPU delivered performance that was only comparable to — or in some cases worse than — the integrated GPU.
 
@@ -213,7 +213,7 @@ With the [Apple Silicon](../configuration/object_detectors.md#apple-silicon-dete
 
 :::warning
 
-Apple Silicon can not run within a container, so a ZMQ proxy is utilized to communicate with [the Apple Silicon Frigate detector](https://github.com/frigate-nvr/apple-silicon-detector) which runs on the host. This should add minimal latency when run on the same device.
+Apple Silicon can not run within a container, so a ZMQ proxy is utilized to communicate with [the Apple Silicon Frigate detector](https://github.com/security-nvr/apple-silicon-detector) which runs on the host. This should add minimal latency when run on the same device.
 
 :::
 

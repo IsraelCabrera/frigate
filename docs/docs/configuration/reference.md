@@ -26,12 +26,12 @@ mqtt:
   # NOTE: must be unique if you are running multiple instances
   client_id: security
   # Optional: user
-  # NOTE: MQTT user can be specified with an environment variable or docker secrets that must begin with 'FRIGATE_'.
-  #       e.g. user: '{FRIGATE_MQTT_USER}'
+  # NOTE: MQTT user can be specified with an environment variable or docker secrets that must begin with 'SECURITY_'.
+  #       e.g. user: '{SECURITY_MQTT_USER}'
   user: mqtt_user
   # Optional: password
-  # NOTE: MQTT password can be specified with an environment variable or docker secrets that must begin with 'FRIGATE_'.
-  #       e.g. password: '{FRIGATE_MQTT_PASSWORD}'
+  # NOTE: MQTT password can be specified with an environment variable or docker secrets that must begin with 'SECURITY_'.
+  #       e.g. password: '{SECURITY_MQTT_PASSWORD}'
   password: password
   # Optional: tls_ca_certs for enabling TLS using self-signed certs (default: None)
   tls_ca_certs: /path/to/ca.crt
@@ -690,7 +690,7 @@ genai:
   # Required if provider is ollama. May also be used for an OpenAI API compatible backend with the openai provider.
   base_url: http://localhost::11434
   # Required if gemini or openai
-  api_key: "{FRIGATE_GENAI_API_KEY}"
+  api_key: "{SECURITY_GENAI_API_KEY}"
   # Required: The model to use with the provider.
   model: gemini-1.5-flash
   # Optional additional args to pass to the GenAI Provider (default: None)
@@ -773,8 +773,8 @@ cameras:
       # Required: A list of input streams for the camera. See documentation for more information.
       inputs:
         # Required: the path to the stream
-        # NOTE: path may include environment variables or docker secrets, which must begin with 'FRIGATE_' and be referenced in {}
-        - path: rtsp://viewer:{FRIGATE_RTSP_PASSWORD}@10.0.10.10:554/cam/realmonitor?channel=1&subtype=2
+        # NOTE: path may include environment variables or docker secrets, which must begin with 'SECURITY_' and be referenced in {}
+        - path: rtsp://viewer:{SECURITY_RTSP_PASSWORD}@10.0.10.10:554/cam/realmonitor?channel=1&subtype=2
           # Required: list of roles for this stream. valid values are: audio,detect,record
           # NOTICE: In addition to assigning the audio, detect, and record roles
           # they must also be enabled in the camera config.

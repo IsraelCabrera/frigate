@@ -4,7 +4,7 @@ import json
 import os
 from typing import Any
 
-base_path = os.environ.get("FRIGATE_BASE_PATH", "")
+base_path = os.environ.get("SECURITY_BASE_PATH", "")
 
 result: dict[str, Any] = {"base_path": base_path}
 

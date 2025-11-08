@@ -184,8 +184,10 @@ RUN pip3 install -r /requirements.txt
 
 # Build pysqlite3 from source
 COPY docker/main/build_pysqlite3.sh /build_pysqlite3.sh
-RUN /build_pysqlite3.sh
+RUN /build_pysqlite3.sh && \
+    mkdir /pips
 
+COPY resources/*.whl /pips/
 COPY docker/main/requirements-wheels.txt /requirements-wheels.txt
 RUN pip3 wheel --wheel-dir=/wheels -r /requirements-wheels.txt && \
     if [ "$DEBUG" = "true" ]; then \
@@ -193,7 +195,6 @@ RUN pip3 wheel --wheel-dir=/wheels -r /requirements-wheels.txt && \
     fi
 
 # Install HailoRT & Wheels
-#TODO: copy the hailort files
 RUN --mount=type=bind,source=docker/main/install_hailort.sh,target=/deps/install_hailort.sh \
     /deps/install_hailort.sh
 
@@ -252,13 +253,14 @@ ENV INCLUDED_FFMPEG_VERSIONS="${DEFAULT_FFMPEG_VERSION}:5.0"
 
 RUN wget -q https://bootstrap.pypa.io/get-pip.py -O get-pip.py \
     && sed -i 's/args.append("setuptools")/args.append("setuptools==77.0.3")/' get-pip.py \
-    && python3 get-pip.py "pip"
+    && python3 get-pip.py "pip" \
+    && mkdir /pips
 
 RUN --mount=type=bind,from=wheels,source=/wheels,target=/deps/wheels \
     pip3 install -U /deps/wheels/*.whl
 
 # Install MemryX runtime (requires libgomp (OpenMP) in the final docker image)
-COPY ./resources/mxaccl.zip /tmp/mxaccl.zip
+COPY ./resources/mxaccl.zip /pips/mxaccl.zip
 RUN --mount=type=bind,source=docker/main/install_memryx.sh,target=/deps/install_memryx.sh \
     bash -c "bash /deps/install_memryx.sh"
 

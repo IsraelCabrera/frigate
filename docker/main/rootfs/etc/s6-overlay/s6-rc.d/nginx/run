@@ -75,11 +75,11 @@ mkdir -p $letsencrypt_path
 if [ ! \( -f "$letsencrypt_path/privkey.pem" -a -f "$letsencrypt_path/fullchain.pem" \) ]; then
     echo "[INFO] No TLS certificate found. Generating a self signed certificate..."
     openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 \
-        -subj "/O=FRIGATE DEFAULT CERT/CN=*" \
+        -subj "/O=SECURITY DEFAULT CERT/CN=*" \
         -keyout "$letsencrypt_path/privkey.pem" -out "$letsencrypt_path/fullchain.pem" 2>/dev/null
 fi
 
-# build templates for optional FRIGATE_BASE_PATH environment variable
+# build templates for optional SECURITY_BASE_PATH environment variable
 python3 /usr/local/nginx/get_base_path.py | \
     tempio -template /usr/local/nginx/templates/base_path.gotmpl \
        -out /usr/local/nginx/conf/base_path.conf

@@ -95,7 +95,7 @@ docker run -d \
   -v /path/to/your/config:/config \
   -v /etc/localtime:/etc/localtime:ro \
   -v /path/to/local/log/dir:/dev/shm/logs \
-  -e FRIGATE_RTSP_PASSWORD='password' \
+  -e SECURITY_RTSP_PASSWORD='password' \
   -p 5000:5000 \
   -p 8554:8554 \
   -p 8555:8555/tcp \

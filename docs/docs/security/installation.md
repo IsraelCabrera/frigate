@@ -7,7 +7,7 @@ Frigate is a Docker container that can be run on any Docker host including as a 
 
 :::tip
 
-If you already have Frigate installed as a Home Assistant Add-on, check out the [getting started guide](../guides/getting_started#configuring-frigate) to configure Frigate.
+If you already have Frigate installed as a Home Assistant Add-on, check out the [getting started guide](../guides/getting_started#configuring-security) to configure Frigate.
 
 :::
 
@@ -28,9 +28,9 @@ Windows is not officially supported, but some users have had success getting it 
 Frigate uses the following locations for read/write operations in the container. Docker volume mappings can be used to map these to any location on your host machine.
 
 - `/config`: Used to store the Frigate config file and sqlite database. You will also see a few files alongside the database file while Frigate is running.
-- `/media/frigate/clips`: Used for snapshot storage. In the future, it will likely be renamed from `clips` to `snapshots`. The file structure here cannot be modified and isn't intended to be browsed or managed manually.
-- `/media/frigate/recordings`: Internal system storage for recording segments. The file structure here cannot be modified and isn't intended to be browsed or managed manually.
-- `/media/frigate/exports`: Storage for clips and timelapses that have been exported via the WebUI or API.
+- `/media/security/clips`: Used for snapshot storage. In the future, it will likely be renamed from `clips` to `snapshots`. The file structure here cannot be modified and isn't intended to be browsed or managed manually.
+- `/media/security/recordings`: Internal system storage for recording segments. The file structure here cannot be modified and isn't intended to be browsed or managed manually.
+- `/media/security/exports`: Storage for clips and timelapses that have been exported via the WebUI or API.
 - `/tmp/cache`: Cache location for recording segments. Initial recordings are written here before being checked and converted to mp4 and moved to the recordings folder. Segments generated via the `clip.mp4` endpoints are also concatenated and processed here. It is recommended to use a [`tmpfs`](https://docs.docker.com/storage/tmpfs/) mount for this.
 - `/dev/shm`: Internal cache for raw decoded frames in shared memory. It is not recommended to modify this directory or map it with docker. The minimum size is impacted by the `shm-size` calculations below.
 
@@ -51,11 +51,11 @@ Writing to a local disk or external USB drive:
 
 ```yaml
 services:
-  frigate:
+  security:
     ...
     volumes:
       - /path/to/your/config:/config
-      - /path/to/your/storage:/media/frigate
+      - /path/to/your/storage:/media/security
       - type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
         target: /tmp/cache
         tmpfs:
@@ -111,13 +111,13 @@ For Raspberry Pi 5 users with the AI Kit, installation is straightforward. Simpl
 For other installations, follow these steps for installation:
 
 1. Install the driver from the [Hailo GitHub repository](https://github.com/hailo-ai/hailort-drivers). A convenient script for Linux is available to clone the repository, build the driver, and install it.
-2. Copy or download [this script](https://github.com/blakeblackshear/frigate/blob/dev/docker/hailo8l/user_installation.sh).
+2. Copy or download [this script](https://github.com/blakeblackshear/security/blob/dev/docker/hailo8l/user_installation.sh).
 3. Ensure it has execution permissions with `sudo chmod +x user_installation.sh`
 4. Run the script with `./user_installation.sh`
 
 #### Setup
 
-To set up Frigate, follow the default installation instructions, for example: `ghcr.io/blakeblackshear/frigate:stable`
+To set up Frigate, follow the default installation instructions, for example: `ghcr.io/blakeblackshear/security:stable`
 
 Next, grant Docker permissions to access your hardware by adding the following lines to your `docker-compose.yml` file:
 
@@ -149,14 +149,14 @@ To get started with MX3 hardware setup for your system, refer to the [Hardware S
 
 Then follow these steps for installing the correct driver/runtime configuration:
 
-1. Copy or download [this script](https://github.com/blakeblackshear/frigate/blob/dev/docker/memryx/user_installation.sh).
+1. Copy or download [this script](https://github.com/blakeblackshear/security/blob/dev/docker/memryx/user_installation.sh).
 2. Ensure it has execution permissions with `sudo chmod +x user_installation.sh`
 3. Run the script with `./user_installation.sh`
 4. **Restart your computer** to complete driver installation.
 
 #### Setup
 
-To set up Frigate, follow the default installation instructions, for example:   `ghcr.io/blakeblackshear/frigate:stable`
+To set up Frigate, follow the default installation instructions, for example:   `ghcr.io/blakeblackshear/security:stable`
 
 Next, grant Docker permissions to access your hardware by adding the following lines to your `docker-compose.yml` file:
 
@@ -180,15 +180,15 @@ If you can't use Docker Compose, you can run the container with something simila
 
 ```bash
   docker run -d \
-    --name frigate-memx \
+    --name security-memx \
     --restart=unless-stopped \
     --mount type=tmpfs,target=/tmp/cache,tmpfs-size=1000000000 \
     --shm-size=256m \
-    -v /path/to/your/storage:/media/frigate \
+    -v /path/to/your/storage:/media/security \
     -v /path/to/your/config:/config \
     -v /etc/localtime:/etc/localtime:ro \
     -v /run/mxa_manager:/run/mxa_manager \
-    -e FRIGATE_RTSP_PASSWORD='password' \
+    -e SECURITY_RTSP_PASSWORD='password' \
     --privileged=true \
     -p 8971:8971 \
     -p 8554:8554 \
@@ -196,7 +196,7 @@ If you can't use Docker Compose, you can run the container with something simila
     -p 8555:8555/tcp \
     -p 8555:8555/udp \
     --device /dev/memx0 \
-    ghcr.io/blakeblackshear/frigate:stable
+    ghcr.io/blakeblackshear/security:stable
 ```
 
 #### Configuration
@@ -220,7 +220,7 @@ I recommend [Armbian](https://www.armbian.com/download/?arch=aarch64), if your b
 
 #### Setup
 
-Follow Frigate's default installation instructions, but use a docker image with `-rk` suffix for example `ghcr.io/blakeblackshear/frigate:stable-rk`.
+Follow Frigate's default installation instructions, but use a docker image with `-rk` suffix for example `ghcr.io/blakeblackshear/security:stable-rk`.
 
 Next, you need to grant docker permissions to access your hardware:
 
@@ -262,7 +262,7 @@ Next, you should configure [hardware object detection](/configuration/object_det
 
 #### Setup
 
-Follow Frigate's default installation instructions, but use a docker image with `-synaptics` suffix for example `ghcr.io/blakeblackshear/frigate:stable-synaptics`.
+Follow Frigate's default installation instructions, but use a docker image with `-synaptics` suffix for example `ghcr.io/blakeblackshear/security:stable-synaptics`.
 
 Next, you need to grant docker permissions to access your hardware:
 
@@ -293,12 +293,12 @@ Running through Docker with Docker Compose is the recommended install method.
 
 ```yaml
 services:
-  frigate:
-    container_name: frigate
+  security:
+    container_name: security
     privileged: true # this may not be necessary for all setups
     restart: unless-stopped
     stop_grace_period: 30s # allow enough time to shut down the various services
-    image: ghcr.io/blakeblackshear/frigate:stable
+    image: ghcr.io/blakeblackshear/security:stable
     shm_size: "512mb" # update for your cameras based on calculation above
     devices:
       - /dev/bus/usb:/dev/bus/usb # Passes the USB Coral, needs to be modified for other versions
@@ -309,7 +309,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /path/to/your/config:/config
-      - /path/to/your/storage:/media/frigate
+      - /path/to/your/storage:/media/security
       - type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
         target: /tmp/cache
         tmpfs:
@@ -321,29 +321,29 @@ services:
       - "8555:8555/tcp" # WebRTC over tcp
       - "8555:8555/udp" # WebRTC over udp
     environment:
-      FRIGATE_RTSP_PASSWORD: "password"
+      SECURITY_RTSP_PASSWORD: "password"
 ```
 
 If you can't use Docker Compose, you can run the container with something similar to this:
 
 ```bash
 docker run -d \
-  --name frigate \
+  --name security \
   --restart=unless-stopped \
   --stop-timeout 30 \
   --mount type=tmpfs,target=/tmp/cache,tmpfs-size=1000000000 \
   --device /dev/bus/usb:/dev/bus/usb \
   --device /dev/dri/renderD128 \
   --shm-size=64m \
-  -v /path/to/your/storage:/media/frigate \
+  -v /path/to/your/storage:/media/security \
   -v /path/to/your/config:/config \
   -v /etc/localtime:/etc/localtime:ro \
-  -e FRIGATE_RTSP_PASSWORD='password' \
+  -e SECURITY_RTSP_PASSWORD='password' \
   -p 8971:8971 \
   -p 8554:8554 \
   -p 8555:8555/tcp \
   -p 8555:8555/udp \
-  ghcr.io/blakeblackshear/frigate:stable
+  ghcr.io/blakeblackshear/security:stable
 ```
 
 The official docker image tags for the current stable version are:
@@ -374,14 +374,14 @@ There are important limitations in HA OS to be aware of:
 
 :::tip
 
-See [the network storage guide](/guides/ha_network_storage.md) for instructions to setup network storage for frigate.
+See [the network storage guide](/guides/ha_network_storage.md) for instructions to setup network storage for security.
 
 :::
 
 Home Assistant OS users can install via the Add-on repository.
 
 1. In Home Assistant, navigate to _Settings_ > _Add-ons_ > _Add-on Store_ > _Repositories_
-2. Add `https://github.com/blakeblackshear/frigate-hass-addons`
+2. Add `https://github.com/blakeblackshear/security-hass-addons`
 3. Install the desired variant of the Frigate Add-on (see below)
 4. Setup your network configuration in the `Configuration` tab
 5. Start the Add-on
@@ -402,12 +402,12 @@ You can also edit the Frigate configuration file through the [VS Code Add-on](ht
 
 ## Kubernetes
 
-Use the [helm chart](https://github.com/blakeblackshear/blakeshome-charts/tree/master/charts/frigate).
+Use the [helm chart](https://github.com/blakeblackshear/blakeshome-charts/tree/master/charts/security).
 
 ## Unraid
 
 Many people have powerful enough NAS devices or home servers to also run docker. There is a Unraid Community App.
-To install make sure you have the [community app plugin here](https://forums.unraid.net/topic/38582-plug-in-community-applications/). Then search for "Frigate" in the apps section within Unraid - you can see the online store [here](https://unraid.net/community/apps?q=frigate#r)
+To install make sure you have the [community app plugin here](https://forums.unraid.net/topic/38582-plug-in-community-applications/). Then search for "Frigate" in the apps section within Unraid - you can see the online store [here](https://unraid.net/community/apps?q=security#r)
 
 ## Proxmox
 
@@ -426,15 +426,15 @@ Suggestions include:
   - `lxc.mount.entry: /dev/dri/renderD128 dev/dri/renderD128 none bind,optional,create=file`
 - The LXC configuration will likely also need `features: fuse=1,nesting=1`. This allows running a Docker container in an LXC container (`nesting`) and prevents duplicated files and wasted storage (`fuse`).
 - Successfully passing hardware devices through multiple levels of containerization (LXC then Docker) can be difficult. Many people make devices like `/dev/dri/renderD128` world-readable in the host or run Frigate in a privileged LXC container.
-- The virtualization layer often introduces a sizable amount of overhead for communication with Coral devices, but [not in all circumstances](https://github.com/blakeblackshear/frigate/discussions/1837).
+- The virtualization layer often introduces a sizable amount of overhead for communication with Coral devices, but [not in all circumstances](https://github.com/blakeblackshear/security/discussions/1837).
 
-See the [Proxmox LXC discussion](https://github.com/blakeblackshear/frigate/discussions/5773) for more general information.
+See the [Proxmox LXC discussion](https://github.com/blakeblackshear/security/discussions/5773) for more general information.
 
 ## ESXi
 
-For details on running Frigate using ESXi, please see the instructions [here](https://williamlam.com/2023/05/frigate-nvr-with-coral-tpu-igpu-passthrough-using-esxi-on-intel-nuc.html).
+For details on running Frigate using ESXi, please see the instructions [here](https://williamlam.com/2023/05/security-nvr-with-coral-tpu-igpu-passthrough-using-esxi-on-intel-nuc.html).
 
-If you're running Frigate on a rack mounted server and want to passthrough the Google Coral, [read this.](https://github.com/blakeblackshear/frigate/issues/305)
+If you're running Frigate on a rack mounted server and want to passthrough the Google Coral, [read this.](https://github.com/blakeblackshear/security/issues/305)
 
 ## Synology NAS on DSM 7
 
@@ -442,7 +442,7 @@ These settings were tested on DSM 7.1.1-42962 Update 4
 
 **General:**
 
-The `Execute container using high privilege` option needs to be enabled in order to give the frigate container the elevated privileges it may need.
+The `Execute container using high privilege` option needs to be enabled in order to give the security container the elevated privileges it may need.
 
 The `Enable auto-restart` option can be enabled if you want the container to automatically restart whenever it improperly shuts down due to an error.
 
@@ -450,15 +450,15 @@ The `Enable auto-restart` option can be enabled if you want the container to aut
 
 **Advanced Settings:**
 
-If you want to use the password template feature, you should add the "FRIGATE_RTSP_PASSWORD" environment variable and set it to your preferred password under advanced settings. The rest of the environment variables should be left as default for now.
+If you want to use the password template feature, you should add the "SECURITY_RTSP_PASSWORD" environment variable and set it to your preferred password under advanced settings. The rest of the environment variables should be left as default for now.
 
 ![image](https://user-images.githubusercontent.com/4516296/232587163-0eb662d4-5e28-4914-852f-9db1ec4b9c3d.png)
 
 **Port Settings:**
 
-The network mode should be set to `bridge`. You need to map the default frigate container ports to your local Synology NAS ports that you want to use to access Frigate.
+The network mode should be set to `bridge`. You need to map the default security container ports to your local Synology NAS ports that you want to use to access Frigate.
 
-There may be other services running on your NAS that are using the same ports that frigate uses. In that instance you can set the ports to auto or a specific port.
+There may be other services running on your NAS that are using the same ports that security uses. In that instance you can set the ports to auto or a specific port.
 
 ![image](https://user-images.githubusercontent.com/4516296/232582642-773c0e37-7ef5-4373-8ce3-41401b1626e6.png)
 
@@ -466,8 +466,8 @@ There may be other services running on your NAS that are using the same ports th
 
 You need to configure 2 paths:
 
-- The location of your config directory which will be different depending on your NAS folder structure e.g. `/docker/frigate/config` will mount to `/config` within the container.
-- The location on your NAS where the recordings will be saved this needs to be a folder e.g. `/docker/volumes/frigate-0-media`
+- The location of your config directory which will be different depending on your NAS folder structure e.g. `/docker/security/config` will mount to `/config` within the container.
+- The location on your NAS where the recordings will be saved this needs to be a folder e.g. `/docker/volumes/security-0-media`
 
 ![image](https://user-images.githubusercontent.com/4516296/232585872-44431d15-55e0-4004-b78b-1e512702b911.png)
 
@@ -487,7 +487,7 @@ Because of above limitations, the installation has to be done from command line.
 1. Install Container Station from QNAP App Center if it is not installed.
 2. Enable ssh on your QNAP (please do an Internet search on how to do this).
 3. Prepare Frigate config file, name it `config.yml`.
-4. Calculate shared memory size according to [documentation](https://docs.frigate.video/frigate/installation).
+4. Calculate shared memory size according to [documentation](https://docs.security.video/security/installation).
 5. Find your time zone value from https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 6. ssh to QNAP.
 
@@ -497,31 +497,31 @@ Run the following commands to install Frigate (using `stable` version as example
 
 ```shell
 # Download Frigate image
-docker pull ghcr.io/blakeblackshear/frigate:stable
+docker pull ghcr.io/blakeblackshear/security:stable
 # Create directory to host Frigate config file on QNAP file system.
 # E.g., you can choose to create it under /share/Container.
-mkdir -p /share/Container/frigate/config
+mkdir -p /share/Container/security/config
 # Copy the config file prepared in step 2 into the newly created config directory.
-cp path/to/your/config/file /share/Container/frigate/config
+cp path/to/your/config/file /share/Container/security/config
 # Create directory to host Frigate media files on QNAP file system.
 # (if you have a surveillance disk, create media directory on the surveillance disk.
 # Example command assumes share_vol2 is the surveillance drive
-mkdir -p /share/share_vol2/frigate/media
+mkdir -p /share/share_vol2/security/media
 # Create Frigate docker container.  Replace shm-size value with the value from preparation step 3.
 # Also replace the time zone value for 'TZ' in the sample command.
 # Example command will create a docker container that uses at most 2 CPUs and 4G RAM.
 # You may need to add "--env=LIBVA_DRIVER_NAME=i965 \" to the following docker run command if you
-# have certain CPU (e.g., J4125). See https://docs.frigate.video/configuration/hardware_acceleration_video.
+# have certain CPU (e.g., J4125). See https://docs.security.video/configuration/hardware_acceleration_video.
 docker run \
-  --name=frigate \
+  --name=security \
   --shm-size=256m \
   --restart=unless-stopped \
   --env=TZ=America/New_York \
-  --volume=/share/Container/frigate/config:/config:rw \
-  --volume=/share/share_vol2/frigate/media:/media/frigate:rw \
+  --volume=/share/Container/security/config:/config:rw \
+  --volume=/share/share_vol2/security/media:/media/security:rw \
   --network=bridge \
   --privileged \
-  --workdir=/opt/frigate \
+  --workdir=/opt/security \
   -p 8971:8971 \
   -p 8554:8554 \
   -p 8555:8555 \
@@ -532,7 +532,7 @@ docker run \
   --cpus="2" \
   --detach=true \
   -t \
-  ghcr.io/blakeblackshear/frigate:stable
+  ghcr.io/blakeblackshear/security:stable
 ```
 
 Log into QNAP, open Container Station. Frigate docker container should be listed under 'Overview' and running. Visit Frigate Web UI by clicking Frigate docker, and then clicking the URL shown at the top of the detail page.

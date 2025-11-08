@@ -114,7 +114,7 @@ This is set in `$server` and `$port` this should match your ports you have expos
 
 server {
   set $forward_scheme http;
-  set $server         "192.168.100.2"; # FRIGATE SERVER LOCATION
+  set $server         "192.168.100.2"; # SECURITY SERVER LOCATION
   set $port           8971;
 
   listen 80;
