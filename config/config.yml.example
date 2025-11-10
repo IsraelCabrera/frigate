@@ -1,16 +1,119 @@
 mqtt:
-  host: mqtt
+  host: 10.73.19.192
+  user: mqttclient
+  password: mqttclient
+
+tls:
+  enabled: false
+
+auth:
+  enabled: true
+
+# detectors:
+#   coral:
+#     type: edgetpu
+#     device: usb
+
+face_recognition:
+  enabled: true
+
+lpr:
+  enabled: true
 
 cameras:
-  test:
+  office:
+    enabled: true
     ffmpeg:
       inputs:
-        - path: /media/security/car-stopping.mp4
-          input_args: -re -stream_loop -1 -fflags +genpts
+        - path: rtsp://omoikane:k4m1z4m4@10.73.19.171:554/stream1
+          roles: []
+
+  cerco:
+    enabled: true
+    ffmpeg:
+      inputs:
+        - path: rtsp://omoikane:k4m1z4m4@10.73.19.182:554/stream1
+          roles: []
+        - path: rtsp://omoikane:k4m1z4m4@10.73.19.182:554/stream2
           roles:
             - detect
-            - rtmp
     detect:
-      height: 1080
-      width: 1920
-      fps: 5
+      enabled: true
+    face_recognition:
+      enabled: true
+    review:
+      alerts:
+        labels:
+          - cat
+          - dog
+          - person
+      detections:
+        labels:
+          - dog
+          - cat
+          - person
+
+  garage:
+    enabled: true
+    ffmpeg:
+      inputs:
+        - path: rtsp://omoikane:k4m1z4m4@10.73.19.183:554/stream1
+          roles: []
+        - path: rtsp://omoikane:k4m1z4m4@10.73.19.183:554/stream2
+          roles:
+            - detect
+    detect:
+      enabled: true
+    lpr:
+      enabled: true
+    face_recognition:
+      enabled: true
+    review:
+      alerts:
+        labels:
+          - cat
+          - dog
+          - person
+      detections:
+        labels:
+          - cat
+          - dog
+          - person
+
+  Livingroom:
+    enabled: true
+    ffmpeg:
+      inputs:
+        - path: rtsp://omoikane:k4m1z4m4@10.73.19.103/stream1
+          roles:
+            - detect
+    detect:
+      enabled: true
+    face_recognition:
+      enabled: true
+    review:
+      detections:
+        labels:
+          - cat
+          - dog
+          - person
+      alerts:
+        labels:
+          - cat
+          - dog
+          - person
+
+  # test:
+  #   ffmpeg:
+  #     inputs:
+  #       - path: /media/security/car-stopping.mp4
+  #         input_args: -re -stream_loop -1 -fflags +genpts
+  #         roles:
+  #           - detect
+  #           - rtmp
+  #   detect:
+  #     height: 1080
+  #     width: 1920
+  #     fps: 5
+
+version: 0.17-0
