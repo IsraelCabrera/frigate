@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-# Download the MxAccl for Frigate github release
-#wget https://github.com/memryx/mx_accl_frigate/archive/refs/tags/v2.1.0.zip -O /tmp/mxaccl.zip
+# Download the MxAccl for Security github release
+#wget https://github.com/memryx/mx_accl_security/archive/refs/tags/v2.1.0.zip -O /tmp/mxaccl.zip
 unzip /pips/mxaccl.zip -d /tmp
 mv /tmp/mx_accl_security-2.1.0 /opt/mx_accl_security
 rm /tmp/mxaccl.zip

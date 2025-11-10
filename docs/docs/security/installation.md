@@ -3,31 +3,31 @@ id: installation
 title: Installation
 ---
 
-Frigate is a Docker container that can be run on any Docker host including as a [Home Assistant Add-on](https://www.home-assistant.io/addons/). Note that the Home Assistant Add-on is **not** the same thing as the integration. The [integration](/integrations/home-assistant) is required to integrate Frigate into Home Assistant, whether you are running Frigate as a standalone Docker container or as a Home Assistant Add-on.
+Security is a Docker container that can be run on any Docker host including as a [Home Assistant Add-on](https://www.home-assistant.io/addons/). Note that the Home Assistant Add-on is **not** the same thing as the integration. The [integration](/integrations/home-assistant) is required to integrate Security into Home Assistant, whether you are running Security as a standalone Docker container or as a Home Assistant Add-on.
 
 :::tip
 
-If you already have Frigate installed as a Home Assistant Add-on, check out the [getting started guide](../guides/getting_started#configuring-security) to configure Frigate.
+If you already have Security installed as a Home Assistant Add-on, check out the [getting started guide](../guides/getting_started#configuring-security) to configure Security.
 
 :::
 
 ## Dependencies
 
-**MQTT broker (optional)** - An MQTT broker is optional with Frigate, but is required for the Home Assistant integration. If using Home Assistant, Frigate and Home Assistant must be connected to the same MQTT broker.
+**MQTT broker (optional)** - An MQTT broker is optional with Security, but is required for the Home Assistant integration. If using Home Assistant, Security and Home Assistant must be connected to the same MQTT broker.
 
 ## Preparing your hardware
 
 ### Operating System
 
-Frigate runs best with Docker installed on bare metal Debian-based distributions. For ideal performance, Frigate needs low overhead access to underlying hardware for the Coral and GPU devices. Running Frigate in a VM on top of Proxmox, ESXi, Virtualbox, etc. is not recommended though [some users have had success with Proxmox](#proxmox).
+Security runs best with Docker installed on bare metal Debian-based distributions. For ideal performance, Security needs low overhead access to underlying hardware for the Coral and GPU devices. Running Security in a VM on top of Proxmox, ESXi, Virtualbox, etc. is not recommended though [some users have had success with Proxmox](#proxmox).
 
-Windows is not officially supported, but some users have had success getting it to run under WSL or Virtualbox. Getting the GPU and/or Coral devices properly passed to Frigate may be difficult or impossible. Search previous discussions or issues for help.
+Windows is not officially supported, but some users have had success getting it to run under WSL or Virtualbox. Getting the GPU and/or Coral devices properly passed to Security may be difficult or impossible. Search previous discussions or issues for help.
 
 ### Storage
 
-Frigate uses the following locations for read/write operations in the container. Docker volume mappings can be used to map these to any location on your host machine.
+Security uses the following locations for read/write operations in the container. Docker volume mappings can be used to map these to any location on your host machine.
 
-- `/config`: Used to store the Frigate config file and sqlite database. You will also see a few files alongside the database file while Frigate is running.
+- `/config`: Used to store the Security config file and sqlite database. You will also see a few files alongside the database file while Security is running.
 - `/media/security/clips`: Used for snapshot storage. In the future, it will likely be renamed from `clips` to `snapshots`. The file structure here cannot be modified and isn't intended to be browsed or managed manually.
 - `/media/security/recordings`: Internal system storage for recording segments. The file structure here cannot be modified and isn't intended to be browsed or managed manually.
 - `/media/security/exports`: Storage for clips and timelapses that have been exported via the WebUI or API.
@@ -36,12 +36,12 @@ Frigate uses the following locations for read/write operations in the container.
 
 ### Ports
 
-The following ports are used by Frigate and can be mapped via docker as required.
+The following ports are used by Security and can be mapped via docker as required.
 
 | Port   | Description                                                                                                                                                                |
 | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `8971` | Authenticated UI and API access without TLS. Reverse proxies should use this port.                                                                                         |
-| `5000` | Internal unauthenticated UI and API access. Access to this port should be limited. Intended to be used within the docker network for services that integrate with Frigate. |
+| `5000` | Internal unauthenticated UI and API access. Access to this port should be limited. Intended to be used within the docker network for services that integrate with Security. |
 | `8554` | RTSP restreaming. By default, these streams are unauthenticated. Authentication can be configured in go2rtc section of config.                                             |
 | `8555` | WebRTC connections for cameras with two-way talk support.                                                                                                                  |
 
@@ -71,11 +71,11 @@ Users of the Snapcraft build of Docker cannot use storage locations outside your
 
 ### Calculating required shm-size
 
-Frigate utilizes shared memory to store frames during processing. The default `shm-size` provided by Docker is **64MB**.
+Security utilizes shared memory to store frames during processing. The default `shm-size` provided by Docker is **64MB**.
 
-The default shm size of **128MB** is fine for setups with **2 cameras** detecting at **720p**. If Frigate is exiting with "Bus error" messages, it is likely because you have too many high resolution cameras and you need to specify a higher shm size, using [`--shm-size`](https://docs.docker.com/engine/reference/run/#runtime-constraints-on-resources) (or [`service.shm_size`](https://docs.docker.com/compose/compose-file/compose-file-v2/#shm_size) in Docker Compose).
+The default shm size of **128MB** is fine for setups with **2 cameras** detecting at **720p**. If Security is exiting with "Bus error" messages, it is likely because you have too many high resolution cameras and you need to specify a higher shm size, using [`--shm-size`](https://docs.docker.com/engine/reference/run/#runtime-constraints-on-resources) (or [`service.shm_size`](https://docs.docker.com/compose/compose-file/compose-file-v2/#shm_size) in Docker Compose).
 
-The Frigate container also stores logs in shm, which can take up to **40MB**, so make sure to take this into account in your math as well.
+The Security container also stores logs in shm, which can take up to **40MB**, so make sure to take this into account in your math as well.
 
 You can calculate the **minimum** shm size for each camera with the following formula using the resolution specified for detect:
 
@@ -92,7 +92,7 @@ $ python -c 'print("{:.2f}MB".format(((1280 * 720 * 1.5 * 20 + 270480) / 1048576
 253MB
 ```
 
-The shm size cannot be set per container for Home Assistant add-ons. However, this is probably not required since by default Home Assistant Supervisor allocates `/dev/shm` with half the size of your total memory. If your machine has 8GB of memory, chances are that Frigate will have access to up to 4GB without any additional configuration.
+The shm size cannot be set per container for Home Assistant add-ons. However, this is probably not required since by default Home Assistant Supervisor allocates `/dev/shm` with half the size of your total memory. If your machine has 8GB of memory, chances are that Security will have access to up to 4GB without any additional configuration.
 
 ### Raspberry Pi 3/4
 
@@ -117,7 +117,7 @@ For other installations, follow these steps for installation:
 
 #### Setup
 
-To set up Frigate, follow the default installation instructions, for example: `ghcr.io/blakeblackshear/security:stable`
+To set up Security, follow the default installation instructions, for example: `ghcr.io/blakeblackshear/security:stable`
 
 Next, grant Docker permissions to access your hardware by adding the following lines to your `docker-compose.yml` file:
 
@@ -156,7 +156,7 @@ Then follow these steps for installing the correct driver/runtime configuration:
 
 #### Setup
 
-To set up Frigate, follow the default installation instructions, for example:   `ghcr.io/blakeblackshear/security:stable`
+To set up Security, follow the default installation instructions, for example:   `ghcr.io/blakeblackshear/security:stable`
 
 Next, grant Docker permissions to access your hardware by adding the following lines to your `docker-compose.yml` file:
 
@@ -220,7 +220,7 @@ I recommend [Armbian](https://www.armbian.com/download/?arch=aarch64), if your b
 
 #### Setup
 
-Follow Frigate's default installation instructions, but use a docker image with `-rk` suffix for example `ghcr.io/blakeblackshear/security:stable-rk`.
+Follow Security's default installation instructions, but use a docker image with `-rk` suffix for example `ghcr.io/blakeblackshear/security:stable-rk`.
 
 Next, you need to grant docker permissions to access your hardware:
 
@@ -262,7 +262,7 @@ Next, you should configure [hardware object detection](/configuration/object_det
 
 #### Setup
 
-Follow Frigate's default installation instructions, but use a docker image with `-synaptics` suffix for example `ghcr.io/blakeblackshear/security:stable-synaptics`.
+Follow Security's default installation instructions, but use a docker image with `-synaptics` suffix for example `ghcr.io/blakeblackshear/security:stable-synaptics`.
 
 Next, you need to grant docker permissions to access your hardware:
 
@@ -348,15 +348,15 @@ docker run -d \
 
 The official docker image tags for the current stable version are:
 
-- `stable` - Standard Frigate build for amd64 & RPi Optimized Frigate build for arm64. This build includes support for Hailo devices as well.
-- `stable-standard-arm64` - Standard Frigate build for arm64
-- `stable-tensorrt` - Frigate build specific for amd64 devices running an nvidia GPU
-- `stable-rocm` - Frigate build for [AMD GPUs](../configuration/object_detectors.md#amdrocm-gpu-detector)
+- `stable` - Standard Security build for amd64 & RPi Optimized Security build for arm64. This build includes support for Hailo devices as well.
+- `stable-standard-arm64` - Standard Security build for arm64
+- `stable-tensorrt` - Security build specific for amd64 devices running an nvidia GPU
+- `stable-rocm` - Security build for [AMD GPUs](../configuration/object_detectors.md#amdrocm-gpu-detector)
 
 The community supported docker image tags for the current stable version are:
 
-- `stable-tensorrt-jp6` - Frigate build optimized for nvidia Jetson devices running Jetpack 6
-- `stable-rk` - Frigate build for SBCs with Rockchip SoC
+- `stable-tensorrt-jp6` - Security build optimized for nvidia Jetson devices running Jetpack 6
+- `stable-rk` - Security build for SBCs with Rockchip SoC
 
 ## Home Assistant Add-on
 
@@ -382,23 +382,23 @@ Home Assistant OS users can install via the Add-on repository.
 
 1. In Home Assistant, navigate to _Settings_ > _Add-ons_ > _Add-on Store_ > _Repositories_
 2. Add `https://github.com/blakeblackshear/security-hass-addons`
-3. Install the desired variant of the Frigate Add-on (see below)
+3. Install the desired variant of the Security Add-on (see below)
 4. Setup your network configuration in the `Configuration` tab
 5. Start the Add-on
-6. Use the _Open Web UI_ button to access the Frigate UI, then click in the _cog icon_ > _Configuration editor_ and configure Frigate to your liking
+6. Use the _Open Web UI_ button to access the Security UI, then click in the _cog icon_ > _Configuration editor_ and configure Security to your liking
 
 There are several variants of the Add-on available:
 
 | Add-on Variant             | Description                                                |
 | -------------------------- | ---------------------------------------------------------- |
-| Frigate                    | Current release with protection mode on                    |
-| Frigate (Full Access)      | Current release with the option to disable protection mode |
-| Frigate Beta               | Beta release with protection mode on                       |
-| Frigate Beta (Full Access) | Beta release with the option to disable protection mode    |
+| Security                    | Current release with protection mode on                    |
+| Security (Full Access)      | Current release with the option to disable protection mode |
+| Security Beta               | Beta release with protection mode on                       |
+| Security Beta (Full Access) | Beta release with the option to disable protection mode    |
 
-If you are using hardware acceleration for ffmpeg, you **may** need to use the _Full Access_ variant of the Add-on. This is because the Frigate Add-on runs in a container with limited access to the host system. The _Full Access_ variant allows you to disable _Protection mode_ and give Frigate full access to the host system.
+If you are using hardware acceleration for ffmpeg, you **may** need to use the _Full Access_ variant of the Add-on. This is because the Security Add-on runs in a container with limited access to the host system. The _Full Access_ variant allows you to disable _Protection mode_ and give Security full access to the host system.
 
-You can also edit the Frigate configuration file through the [VS Code Add-on](https://github.com/hassio-addons/addon-vscode) or similar. In that case, the configuration file will be at `/addon_configs/<addon_directory>/config.yml`, where `<addon_directory>` is specific to the variant of the Frigate Add-on you are running. See the list of directories [here](../configuration/index.md#accessing-add-on-config-dir).
+You can also edit the Security configuration file through the [VS Code Add-on](https://github.com/hassio-addons/addon-vscode) or similar. In that case, the configuration file will be at `/addon_configs/<addon_directory>/config.yml`, where `<addon_directory>` is specific to the variant of the Security Add-on you are running. See the list of directories [here](../configuration/index.md#accessing-add-on-config-dir).
 
 ## Kubernetes
 
@@ -407,15 +407,15 @@ Use the [helm chart](https://github.com/blakeblackshear/blakeshome-charts/tree/m
 ## Unraid
 
 Many people have powerful enough NAS devices or home servers to also run docker. There is a Unraid Community App.
-To install make sure you have the [community app plugin here](https://forums.unraid.net/topic/38582-plug-in-community-applications/). Then search for "Frigate" in the apps section within Unraid - you can see the online store [here](https://unraid.net/community/apps?q=security#r)
+To install make sure you have the [community app plugin here](https://forums.unraid.net/topic/38582-plug-in-community-applications/). Then search for "Security" in the apps section within Unraid - you can see the online store [here](https://unraid.net/community/apps?q=security#r)
 
 ## Proxmox
 
-[According to Proxmox documentation](https://pve.proxmox.com/pve-docs/pve-admin-guide.html#chapter_pct) it is recommended that you run application containers like Frigate inside a Proxmox QEMU VM. This will give you all the advantages of application containerization, while also providing the benefits that VMs offer, such as strong isolation from the host and the ability to live-migrate, which otherwise isn’t possible with containers.
+[According to Proxmox documentation](https://pve.proxmox.com/pve-docs/pve-admin-guide.html#chapter_pct) it is recommended that you run application containers like Security inside a Proxmox QEMU VM. This will give you all the advantages of application containerization, while also providing the benefits that VMs offer, such as strong isolation from the host and the ability to live-migrate, which otherwise isn’t possible with containers.
 
 :::warning
 
-If you choose to run Frigate via LXC in Proxmox the setup can be complex so be prepared to read the Proxmox and LXC documentation, Frigate does not officially support running inside of an LXC.
+If you choose to run Security via LXC in Proxmox the setup can be complex so be prepared to read the Proxmox and LXC documentation, Security does not officially support running inside of an LXC.
 
 :::
 
@@ -425,16 +425,16 @@ Suggestions include:
   - `lxc.cgroup2.devices.allow: c 226:128 rwm`
   - `lxc.mount.entry: /dev/dri/renderD128 dev/dri/renderD128 none bind,optional,create=file`
 - The LXC configuration will likely also need `features: fuse=1,nesting=1`. This allows running a Docker container in an LXC container (`nesting`) and prevents duplicated files and wasted storage (`fuse`).
-- Successfully passing hardware devices through multiple levels of containerization (LXC then Docker) can be difficult. Many people make devices like `/dev/dri/renderD128` world-readable in the host or run Frigate in a privileged LXC container.
+- Successfully passing hardware devices through multiple levels of containerization (LXC then Docker) can be difficult. Many people make devices like `/dev/dri/renderD128` world-readable in the host or run Security in a privileged LXC container.
 - The virtualization layer often introduces a sizable amount of overhead for communication with Coral devices, but [not in all circumstances](https://github.com/blakeblackshear/security/discussions/1837).
 
 See the [Proxmox LXC discussion](https://github.com/blakeblackshear/security/discussions/5773) for more general information.
 
 ## ESXi
 
-For details on running Frigate using ESXi, please see the instructions [here](https://williamlam.com/2023/05/security-nvr-with-coral-tpu-igpu-passthrough-using-esxi-on-intel-nuc.html).
+For details on running Security using ESXi, please see the instructions [here](https://williamlam.com/2023/05/security-nvr-with-coral-tpu-igpu-passthrough-using-esxi-on-intel-nuc.html).
 
-If you're running Frigate on a rack mounted server and want to passthrough the Google Coral, [read this.](https://github.com/blakeblackshear/security/issues/305)
+If you're running Security on a rack mounted server and want to passthrough the Google Coral, [read this.](https://github.com/blakeblackshear/security/issues/305)
 
 ## Synology NAS on DSM 7
 
@@ -456,7 +456,7 @@ If you want to use the password template feature, you should add the "SECURITY_R
 
 **Port Settings:**
 
-The network mode should be set to `bridge`. You need to map the default security container ports to your local Synology NAS ports that you want to use to access Frigate.
+The network mode should be set to `bridge`. You need to map the default security container ports to your local Synology NAS ports that you want to use to access Security.
 
 There may be other services running on your NAS that are using the same ports that security uses. In that instance you can set the ports to auto or a specific port.
 
@@ -475,10 +475,10 @@ You need to configure 2 paths:
 
 These instructions were tested on a QNAP with an Intel J3455 CPU and 16G RAM, running QTS 4.5.4.2117.
 
-QNAP has a graphic tool named Container Station to install and manage docker containers. However, there are two limitations with Container Station that make it unsuitable to install Frigate:
+QNAP has a graphic tool named Container Station to install and manage docker containers. However, there are two limitations with Container Station that make it unsuitable to install Security:
 
-1. Container Station does not incorporate GitHub Container Registry (ghcr), which hosts Frigate docker image version 0.12.0 and above.
-2. Container Station uses default 64 Mb shared memory size (shm-size), and does not have a mechanism to adjust it. Frigate requires a larger shm-size to be able to work properly with more than two high resolution cameras.
+1. Container Station does not incorporate GitHub Container Registry (ghcr), which hosts Security docker image version 0.12.0 and above.
+2. Container Station uses default 64 Mb shared memory size (shm-size), and does not have a mechanism to adjust it. Security requires a larger shm-size to be able to work properly with more than two high resolution cameras.
 
 Because of above limitations, the installation has to be done from command line. Here are the steps:
 
@@ -486,28 +486,28 @@ Because of above limitations, the installation has to be done from command line.
 
 1. Install Container Station from QNAP App Center if it is not installed.
 2. Enable ssh on your QNAP (please do an Internet search on how to do this).
-3. Prepare Frigate config file, name it `config.yml`.
+3. Prepare Security config file, name it `config.yml`.
 4. Calculate shared memory size according to [documentation](https://docs.security.video/security/installation).
 5. Find your time zone value from https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 6. ssh to QNAP.
 
 **Installation**
 
-Run the following commands to install Frigate (using `stable` version as example):
+Run the following commands to install Security (using `stable` version as example):
 
 ```shell
-# Download Frigate image
+# Download Security image
 docker pull ghcr.io/blakeblackshear/security:stable
-# Create directory to host Frigate config file on QNAP file system.
+# Create directory to host Security config file on QNAP file system.
 # E.g., you can choose to create it under /share/Container.
 mkdir -p /share/Container/security/config
 # Copy the config file prepared in step 2 into the newly created config directory.
 cp path/to/your/config/file /share/Container/security/config
-# Create directory to host Frigate media files on QNAP file system.
+# Create directory to host Security media files on QNAP file system.
 # (if you have a surveillance disk, create media directory on the surveillance disk.
 # Example command assumes share_vol2 is the surveillance drive
 mkdir -p /share/share_vol2/security/media
-# Create Frigate docker container.  Replace shm-size value with the value from preparation step 3.
+# Create Security docker container.  Replace shm-size value with the value from preparation step 3.
 # Also replace the time zone value for 'TZ' in the sample command.
 # Example command will create a docker container that uses at most 2 CPUs and 4G RAM.
 # You may need to add "--env=LIBVA_DRIVER_NAME=i965 \" to the following docker run command if you
@@ -535,4 +535,4 @@ docker run \
   ghcr.io/blakeblackshear/security:stable
 ```
 
-Log into QNAP, open Container Station. Frigate docker container should be listed under 'Overview' and running. Visit Frigate Web UI by clicking Frigate docker, and then clicking the URL shown at the top of the detail page.
+Log into QNAP, open Container Station. Security docker container should be listed under 'Overview' and running. Visit Security Web UI by clicking Security docker, and then clicking the URL shown at the top of the detail page.

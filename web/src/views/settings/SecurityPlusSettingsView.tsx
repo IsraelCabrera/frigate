@@ -7,7 +7,7 @@ import ActivityIndicator from "@/components/indicators/activity-indicator";
 import { toast } from "sonner";
 import useSWR from "swr";
 import axios from "axios";
-import { FrigateConfig } from "@/types/securityConfig";
+import { SecurityConfig } from "@/types/securityConfig";
 import { CheckCircle2, XCircle } from "lucide-react";
 import { Trans, useTranslation } from "react-i18next";
 import { IoIosWarning } from "react-icons/io";
@@ -25,7 +25,7 @@ import {
 import { useDocDomain } from "@/hooks/use-doc-domain";
 import { CameraNameLabel } from "@/components/camera/CameraNameLabel";
 
-type FrigatePlusModel = {
+type SecurityPlusModel = {
   id: string;
   type: string;
   name: string;
@@ -37,36 +37,36 @@ type FrigatePlusModel = {
   height: number;
 };
 
-type FrigatePlusSettings = {
+type SecurityPlusSettings = {
   model: {
     id?: string;
   };
 };
 
-type FrigateSettingsViewProps = {
+type SecuritySettingsViewProps = {
   setUnsavedChanges: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function FrigatePlusSettingsView({
+export default function SecurityPlusSettingsView({
   setUnsavedChanges,
-}: FrigateSettingsViewProps) {
+}: SecuritySettingsViewProps) {
   const { t } = useTranslation("views/settings");
   const { getLocaleDocUrl } = useDocDomain();
   const { data: config, mutate: updateConfig } =
-    useSWR<FrigateConfig>("config");
+    useSWR<SecurityConfig>("config");
   const [changedValue, setChangedValue] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const { addMessage, removeMessage } = useContext(StatusBarMessagesContext)!;
 
-  const [securityPlusSettings, setFrigatePlusSettings] =
-    useState<FrigatePlusSettings>({
+  const [securityPlusSettings, setSecurityPlusSettings] =
+    useState<SecurityPlusSettings>({
       model: {
         id: undefined,
       },
     });
 
-  const [origPlusSettings, setOrigPlusSettings] = useState<FrigatePlusSettings>(
+  const [origPlusSettings, setOrigPlusSettings] = useState<SecurityPlusSettings>(
     {
       model: {
         id: undefined,
@@ -75,13 +75,13 @@ export default function FrigatePlusSettingsView({
   );
 
   const { data: availableModels = {} } = useSWR<
-    Record<string, FrigatePlusModel>
+    Record<string, SecurityPlusModel>
   >("/plus/models", {
     fallbackData: {},
     fetcher: async (url) => {
       const res = await axios.get(url, { withCredentials: true });
       return res.data.reduce(
-        (obj: Record<string, FrigatePlusModel>, model: FrigatePlusModel) => {
+        (obj: Record<string, SecurityPlusModel>, model: SecurityPlusModel) => {
           obj[model.id] = model;
           return obj;
         },
@@ -93,7 +93,7 @@ export default function FrigatePlusSettingsView({
   useEffect(() => {
     if (config) {
       if (securityPlusSettings?.model.id == undefined) {
-        setFrigatePlusSettings({
+        setSecurityPlusSettings({
           model: {
             id: config.model.plus?.id,
           },
@@ -110,10 +110,10 @@ export default function FrigatePlusSettingsView({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [config]);
 
-  const handleFrigatePlusConfigChange = (
-    newConfig: Partial<FrigatePlusSettings>,
+  const handleSecurityPlusConfigChange = (
+    newConfig: Partial<SecurityPlusSettings>,
   ) => {
-    setFrigatePlusSettings((prevConfig) => ({
+    setSecurityPlusSettings((prevConfig) => ({
       model: {
         ...prevConfig.model,
         ...newConfig.model,
@@ -170,7 +170,7 @@ export default function FrigatePlusSettingsView({
   }, [updateConfig, addMessage, securityPlusSettings, t]);
 
   const onCancel = useCallback(() => {
-    setFrigatePlusSettings(origPlusSettings);
+    setSecurityPlusSettings(origPlusSettings);
     setChangedValue(false);
     removeMessage("plus_settings", "plus_settings");
   }, [origPlusSettings, removeMessage]);
@@ -338,7 +338,7 @@ export default function FrigatePlusSettingsView({
                           <Select
                             value={securityPlusSettings.model.id}
                             onValueChange={(value) =>
-                              handleFrigatePlusConfigChange({
+                              handleSecurityPlusConfigChange({
                                 model: { id: value as string },
                               })
                             }

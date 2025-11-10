@@ -6,7 +6,7 @@ from security.motion import MotionDetector
 from security.util.image import grab_cv2_contours
 
 
-class FrigateMotionDetector(MotionDetector):
+class SecurityMotionDetector(MotionDetector):
     def __init__(
         self,
         frame_shape,

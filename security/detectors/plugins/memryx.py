@@ -91,18 +91,18 @@ class MemryXDetector(DetectionApi):
         if self.memx_model_type == ModelTypeEnum.yologeneric:
             model_mapping = {
                 (640, 640): (
-                    "https://developer.memryx.com/example_files/2p0_frigate/yolov9_640.zip",
+                    "https://developer.memryx.com/example_files/2p0_security/yolov9_640.zip",
                     "yolov9_640",
                 ),
                 (320, 320): (
-                    "https://developer.memryx.com/example_files/2p0_frigate/yolov9_320.zip",
+                    "https://developer.memryx.com/example_files/2p0_security/yolov9_320.zip",
                     "yolov9_320",
                 ),
             }
             self.model_url, self.model_folder = model_mapping.get(
                 (self.memx_model_height, self.memx_model_width),
                 (
-                    "https://developer.memryx.com/example_files/2p0_frigate/yolov9_320.zip",
+                    "https://developer.memryx.com/example_files/2p0_security/yolov9_320.zip",
                     "yolov9_320",
                 ),
             )
@@ -111,18 +111,18 @@ class MemryXDetector(DetectionApi):
         elif self.memx_model_type == ModelTypeEnum.yolonas:
             model_mapping = {
                 (640, 640): (
-                    "https://developer.memryx.com/example_files/2p0_frigate/yolonas_640.zip",
+                    "https://developer.memryx.com/example_files/2p0_security/yolonas_640.zip",
                     "yolonas_640",
                 ),
                 (320, 320): (
-                    "https://developer.memryx.com/example_files/2p0_frigate/yolonas_320.zip",
+                    "https://developer.memryx.com/example_files/2p0_security/yolonas_320.zip",
                     "yolonas_320",
                 ),
             }
             self.model_url, self.model_folder = model_mapping.get(
                 (self.memx_model_height, self.memx_model_width),
                 (
-                    "https://developer.memryx.com/example_files/2p0_frigate/yolonas_320.zip",
+                    "https://developer.memryx.com/example_files/2p0_security/yolonas_320.zip",
                     "yolonas_320",
                 ),
             )
@@ -132,7 +132,7 @@ class MemryXDetector(DetectionApi):
         elif self.memx_model_type == ModelTypeEnum.yolox:
             self.model_folder = "yolox"
             self.model_url = (
-                "https://developer.memryx.com/example_files/2p0_frigate/yolox.zip"
+                "https://developer.memryx.com/example_files/2p0_security/yolox.zip"
             )
             self.expected_dfp_model = "YOLOX_640_640_3_onnx.dfp"
             self.set_strides_grids()
@@ -140,7 +140,7 @@ class MemryXDetector(DetectionApi):
         elif self.memx_model_type == ModelTypeEnum.ssd:
             self.model_folder = "ssd"
             self.model_url = (
-                "https://developer.memryx.com/example_files/2p0_frigate/ssd.zip"
+                "https://developer.memryx.com/example_files/2p0_security/ssd.zip"
             )
             self.expected_dfp_model = "SSDlite_MobileNet_v2_320_320_3_onnx.dfp"
             self.expected_post_model = "SSDlite_MobileNet_v2_320_320_3_onnx_post.onnx"

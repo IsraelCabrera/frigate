@@ -22,7 +22,7 @@ DETECTOR_KEY = "rknn"
 supported_socs = ["rk3562", "rk3566", "rk3568", "rk3576", "rk3588"]
 
 supported_models = {
-    ModelTypeEnum.yologeneric: "^frigate-fp16-yolov9-[cemst]$",
+    ModelTypeEnum.yologeneric: "^security-fp16-yolov9-[cemst]$",
     ModelTypeEnum.yolonas: "^deci-fp16-yolonas_[sml]$",
     ModelTypeEnum.yolox: "^rock-(fp16|i8)-yolox_(nano|tiny)$",
 }

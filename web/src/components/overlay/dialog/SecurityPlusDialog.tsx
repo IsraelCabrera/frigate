@@ -10,18 +10,18 @@ import { isDesktop, isMobile } from "react-device-detect";
 import { ObjectSnapshotTab } from "../detail/SearchDetailDialog";
 import { cn } from "@/lib/utils";
 
-type FrigatePlusDialogProps = {
+type SecurityPlusDialogProps = {
   upload?: Event;
   dialog?: boolean;
   onClose: () => void;
   onEventUploaded: () => void;
 };
-export function FrigatePlusDialog({
+export function SecurityPlusDialog({
   upload,
   dialog = true,
   onClose,
   onEventUploaded,
-}: FrigatePlusDialogProps) {
+}: SecurityPlusDialogProps) {
   if (!upload) {
     return;
   }
@@ -40,9 +40,9 @@ export function FrigatePlusDialog({
           )}
         >
           <DialogHeader>
-            <DialogTitle className="sr-only">Submit to Frigate+</DialogTitle>
+            <DialogTitle className="sr-only">Submit to Security+</DialogTitle>
             <DialogDescription className="sr-only">
-              Submit this snapshot to Frigate+
+              Submit this snapshot to Security+
             </DialogDescription>
           </DialogHeader>
           <ObjectSnapshotTab

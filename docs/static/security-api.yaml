@@ -2690,9 +2690,9 @@ paths:
     post:
       tags:
         - Events
-      summary: Send event to Frigate+.
+      summary: Send event to Security+.
       description: |-
-        Sends an event to Frigate+.
+        Sends an event to Security+.
             Returns a success message or an error if the event is not found.
       operationId: send_to_plus_events__event_id__plus_post
       parameters:
@@ -2724,10 +2724,10 @@ paths:
     put:
       tags:
         - Events
-      summary: Submit false positive to Frigate+
+      summary: Submit false positive to Security+
       description: |-
-        Submit an event as a false positive to Frigate+.
-            This endpoint is the same as the standard Frigate+ submission endpoint,
+        Submit an event as a false positive to Security+.
+            This endpoint is the same as the standard Security+ submission endpoint,
             but is specifically for marking an event as a false positive.
       operationId: false_positive_events__event_id__false_positive_put
       parameters:

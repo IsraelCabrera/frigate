@@ -326,7 +326,7 @@ export type AllGroupsStreamingSettings = {
   [groupName: string]: GroupStreamingSettings;
 };
 
-export interface FrigateConfig {
+export interface SecurityConfig {
   version: string;
   safe_mode: boolean;
 
