@@ -1,0 +1,29 @@
+services:
+  security:
+    container_name: security
+    restart: unless-stopped
+    stop_grace_period: 30s
+    shm_size: "384mb"
+    image: security:latest
+    devices:
+      - /dev/bus/usb:/dev/bus/usb
+    deploy:
+          resources:
+              reservations:
+                  devices:
+                      - driver: nvidia
+                        count: 1
+                        capabilities: [gpu]
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /dev/bus/usb:/dev/bus/usb
+      - ./config:/config
+      - ./storage:/media/security
+      - type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
+        target: /tmp/cache
+        tmpfs:
+          size: 1000000000
+    ports:
+      - "8971:8971"
+      - "5000:5000"
+      - "8554:8554" # RTSP feeds

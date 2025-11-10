@@ -5,7 +5,7 @@ set -e
 #wget https://github.com/memryx/mx_accl_security/archive/refs/tags/v2.1.0.zip -O /tmp/mxaccl.zip
 unzip /pips/mxaccl.zip -d /tmp
 mv /tmp/mx_accl_security-2.1.0 /opt/mx_accl_security
-rm /tmp/mxaccl.zip
+#rm /pips/mxaccl.zip
 
 # Install Python dependencies
 pip3 install -r /opt/mx_accl_security/freeze
