@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/dialog";
 import { Trans, useTranslation } from "react-i18next";
 import { SecurityConfig } from "@/types/securityConfig";
-import { CameraNameLabel } from "@/components/camera/CameraNameLabel";
+import { CameraNameLabel } from "@/components/camera/FriendlyNameLabel";
 
 type EditRoleCamerasOverlayProps = {
   show: boolean;

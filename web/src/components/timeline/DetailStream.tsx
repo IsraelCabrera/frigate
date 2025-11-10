@@ -15,7 +15,7 @@ import useSWR from "swr";
 import ActivityIndicator from "../indicators/activity-indicator";
 import { Event } from "@/types/event";
 import { getIconForLabel } from "@/utils/iconUtil";
-import { ReviewSegment } from "@/types/review";
+import { REVIEW_PADDING, ReviewSegment } from "@/types/review";
 import { LuChevronDown, LuCircle, LuChevronRight } from "react-icons/lu";
 import { getTranslatedLabel } from "@/utils/i18n";
 import EventMenu from "@/components/timeline/EventMenu";
@@ -26,6 +26,7 @@ import { Link } from "react-router-dom";
 import { Switch } from "@/components/ui/switch";
 import { usePersistence } from "@/hooks/use-persistence";
 import { isDesktop } from "react-device-detect";
+import { resolveZoneName } from "@/hooks/use-zone-friendly-name";
 import { PiSlidersHorizontalBold } from "react-icons/pi";
 import { MdAutoAwesome } from "react-icons/md";
 
@@ -192,7 +193,7 @@ export default function DetailStream({
       <div className="relative flex h-full flex-col">
         <div
           ref={scrollRef}
-          className="scrollbar-container flex-1 overflow-y-auto pb-14"
+          className="scrollbar-container flex-1 overflow-y-auto overflow-x-hidden pb-14"
         >
           <div className="space-y-4 py-2">
             {reviewItems?.length === 0 ? (
@@ -390,8 +391,8 @@ function ReviewGroup({
             )}
           />
         </div>
-        <div className="mr-3 flex w-full justify-between">
-          <div className="ml-1 flex flex-col items-start gap-1.5">
+        <div className="mr-3 grid w-full grid-cols-[1fr_auto] gap-2">
+          <div className="ml-1 flex min-w-0 flex-col gap-1.5">
             <div className="flex flex-row gap-3">
               <div className="text-sm font-medium">{displayTime}</div>
               <div className="relative flex items-center gap-2 text-white">
@@ -407,7 +408,7 @@ function ReviewGroup({
             </div>
             <div className="flex flex-col gap-0.5">
               {review.data.metadata?.title && (
-                <div className="mb-1 flex items-center gap-1 text-sm text-primary-variant">
+                <div className="mb-1 flex min-w-0 items-center gap-1 text-sm text-primary-variant">
                   <MdAutoAwesome className="size-3 shrink-0" />
                   <span className="truncate">{review.data.metadata.title}</span>
                 </div>
@@ -431,7 +432,7 @@ function ReviewGroup({
               e.stopPropagation();
               setOpen((v) => !v);
             }}
-            className="ml-2 inline-flex items-center justify-center rounded p-1 hover:bg-secondary/10"
+            className="inline-flex items-center justify-center self-center rounded p-1 hover:bg-secondary/10"
           >
             {open ? (
               <LuChevronDown className="size-4 text-primary-variant" />
@@ -793,17 +794,29 @@ function ObjectTimeline({
     },
   ]);
 
+  const { data: config } = useSWR<FrigateConfig>("config");
   const timeline = useMemo(() => {
     if (!fullTimeline) {
       return fullTimeline;
     }
 
-    return fullTimeline.filter(
-      (t) =>
-        t.timestamp >= review.start_time &&
-        (review.end_time == undefined || t.timestamp <= review.end_time),
-    );
-  }, [fullTimeline, review]);
+    return fullTimeline
+      .filter(
+        (t) =>
+          t.timestamp >= review.start_time - REVIEW_PADDING &&
+          (review.end_time == undefined ||
+            t.timestamp <= review.end_time + REVIEW_PADDING),
+      )
+      .map((event) => ({
+        ...event,
+        data: {
+          ...event.data,
+          zones_friendly_names: event.data?.zones?.map((zone) =>
+            resolveZoneName(config, zone),
+          ),
+        },
+      }));
+  }, [config, fullTimeline, review]);
 
   if (isValidating && (!timeline || timeline.length === 0)) {
     return <ActivityIndicator className="ml-2 size-3" />;
@@ -811,7 +824,7 @@ function ObjectTimeline({
 
   if (!timeline || timeline.length === 0) {
     return (
-      <div className="py-2 text-sm text-muted-foreground">
+      <div className="ml-8 text-sm text-muted-foreground">
         {t("detail.noObjectDetailData")}
       </div>
     );

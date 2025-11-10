@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/dialog";
 import { useTranslation } from "react-i18next";
 import { SecurityConfig } from "@/types/securityConfig";
-import { CameraNameLabel } from "../camera/CameraNameLabel";
+import { CameraNameLabel } from "../camera/FriendlyNameLabel";
 import { isDesktop, isMobile } from "react-device-detect";
 import { cn } from "@/lib/utils";
 import {

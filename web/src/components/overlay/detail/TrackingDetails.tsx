@@ -23,6 +23,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { getLifecycleItemDescription } from "@/utils/lifecycleUtil";
 import { useTranslation } from "react-i18next";
 import { getTranslatedLabel } from "@/utils/i18n";
+import { resolveZoneName } from "@/hooks/use-zone-friendly-name";
 import { Badge } from "@/components/ui/badge";
 import { HiDotsHorizontal } from "react-icons/hi";
 import axios from "axios";
@@ -72,6 +73,12 @@ export function TrackingDetails({
   ]);
 
   const { data: config } = useSWR<SecurityConfig>("config");
+
+  eventSequence?.map((event) => {
+    event.data.zones_friendly_names = event.data?.zones?.map((zone) => {
+      return resolveZoneName(config, zone);
+    });
+  });
 
   // Use manualOverride (set when seeking in image mode) if present so
   // lifecycle rows and overlays follow image-mode seeks. Otherwise fall
@@ -345,7 +352,8 @@ export function TrackingDetails({
       className={cn(
         isDesktop
           ? "flex size-full justify-evenly gap-4 overflow-hidden"
-          : "flex size-full flex-col gap-2",
+          : "flex flex-col gap-2",
+        !isDesktop && cameraAspect === "tall" && "size-full",
         className,
       )}
     >
@@ -446,7 +454,7 @@ export function TrackingDetails({
         )}
       >
         {isDesktop && tabs && (
-          <div className="mb-4 flex items-center justify-between">
+          <div className="mb-2 flex items-center justify-between">
             <div className="flex-1">{tabs}</div>
           </div>
         )}
@@ -457,7 +465,7 @@ export function TrackingDetails({
         >
           {config?.cameras[event.camera]?.onvif.autotracking
             .enabled_in_config && (
-            <div className="mb-2 text-sm text-danger">
+            <div className="mb-2 ml-3 text-sm text-danger">
               {t("trackingDetails.autoTrackingTips")}
             </div>
           )}
@@ -712,8 +720,13 @@ function LifecycleIconRow({
                             backgroundColor: `rgb(${color})`,
                           }}
                         />
-                        <span className="smart-capitalize">
-                          {zone.replaceAll("_", " ")}
+                        <span
+                          className={cn(
+                            item.data?.zones_friendly_names?.[zidx] === zone &&
+                              "smart-capitalize",
+                          )}
+                        >
+                          {item.data?.zones_friendly_names?.[zidx]}
                         </span>
                       </Badge>
                     );

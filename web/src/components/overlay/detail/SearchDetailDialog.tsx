@@ -34,9 +34,11 @@ import ActivityIndicator from "@/components/indicators/activity-indicator";
 import {
   FaArrowRight,
   FaCheckCircle,
-  FaChevronDown,
   FaChevronLeft,
   FaChevronRight,
+  FaMicrophone,
+  FaCheck,
+  FaTimes,
 } from "react-icons/fa";
 import { TrackingDetails } from "./TrackingDetails";
 import { AnnotationSettingsPane } from "./AnnotationSettingsPane";
@@ -72,7 +74,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import { LuInfo } from "react-icons/lu";
 import { TooltipPortal } from "@radix-ui/react-tooltip";
 import { FaPencilAlt } from "react-icons/fa";
@@ -80,10 +87,11 @@ import TextEntryDialog from "@/components/overlay/dialog/TextEntryDialog";
 import { Trans, useTranslation } from "react-i18next";
 import { useIsAdmin } from "@/hooks/use-is-admin";
 import { getTranslatedLabel } from "@/utils/i18n";
-import { CameraNameLabel } from "@/components/camera/CameraNameLabel";
+import { CameraNameLabel } from "@/components/camera/FriendlyNameLabel";
 import { DialogPortal } from "@radix-ui/react-dialog";
 import { useDetailStream } from "@/context/detail-stream-context";
 import { PiSlidersHorizontalBold } from "react-icons/pi";
+import { HiSparkles } from "react-icons/hi";
 
 const SEARCH_TABS = ["snapshot", "tracking_details"] as const;
 export type SearchTab = (typeof SEARCH_TABS)[number];
@@ -126,7 +134,7 @@ function TabsWithActions({
   return (
     <div className="flex items-center justify-between gap-1">
       <ScrollArea className="flex-1 whitespace-nowrap">
-        <div className="mb-2 flex flex-row md:mb-0">
+        <div className="mb-2 flex flex-row">
           <ToggleGroup
             className="*:rounded-md *:px-3 *:py-4"
             type="single"
@@ -224,6 +232,7 @@ function AnnotationSettings({
   const Overlay = isDesktop ? Popover : Drawer;
   const Trigger = isDesktop ? PopoverTrigger : DrawerTrigger;
   const Content = isDesktop ? PopoverContent : DrawerContent;
+  const Title = isDesktop ? "div" : DrawerTitle;
   const contentProps = isDesktop
     ? { align: "end" as const, container: container ?? undefined }
     : {};
@@ -248,7 +257,9 @@ function AnnotationSettings({
             <PiSlidersHorizontalBold className="size-5" />
           </Button>
         </Trigger>
-
+        <Title className="sr-only">
+          {t("trackingDetails.adjustAnnotationSettings")}
+        </Title>
         <Content
           className={
             isDesktop
@@ -306,7 +317,7 @@ function DialogContentComponent({
   if (page === "tracking_details") {
     return (
       <TrackingDetails
-        className={cn("size-full", !isDesktop && "flex flex-col gap-4")}
+        className={cn(isDesktop ? "size-full" : "flex flex-col gap-4")}
         event={search as unknown as Event}
         tabs={
           isDesktop ? (
@@ -340,7 +351,12 @@ function DialogContentComponent({
       }
     />
   ) : (
-    <div className={cn(!isDesktop ? "mb-4 w-full" : "size-full")}>
+    <div
+      className={cn(
+        "max-w-lg",
+        !isDesktop ? "mb-4 w-full" : "mx-auto size-full",
+      )}
+    >
       <img
         className="w-full select-none rounded-lg object-contain transition-opacity"
         style={
@@ -359,16 +375,11 @@ function DialogContentComponent({
 
   if (isDesktop) {
     return (
-      <div className="flex h-full gap-4 overflow-hidden">
-        <div
-          className={cn(
-            "scrollbar-container flex-[3] overflow-y-hidden",
-            !search.has_snapshot && "flex-[2]",
-          )}
-        >
+      <div className="grid h-full w-full grid-cols-[60%_40%] gap-4">
+        <div className="scrollbar-container min-w-0 overflow-y-auto overflow-x-hidden">
           {snapshotElement}
         </div>
-        <div className="flex flex-col gap-4 overflow-hidden md:basis-2/5">
+        <div className="flex min-w-0 flex-col gap-4 pr-2">
           <TabsWithActions
             search={search}
             searchTabs={searchTabs}
@@ -381,7 +392,7 @@ function DialogContentComponent({
             setIsPopoverOpen={setIsPopoverOpen}
             dialogContainer={dialogContainer}
           />
-          <div className="scrollbar-container flex-1 overflow-y-auto">
+          <div className="scrollbar-container min-w-0 flex-1 overflow-y-auto overflow-x-hidden px-4">
             <ObjectDetailsTab
               search={search}
               config={config}
@@ -584,8 +595,13 @@ export default function SearchDetailDialog({
             "scrollbar-container overflow-y-auto",
             isDesktop &&
               "max-h-[95dvh] sm:max-w-xl md:max-w-4xl lg:max-w-[70%]",
-            isMobile && "px-4",
+            isMobile && "flex h-full flex-col px-4",
           )}
+          onEscapeKeyDown={(event) => {
+            if (isPopoverOpen) {
+              event.preventDefault();
+            }
+          }}
           onInteractOutside={(e) => {
             if (isPopoverOpen) {
               e.preventDefault();
@@ -596,7 +612,7 @@ export default function SearchDetailDialog({
             }
           }}
         >
-          <Header>
+          <Header className={cn(!isDesktop && "top-0 z-[60] mb-0")}>
             <Title>{t("trackedObjectDetails")}</Title>
             <Description className="sr-only">
               {t("trackedObjectDetails")}
@@ -676,6 +692,8 @@ function ObjectDetailsTab({
   const [desc, setDesc] = useState(search?.data.description);
   const [isSubLabelDialogOpen, setIsSubLabelDialogOpen] = useState(false);
   const [isLPRDialogOpen, setIsLPRDialogOpen] = useState(false);
+  const [isEditingDesc, setIsEditingDesc] = useState(false);
+  const originalDescRef = useRef<string | null>(null);
 
   const handleDescriptionFocus = useCallback(() => {
     setInputFocused(true);
@@ -1078,15 +1096,51 @@ function ObjectDetailsTab({
           });
 
       setState("submitted");
-      setSearch({
-        ...search,
-        plus_id: "new_upload",
-      });
+      mutate(
+        (key) =>
+          typeof key === "string" &&
+          (key.includes("events") ||
+            key.includes("events/search") ||
+            key.includes("events/explore")),
+        (currentData: SearchResult[][] | SearchResult[] | undefined) => {
+          if (!currentData) return currentData;
+          // optimistic update
+          return currentData
+            .flat()
+            .map((event) =>
+              event.id === search.id
+                ? { ...event, plus_id: "new_upload" }
+                : event,
+            );
+        },
+        {
+          optimisticData: true,
+          rollbackOnError: true,
+          revalidate: false,
+        },
+      );
     },
-    [search, setSearch],
+    [search, mutate],
   );
 
   const popoverContainerRef = useRef<HTMLDivElement | null>(null);
+  const canRegenerate = !!(
+    config?.cameras[search.camera].objects.genai.enabled && search.end_time
+  );
+  const showGenAIPlaceholder = !!(
+    config?.cameras[search.camera].objects.genai.enabled &&
+    !search.end_time &&
+    (config.cameras[search.camera].objects.genai.required_zones.length === 0 ||
+      search.zones.some((zone) =>
+        config.cameras[search.camera].objects.genai.required_zones.includes(
+          zone,
+        ),
+      )) &&
+    (config.cameras[search.camera].objects.genai.objects.length === 0 ||
+      config.cameras[search.camera].objects.genai.objects.includes(
+        search.label,
+      ))
+  );
   return (
     <div ref={popoverContainerRef} className="flex flex-col gap-5">
       <div className="flex w-full flex-row">
@@ -1242,176 +1296,173 @@ function ObjectDetailsTab({
         </div>
       </div>
 
-      <div
-        className={cn(
-          "my-2 flex w-full flex-col justify-between gap-1.5",
-          state == "submitted" && "flex-row",
-        )}
-      >
-        <div className="text-sm text-primary/40">
-          <div className="flex flex-row items-center gap-1">
-            {t("explore.plus.submitToPlus.label", {
-              ns: "components/dialog",
-            })}
-            <Popover>
-              <PopoverTrigger asChild>
-                <div className="cursor-pointer p-0">
-                  <LuInfo className="size-4" />
-                  <span className="sr-only">Info</span>
-                </div>
-              </PopoverTrigger>
-              <PopoverContent
-                container={popoverContainerRef.current}
-                className="w-80 text-xs"
-              >
-                {t("explore.plus.submitToPlus.desc", {
+      {search.data.type === "object" &&
+        config?.plus?.enabled &&
+        search.has_snapshot && (
+          <div
+            className={cn(
+              "my-2 flex w-full flex-col justify-between gap-1.5",
+              state == "submitted" && "flex-row",
+            )}
+          >
+            <div className="text-sm text-primary/40">
+              <div className="flex flex-row items-center gap-1">
+                {t("explore.plus.submitToPlus.label", {
                   ns: "components/dialog",
                 })}
-              </PopoverContent>
-            </Popover>
-          </div>
-        </div>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <div className="cursor-pointer p-0">
+                      <LuInfo className="size-4" />
+                      <span className="sr-only">Info</span>
+                    </div>
+                  </PopoverTrigger>
+                  <PopoverContent
+                    container={popoverContainerRef.current}
+                    className="w-80 text-xs"
+                  >
+                    {t("explore.plus.submitToPlus.desc", {
+                      ns: "components/dialog",
+                    })}
+                  </PopoverContent>
+                </Popover>
+              </div>
+            </div>
 
-        <div className="flex flex-row items-center justify-between gap-2 text-sm">
-          {state == "reviewing" && (
-            <>
-              <div>
-                {i18n.language === "en" ? (
-                  // English with a/an logic plus label
-                  <>
-                    {/^[aeiou]/i.test(search?.label || "") ? (
-                      <Trans
-                        ns="components/dialog"
-                        values={{ label: search?.label }}
-                      >
-                        explore.plus.review.question.ask_an
-                      </Trans>
+            <div className="flex flex-row items-center justify-between gap-2 text-sm">
+              {state == "reviewing" && (
+                <>
+                  <div>
+                    {i18n.language === "en" ? (
+                      // English with a/an logic plus label
+                      <>
+                        {/^[aeiou]/i.test(search?.label || "") ? (
+                          <Trans
+                            ns="components/dialog"
+                            values={{ label: search?.label }}
+                          >
+                            explore.plus.review.question.ask_an
+                          </Trans>
+                        ) : (
+                          <Trans
+                            ns="components/dialog"
+                            values={{ label: search?.label }}
+                          >
+                            explore.plus.review.question.ask_a
+                          </Trans>
+                        )}
+                      </>
                     ) : (
+                      // For other languages
                       <Trans
                         ns="components/dialog"
-                        values={{ label: search?.label }}
+                        values={{
+                          untranslatedLabel: search?.label,
+                          translatedLabel: getTranslatedLabel(search?.label),
+                        }}
                       >
-                        explore.plus.review.question.ask_a
+                        explore.plus.review.question.ask_full
                       </Trans>
                     )}
-                  </>
-                ) : (
-                  // For other languages
-                  <Trans
-                    ns="components/dialog"
-                    values={{
-                      untranslatedLabel: search?.label,
-                      translatedLabel: getTranslatedLabel(search?.label),
-                    }}
-                  >
-                    explore.plus.review.question.ask_full
-                  </Trans>
-                )}
-              </div>
-              <div className="flex max-w-xl flex-row gap-2">
-                <Button
-                  className="flex-1 bg-success"
-                  aria-label={t("button.yes", { ns: "common" })}
-                  onClick={() => {
-                    setState("uploading");
-                    onSubmitToPlus(false);
-                  }}
-                >
-                  {t("button.yes", { ns: "common" })}
-                </Button>
-                <Button
-                  className="flex-1 text-white"
-                  aria-label={t("button.no", { ns: "common" })}
-                  variant="destructive"
-                  onClick={() => {
-                    setState("uploading");
-                    onSubmitToPlus(true);
-                  }}
-                >
-                  {t("button.no", { ns: "common" })}
-                </Button>
-              </div>
-            </>
-          )}
-          {state == "uploading" && <ActivityIndicator />}
-          {state == "submitted" && (
-            <div className="flex flex-row items-center justify-center gap-2">
-              <FaCheckCircle className="size-4 text-success" />
-              {t("explore.plus.review.state.submitted")}
-            </div>
-          )}
-        </div>
-      </div>
-      <div className="flex flex-col gap-1.5">
-        {config?.cameras[search.camera].objects.genai.enabled &&
-        !search.end_time &&
-        (config.cameras[search.camera].objects.genai.required_zones.length ===
-          0 ||
-          search.zones.some((zone) =>
-            config.cameras[search.camera].objects.genai.required_zones.includes(
-              zone,
-            ),
-          )) &&
-        (config.cameras[search.camera].objects.genai.objects.length === 0 ||
-          config.cameras[search.camera].objects.genai.objects.includes(
-            search.label,
-          )) ? (
-          <>
-            <div className="text-sm text-primary/40">
-              {t("details.description.label")}
-            </div>
-            <div className="flex h-64 flex-col items-center justify-center gap-3 border p-4 text-sm text-primary/40">
-              <div className="flex">
-                <ActivityIndicator />
-              </div>
-              <div className="flex">{t("details.description.aiTips")}</div>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="text-sm text-primary/40"></div>
-            <Textarea
-              className="text-md h-64"
-              placeholder={t("details.description.placeholder")}
-              value={desc}
-              onChange={(e) => setDesc(e.target.value)}
-              onFocus={handleDescriptionFocus}
-              onBlur={handleDescriptionBlur}
-            />
-          </>
-        )}
-
-        <div className="flex w-full flex-row justify-end gap-2">
-          {config?.cameras[search?.camera].audio_transcription.enabled &&
-            search?.label == "speech" &&
-            search?.end_time && (
-              <Button onClick={onTranscribe}>
-                <div className="flex gap-1">
-                  {t("itemMenu.audioTranscription.label")}
+                  </div>
+                  <div className="flex max-w-xl flex-row gap-2">
+                    <Button
+                      className="flex-1 bg-success"
+                      aria-label={t("button.yes", { ns: "common" })}
+                      onClick={() => {
+                        setState("uploading");
+                        onSubmitToPlus(false);
+                      }}
+                    >
+                      {t("button.yes", { ns: "common" })}
+                    </Button>
+                    <Button
+                      className="flex-1 text-white"
+                      aria-label={t("button.no", { ns: "common" })}
+                      variant="destructive"
+                      onClick={() => {
+                        setState("uploading");
+                        onSubmitToPlus(true);
+                      }}
+                    >
+                      {t("button.no", { ns: "common" })}
+                    </Button>
+                  </div>
+                </>
+              )}
+              {state == "uploading" && <ActivityIndicator />}
+              {state == "submitted" && (
+                <div className="flex flex-row items-center justify-center gap-2">
+                  <FaCheckCircle className="size-4 text-success" />
+                  {t("explore.plus.review.state.submitted")}
                 </div>
-              </Button>
-            )}
-          {config?.cameras[search.camera].objects.genai.enabled &&
-            search.end_time && (
-              <div className="flex items-start">
-                <Button
-                  className="rounded-r-none border-r-0"
-                  aria-label={t("details.button.regenerate.label")}
-                  onClick={() => regenerateDescription("thumbnails")}
+              )}
+            </div>
+          </div>
+        )}
+      <div className="flex flex-col gap-1.5">
+        <div className="flex items-center justify-start gap-3">
+          <div className="text-sm text-primary/40">
+            {t("details.description.label")}
+          </div>
+          <div className="flex items-center gap-3">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  aria-label={t("button.edit", { ns: "common" })}
+                  className="text-primary/40 hover:text-primary/80"
+                  onClick={() => {
+                    originalDescRef.current = desc ?? "";
+                    setIsEditingDesc(true);
+                  }}
                 >
-                  {t("details.button.regenerate.title")}
-                </Button>
-                {search.has_snapshot && (
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button
-                        className="rounded-l-none border-l-0 px-2"
-                        aria-label={t("details.expandRegenerationMenu")}
-                      >
-                        <FaChevronDown className="size-3" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
+                  <FaPencilAlt className="size-4" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent>
+                {t("button.edit", { ns: "common" })}
+              </TooltipContent>
+            </Tooltip>
+
+            {config?.cameras[search?.camera].audio_transcription.enabled &&
+              search?.label == "speech" &&
+              search?.end_time && (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <button
+                      aria-label={t("itemMenu.audioTranscription.label")}
+                      className="text-primary/40 hover:text-primary/80"
+                      onClick={onTranscribe}
+                    >
+                      <FaMicrophone className="size-4" />
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    {t("itemMenu.audioTranscription.label")}
+                  </TooltipContent>
+                </Tooltip>
+              )}
+
+            {canRegenerate && (
+              <div className="relative">
+                <DropdownMenu>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <DropdownMenuTrigger asChild>
+                        <button
+                          aria-label={t("details.button.regenerate.label")}
+                          className="text-primary/40 hover:text-primary/80"
+                        >
+                          <HiSparkles className="size-4" />
+                        </button>
+                      </DropdownMenuTrigger>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      {t("details.button.regenerate.title")}
+                    </TooltipContent>
+                  </Tooltip>
+                  <DropdownMenuContent>
+                    {search.has_snapshot && (
                       <DropdownMenuItem
                         className="cursor-pointer"
                         aria-label={t("details.regenerateFromSnapshot")}
@@ -1419,61 +1470,115 @@ function ObjectDetailsTab({
                       >
                         {t("details.regenerateFromSnapshot")}
                       </DropdownMenuItem>
-                      <DropdownMenuItem
-                        className="cursor-pointer"
-                        aria-label={t("details.regenerateFromThumbnails")}
-                        onClick={() => regenerateDescription("thumbnails")}
-                      >
-                        {t("details.regenerateFromThumbnails")}
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                )}
+                    )}
+                    <DropdownMenuItem
+                      className="cursor-pointer"
+                      aria-label={t("details.regenerateFromThumbnails")}
+                      onClick={() => regenerateDescription("thumbnails")}
+                    >
+                      {t("details.regenerateFromThumbnails")}
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             )}
-          {((config?.cameras[search.camera].objects.genai.enabled &&
-            search.end_time) ||
-            !config?.cameras[search.camera].objects.genai.enabled) && (
-            <Button
-              variant="select"
-              aria-label={t("button.save", { ns: "common" })}
-              onClick={updateDescription}
-            >
-              {t("button.save", { ns: "common" })}
-            </Button>
-          )}
-
-          <TextEntryDialog
-            open={isSubLabelDialogOpen}
-            setOpen={setIsSubLabelDialogOpen}
-            title={t("details.editSubLabel.title")}
-            description={
-              search.label
-                ? t("details.editSubLabel.desc", {
-                    label: search.label,
-                  })
-                : t("details.editSubLabel.descNoLabel")
-            }
-            onSave={handleSubLabelSave}
-            defaultValue={search?.sub_label || ""}
-            allowEmpty={true}
-          />
-          <TextEntryDialog
-            open={isLPRDialogOpen}
-            setOpen={setIsLPRDialogOpen}
-            title={t("details.editLPR.title")}
-            description={
-              search.label
-                ? t("details.editLPR.desc", {
-                    label: search.label,
-                  })
-                : t("details.editLPR.descNoLabel")
-            }
-            onSave={handleLPRSave}
-            defaultValue={search?.data.recognized_license_plate || ""}
-            allowEmpty={true}
-          />
+          </div>
         </div>
+
+        {!isEditingDesc ? (
+          showGenAIPlaceholder ? (
+            <div className="flex h-32 flex-col items-center justify-center gap-3 border p-4 text-sm text-primary/40">
+              <div className="flex">
+                <ActivityIndicator />
+              </div>
+              <div className="flex">{t("details.description.aiTips")}</div>
+            </div>
+          ) : (
+            <div className="overflow-auto text-sm text-primary">
+              {desc || t("label.none", { ns: "common" })}
+            </div>
+          )
+        ) : (
+          <div className="flex flex-col gap-2">
+            <Textarea
+              className="text-md h-32"
+              placeholder={t("details.description.placeholder")}
+              value={desc}
+              onChange={(e) => setDesc(e.target.value)}
+              onFocus={handleDescriptionFocus}
+              onBlur={handleDescriptionBlur}
+              autoFocus
+            />
+            <div className="flex flex-row justify-end gap-4">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button
+                    aria-label={t("button.save", { ns: "common" })}
+                    className="text-primary/40 hover:text-primary/80"
+                    onClick={() => {
+                      setIsEditingDesc(false);
+                      updateDescription();
+                    }}
+                  >
+                    <FaCheck className="size-4" />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  {t("button.save", { ns: "common" })}
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button
+                    aria-label={t("button.cancel", { ns: "common" })}
+                    className="text-primary/40 hover:text-primary"
+                    onClick={() => {
+                      setIsEditingDesc(false);
+                      setDesc(originalDescRef.current ?? "");
+                    }}
+                  >
+                    <FaTimes className="size-4" />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  {t("button.cancel", { ns: "common" })}
+                </TooltipContent>
+              </Tooltip>
+            </div>
+          </div>
+        )}
+
+        <TextEntryDialog
+          open={isSubLabelDialogOpen}
+          setOpen={setIsSubLabelDialogOpen}
+          title={t("details.editSubLabel.title")}
+          description={
+            search.label
+              ? t("details.editSubLabel.desc", {
+                  label: search.label,
+                })
+              : t("details.editSubLabel.descNoLabel")
+          }
+          onSave={handleSubLabelSave}
+          defaultValue={search?.sub_label || ""}
+          allowEmpty={true}
+        />
+        <TextEntryDialog
+          open={isLPRDialogOpen}
+          setOpen={setIsLPRDialogOpen}
+          title={t("details.editLPR.title")}
+          description={
+            search.label
+              ? t("details.editLPR.desc", {
+                  label: search.label,
+                })
+              : t("details.editLPR.descNoLabel")
+          }
+          onSave={handleLPRSave}
+          defaultValue={search?.data.recognized_license_plate || ""}
+          allowEmpty={true}
+        />
       </div>
     </div>
   );
