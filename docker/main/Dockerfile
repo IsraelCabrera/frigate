@@ -187,7 +187,10 @@ COPY docker/main/build_pysqlite3.sh /build_pysqlite3.sh
 RUN /build_pysqlite3.sh && \
     mkdir /pips
 
+
+COPY resources/*.tar.gz /pips/
 COPY resources/*.whl /pips/
+COPY resources/*.zip /pips/
 COPY docker/main/requirements-wheels.txt /requirements-wheels.txt
 RUN pip3 wheel --wheel-dir=/wheels -r /requirements-wheels.txt && \
     if [ "$DEBUG" = "true" ]; then \
