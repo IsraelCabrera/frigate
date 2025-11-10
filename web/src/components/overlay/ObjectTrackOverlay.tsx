@@ -115,7 +115,7 @@ export default function ObjectTrackOverlay({
     { revalidateOnFocus: false },
   );
 
-  const getZonesFriendlyNames = (zones: string[], config: FrigateConfig) => {
+  const getZonesFriendlyNames = (zones: string[], config: SecurityConfig) => {
     return zones?.map((zone) => resolveZoneName(config, zone)) ?? [];
   };
 
