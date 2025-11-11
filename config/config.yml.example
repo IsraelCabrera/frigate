@@ -4,15 +4,15 @@ mqtt:
   password: mqttclient
 
 tls:
-  enabled: false
+  enabled: true
 
 auth:
   enabled: true
 
-# detectors:
-#   coral:
-#     type: edgetpu
-#     device: usb
+detectors:
+  coral:
+    type: edgetpu
+    device: usb
 
 face_recognition:
   enabled: true
@@ -20,21 +20,53 @@ face_recognition:
 lpr:
   enabled: true
 
+detect:
+  enabled: True
+
+objects:
+  track:
+    - person
+    - cat
+    - dog
+    - car
+
+review:
+  alerts:
+    enabled: True
+    labels:
+      - car
+      - person
+      - cat
+      - dog
+  detections:
+    enabled: True
+    labels:
+      - car
+      - person
+      - cat
+      - dog
+
+motion:
+  enabled: True
+
+record:
+  enabled: True
+
+semantic_search:
+  enabled: False
+
+# genai:
+#   enabled: False
+    # provider: ollama
+    # base_url: http://localhost:11434
+    # prompt: ""
+
 cameras:
   office:
     enabled: true
     ffmpeg:
       inputs:
         - path: rtsp://omoikane:k4m1z4m4@10.73.19.171:554/stream1
-          roles: []
-
-  cerco:
-    enabled: true
-    ffmpeg:
-      inputs:
-        - path: rtsp://omoikane:k4m1z4m4@10.73.19.182:554/stream1
-          roles: []
-        - path: rtsp://omoikane:k4m1z4m4@10.73.19.182:554/stream2
           roles:
             - detect
     detect:
@@ -52,14 +84,41 @@ cameras:
           - dog
           - cat
           - person
-
+    notifications:
+      enabled: true
+    motion:
+      mask: 0,0,0.353,0,0.353,0.08,0,0.08
+  cerco:
+    enabled: true
+    ffmpeg:
+      inputs:
+        - path: rtsp://omoikane:k4m1z4m4@10.73.19.182:554/stream1
+          roles:
+            - detect
+    detect:
+      enabled: true
+    face_recognition:
+      enabled: true
+    review:
+      alerts:
+        labels:
+          - cat
+          - dog
+          - person
+      detections:
+        labels:
+          - dog
+          - cat
+          - person
+    notifications:
+      enabled: true
+    motion:
+      mask: 0,0,0.353,0,0.353,0.08,0,0.08
   garage:
     enabled: true
     ffmpeg:
       inputs:
         - path: rtsp://omoikane:k4m1z4m4@10.73.19.183:554/stream1
-          roles: []
-        - path: rtsp://omoikane:k4m1z4m4@10.73.19.183:554/stream2
           roles:
             - detect
     detect:
@@ -76,10 +135,13 @@ cameras:
           - person
       detections:
         labels:
-          - cat
           - dog
+          - cat
           - person
-
+    notifications:
+      enabled: true
+    motion:
+      mask: 0,0,0.353,0,0.353,0.08,0,0.08
   Livingroom:
     enabled: true
     ffmpeg:
@@ -92,17 +154,20 @@ cameras:
     face_recognition:
       enabled: true
     review:
-      detections:
-        labels:
-          - cat
-          - dog
-          - person
       alerts:
         labels:
           - cat
           - dog
           - person
-
+      detections:
+        labels:
+          - dog
+          - cat
+          - person
+    notifications:
+      enabled: true
+    motion:
+      mask: 0,0,0.353,0,0.353,0.08,0,0.08
   # test:
   #   ffmpeg:
   #     inputs:
@@ -117,3 +182,6 @@ cameras:
   #     fps: 5
 
 version: 0.17-0
+notifications:
+  enabled: true
+  email: issurfer@gmail.com

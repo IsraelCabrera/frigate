@@ -16,6 +16,7 @@ services:
                         capabilities: [gpu]
     volumes:
       - /etc/localtime:/etc/localtime:ro
+      - ./certificates:/etc/letsencrypt/live/security:ro
       - /dev/bus/usb:/dev/bus/usb
       - ./config:/config
       - ./storage:/media/security
@@ -24,6 +25,6 @@ services:
         tmpfs:
           size: 1000000000
     ports:
-      - "8971:8971"
+      - "443:8971"
       - "5000:5000"
       - "8554:8554" # RTSP feeds
