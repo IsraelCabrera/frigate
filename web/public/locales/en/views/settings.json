@@ -1,16 +1,16 @@
 {
   "documentTitle": {
-    "default": "Settings - Frigate",
-    "authentication": "Authentication Settings - Frigate",
-    "cameraManagement": "Manage Cameras - Frigate",
-    "cameraReview": "Camera Review Settings - Frigate",
-    "enrichments": "Enrichments Settings - Frigate",
-    "masksAndZones": "Mask and Zone Editor - Frigate",
-    "motionTuner": "Motion Tuner - Frigate",
-    "object": "Debug - Frigate",
-    "general": "UI Settings - Frigate",
-    "frigatePlus": "Frigate+ Settings - Frigate",
-    "notifications": "Notification Settings - Frigate"
+    "default": "Settings - Security",
+    "authentication": "Authentication Settings - Security",
+    "cameraManagement": "Manage Cameras - Security",
+    "cameraReview": "Camera Review Settings - Security",
+    "enrichments": "Enrichments Settings - Security",
+    "masksAndZones": "Mask and Zone Editor - Security",
+    "motionTuner": "Motion Tuner - Security",
+    "object": "Debug - Security",
+    "general": "UI Settings - Security",
+    "securityPlus": "Security+ Settings - Security",
+    "notifications": "Notification Settings - Security"
   },
   "menu": {
     "ui": "UI",
