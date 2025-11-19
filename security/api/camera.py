@@ -934,7 +934,7 @@ async def onvif_probe(
                 for test_uri in to_test:
                     try:
                         probe = ffprobe_stream(
-                            request.app.frigate_config.ffmpeg, test_uri, detailed=False
+                            request.app.security_config.ffmpeg, test_uri, detailed=False
                         )
                         print(probe)
                         ok = probe is not None and getattr(probe, "returncode", 1) == 0

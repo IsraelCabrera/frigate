@@ -342,7 +342,7 @@ class OpenVINOModelRunner(BaseModelRunner):
         # Lock prevents concurrent access to infer_request
         # Needed for JinaV2: genai thread (text) + embeddings thread (vision)
         with self._inference_lock:
-            from frigate.embeddings.types import EnrichmentModelTypeEnum
+            from security.embeddings.types import EnrichmentModelTypeEnum
 
             if self.model_type in [EnrichmentModelTypeEnum.arcface.value]:
                 # For face recognition models, create a fresh infer_request

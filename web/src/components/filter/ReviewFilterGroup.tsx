@@ -454,7 +454,7 @@ export function GeneralFilterContent({
   onClose,
 }: GeneralFilterContentProps) {
   const { t } = useTranslation(["components/filter", "views/events"]);
-  const { data: config } = useSWR<FrigateConfig>("config", {
+  const { data: config } = useSWR<SecurityConfig>("config", {
     revalidateOnFocus: false,
   });
   const allAudioListenLabels = useMemo<string[]>(() => {
